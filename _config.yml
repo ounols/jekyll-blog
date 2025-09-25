@@ -183,6 +183,15 @@ defaults:
       # DO NOT modify the following parameter unless you are confident enough
       # to update the code of all other post links in this project.
       permalink: /posts/:title/
+      categories: []
+      author: ounols
+      tags: []
+      pin: false
+      math: false # Enable mathjax in posts.
+      mermaid: false # Enable mermaid in posts.
+      image:
+        path: "/media/"
+      description: ""
   - scope:
       path: _drafts
     values:
