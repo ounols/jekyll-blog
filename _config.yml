@@ -189,8 +189,8 @@ defaults:
       pin: false
       math: false # Enable mathjax in posts.
       mermaid: false # Enable mermaid in posts.
-      image:
-        path: "/media/"
+      # image:
+      #   path:
       description: ""
   - scope:
       path: _drafts
