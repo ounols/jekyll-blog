@@ -77,7 +77,7 @@ _Generalization of Lambert’s Reflectance Model의 Figure 22. 해당 기술 문
 
 
 
-1994년 SIGGRAPH에서 Oren-Natyar 디퓨즈 모델이 처음 선보였습니다. [당시의 기술 문서](https://www.cs.columbia.edu/CAVE/publications/pdfs/Oren_SIGGRAPH94.pdf){:target="_blank"}를 참고해보면 "Lambert 모델은 이상적인 조건에서의 조명 시뮬레이션이며, 특히 거친 물체의 표면에서 조명 효과를 정확하게 반영할 수 없다"는 이유로 개발되었다고 합니다.
+1994년 SIGGRAPH에서 Oren-Nayar 디퓨즈 모델이 처음 선보였습니다. [당시의 기술 문서](https://www.cs.columbia.edu/CAVE/publications/pdfs/Oren_SIGGRAPH94.pdf){:target="_blank"}를 참고해보면 "Lambert 모델은 이상적인 조건에서의 조명 시뮬레이션이며, 특히 거친 물체의 표면에서 조명 효과를 정확하게 반영할 수 없다"는 이유로 개발되었다고 합니다.
 
 이렇게 Roughness가 무시되면 backscattering 즉, 역산란을 계산할 수 없어 retroreflection을 재현할 수 없습니다.
 사실 이렇게만 들으면 긴가민가 할 수 있으니 사진과 함께 다시 설명해보도록 하겠습니다.
@@ -140,7 +140,7 @@ FDirectLighting DefaultLitBxDF( FGBufferData GBuffer, half3 N, half3 V, half3 L,
 }
 
 ```
-기본 Lit을 담당하는 쉐이더 코드입니다. 이번 UE5에서 `MATERIAL_ROUGHDIFFUSE`를 사용하고 있습니다. 여기선 신기하게도 Burley가 아닌 Chan을 사용하고 있습니다. Chan 모델은 에서 사용된 디퓨즈 BRDF 모델입니다. 관련하여 한국어로 번역된 내용은 [이 블로그 링크](https://techartnomad.tistory.com/49){:target="_blank"}에서 상세하게 확인할 수 있습니다. 저도 나중에 한번 관련해서 다뤄보고 싶네요.
+기본 Lit을 담당하는 쉐이더 코드입니다. 이번 UE5에서 `MATERIAL_ROUGHDIFFUSE`를 사용하고 있습니다. 여기선 신기하게도 Burley가 아닌 Chan을 사용하고 있습니다. Chan 모델은 Call of Duty: WWII 에서 사용된 디퓨즈 BRDF 모델입니다. 관련하여 한국어로 번역된 내용은 [이 블로그 링크](https://techartnomad.tistory.com/49){:target="_blank"}에서 상세하게 확인할 수 있습니다. 저도 나중에 한번 관련해서 다뤄보고 싶네요.
 
 아무튼 Chan 모델은 Burley 모델보다 오차율이 적어 수학적으로 더욱 정확한 근사값을 줍니다. 하지만 영상 속에선 '저품질 코드'라고 못박아버렸는데, 사실 그 정도는 좀... 너무 막나간 비유이긴 합니다만. 영상에서의 비관적인 판단은 어느정도 이해가 됩니다. 이는 문단의 주제에서 벗어나니 아래 문단에서 마저 이야기 해보도록 하고, 계속 코드를 보도록 하겠습니다.
 
@@ -178,7 +178,7 @@ FDirectLighting SubsurfaceProfileBxDF( FGBufferData GBuffer, half3 N, half3 V, h
 
 ### 1. 현대적인 렌더링 기법의 적극 수용
 
-이번 영상은 디퓨즈 모델을 통해 현대적인 렌더링 기법을 적극 수용했으면 한다는 내용이 주요 토픽입니다. 솔직히 Lambert는 1760년에 나온 정말 오래된 모델이기 때문에 요즘 실시간 레이 트레이싱을 넣는 게임같은 곳에선 어울리기 힘든 모델이건 맞습니다.
+이번 영상은 디퓨즈 모델을 통해 현대적인 렌더링 기법을 적극 수용했으면 한다는 내용이 주요 토픽입니다. 솔직히 Lambert는 1760년에 나온 정말 오래된 모델이기 때문에 요즘 실시간 레이 트레이싱을 넣는 게임같은 곳에선 어울리기 힘든 모델인건 맞습니다.
 
 ### 2. 물리적인 로직과 손쉬운 사용 사이의 밸런스
 
