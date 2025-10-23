@@ -16,6 +16,7 @@ tags:
 pin: false
 math: false
 mermaid: false
+hidden: true
 ---
 
 > 이 포스트는 AI 모델을 활용하여 정보를 수집하였습니다. 기술적 정확성을 위해 추가 검토가 이루어진 포스팅입니다.
