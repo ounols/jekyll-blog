@@ -5,6 +5,7 @@
     script-src
       'self'
       'unsafe-inline'
+      'nonce-{random}'
       cdn.jsdelivr.net
       ounols.github.io
       ounols-blog.goatcounter.com
@@ -14,7 +15,13 @@
       app.rybbit.io
       www.youtube.com
       s.ytimg.com
-      www.google.com;
+      www.google.com
+      pagead2.googlesyndication.com
+      partner.googleadservices.com
+      tpc.googlesyndication.com
+      www.googletagservices.com
+      adservice.google.com
+      *.googleadservices.com;
     style-src
       'self'
       'unsafe-inline'
@@ -36,7 +43,10 @@
       data:
       https:
       i.ytimg.com
-      *.googlevideo.com;
+      *.googlevideo.com
+      pagead2.googlesyndication.com
+      *.googleadservices.com
+      *.doubleclick.net;
     default-src
       'self'
       data:;
@@ -45,7 +55,9 @@
       ounols-blog.goatcounter.com
       app.rybbit.io
       www.youtube.com
-      www.google.com;
+      www.google.com
+      pagead2.googlesyndication.com
+      *.google-analytics.com;
     frame-src
       'self'
       www.youtube.com
@@ -55,7 +67,10 @@
       giscus.app
       tv.naver.com
       serviceapi.nmv.naver.com
-      ounols.github.io;
+      ounols.github.io
+      googleads.g.doubleclick.net
+      tpc.googlesyndication.com
+      *.doubleclick.net;
     frame-ancestors
       'none';
     base-uri
