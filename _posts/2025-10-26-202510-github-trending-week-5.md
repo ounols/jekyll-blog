@@ -26,7 +26,7 @@ hidden: true
 
 ## Yaak - 프라이버시 우선 API 클라이언트
 
-![Yaak Screenshot](https://yaak.app/static/screenshot.png)
+![Yaak Screenshot](/media/2025-10-26-202510-github-trending-week-5/figure-1.png)
 
 GitHub: [https://github.com/mountain-loop/yaak](https://github.com/mountain-loop/yaak){: target="_blank"}
 
@@ -105,7 +105,7 @@ Chromium/Webkit/Gecko 계열에 종속되지 않는 완전히 새로운 브라�
 
 ## Uptime Kuma - 셀프호스팅 모니터링 도구
 
-![Uptime Kuma](https://user-images.githubusercontent.com/1336778/212262296-e6205815-ad62-488c-83ec-a5b0d0689f7c.jpg)
+![Uptime Kuma](/media/2025-10-26-202510-github-trending-week-5/figure-2.jpg)
 
 GitHub: [https://github.com/louislam/uptime-kuma](https://github.com/louislam/uptime-kuma){: target="_blank"}
 
@@ -124,7 +124,7 @@ MIT 라이선스로 완전히 오픈소스이며, 793명의 기여자와 활발�
 
 ## nanoGPT - GPT 학습의 정수
 
-![nanoGPT](https://github.com/karpathy/nanoGPT/raw/master/assets/nanogpt.jpg)
+![nanoGPT](/media/2025-10-26-202510-github-trending-week-5/figure-3.jpg)
 
 GitHub: [https://github.com/karpathy/nanoGPT](https://github.com/karpathy/nanoGPT){: target="_blank"}
 

@@ -26,7 +26,7 @@ hidden: true
 
 ## nanoGPT
 
-![nanoGPT](https://github.com/karpathy/nanoGPT/raw/master/assets/nanogpt.jpg)
+![nanoGPT](/media/2025-10-22-202510-github-trending-week-4/figure-1.jpg)
 
 [https://github.com/karpathy/nanoGPT](https://github.com/karpathy/nanoGPT){: target="_blank"}
 
@@ -43,7 +43,7 @@ Andrej Karpathy가 만든 GPT 모델 학습을 위한 미니멀한 PyTorch 구�
 
 ## micrograd
 
-![micrograd](https://github.com/karpathy/micrograd/raw/master/moon_mlp.png)
+![micrograd](/media/2025-10-22-202510-github-trending-week-4/figure-2.png)
 
 [https://github.com/karpathy/micrograd](https://github.com/karpathy/micrograd){: target="_blank"}
 
@@ -58,7 +58,7 @@ Andrej Karpathy가 만든 GPT 모델 학습을 위한 미니멀한 PyTorch 구�
 
 ## MiniMind
 
-![MiniMind Architecture](https://github.com/jingyaogong/minimind/raw/master/images/LLM-structure.png)
+![MiniMind Architecture](/media/2025-10-22-202510-github-trending-week-4/figure-3.png)
 
 [https://github.com/jingyaogong/minimind](https://github.com/jingyaogong/minimind){: target="_blank"}
 
@@ -107,7 +107,7 @@ Go로 작성된 고성능 S3 호환 오브젝트 스토리지 솔루션입니다
 
 ## Yaak
 
-![Yaak Screenshot](https://yaak.app/static/screenshot.png)
+![Yaak Screenshot](/media/2025-10-22-202510-github-trending-week-4/figure-4.png)
 
 [https://github.com/mountain-loop/yaak](https://github.com/mountain-loop/yaak){: target="_blank"}
 

@@ -3,210 +3,159 @@
 
 # Check if markdown file is provided
 if [ $# -eq 0 ]; then
-  echo "Usage: $0 <markdown_file>"
+  echo "Usage: $0 <markdown_file_pattern>"
+  echo "Examples:"
+  echo "  $0 post.md"
+  echo "  $0 '_posts/*.md'"
+  echo "  $0 '_posts/2024-*.md'"
   exit 1
 fi
 
-MD_FILE="$1"
-if [ ! -f "$MD_FILE" ]; then
-  echo "Error: File $MD_FILE does not exist"
-  exit 1
-fi
+# 단일 파일 처리 함수
+process_single_file() {
+  MD_FILE="$1"
 
-# Extract filename and date from the filename (expected format: YYYY-MM-DD-title.md)
-FILENAME=$(basename "$MD_FILE" .md)
-if [[ $FILENAME =~ ^([0-9]{4}-[0-9]{2}-[0-9]{2})-(.*) ]]; then
-  POST_DATE="${BASH_REMATCH[1]} 00:00:00"
-fi
+  echo "========================================="
+  echo "Processing: $MD_FILE"
+  echo "========================================="
 
-# Create media directory if it doesn't exist
-MEDIA_DIR="media/$FILENAME"
-mkdir -p "$MEDIA_DIR"
-
-# Default front matter properties
-DEFAULT_FRONT_MATTER=$(
-  cat <<EOF
----
-title:
-description:
-author: ounols
-date: '$POST_DATE'
-categories: []
-tags: []
-pin: false
-math: false
-mermaid: false
-image:
-  path:
----
-EOF
-)
-
-# Temporary files
-TEMP_FILE=$(mktemp)
-FRONT_MATTER_FILE=$(mktemp)
-
-# Extract existing front matter
-IN_FRONT_MATTER=false
-HAS_FRONT_MATTER=false
-while IFS= read -r line; do
-  if [[ $line == "---" ]]; then
-    if [ "$IN_FRONT_MATTER" = false ]; then
-      IN_FRONT_MATTER=true
-      HAS_FRONT_MATTER=true
-      echo "$line" >>"$FRONT_MATTER_FILE"
-      continue
-    else
-      IN_FRONT_MATTER=false
-      echo "$line" >>"$FRONT_MATTER_FILE"
-      continue
-    fi
+  if [ ! -f "$MD_FILE" ]; then
+    echo "Error: File $MD_FILE does not exist"
+    return 1
   fi
 
-  if [ "$IN_FRONT_MATTER" = true ]; then
-    echo "$line" >>"$FRONT_MATTER_FILE"
-  fi
-done <"$MD_FILE"
+  # Extract filename from the filename (expected format: YYYY-MM-DD-title.md)
+  FILENAME=$(basename "$MD_FILE" .md)
 
-# If no front matter exists, add default one
-if [ "$HAS_FRONT_MATTER" = false ]; then
-  echo "$DEFAULT_FRONT_MATTER" >"$TEMP_FILE"
-  cat "$MD_FILE" >>"$TEMP_FILE"
-else
-  # Check and add missing properties
-  {
-    echo "---"
+  # Create media directory if it doesn't exist
+  MEDIA_DIR="media/$FILENAME"
+  mkdir -p "$MEDIA_DIR"
 
-    # Read existing front matter and check for required fields
-    HAS_TITLE=false
-    HAS_DESC=false
-    HAS_AUTHOR=false
-    HAS_DATE=false
-    HAS_CATEGORIES=false
-    HAS_TAGS=false
-    HAS_PIN=false
-    HAS_MATH=false
-    HAS_MERMAID=false
-    HAS_IMAGE=false
+  # Temporary files
+  TEMP_FILE=$(mktemp)
 
-    while IFS= read -r line; do
-      if [[ $line == "---" ]]; then continue; fi
+  # Copy original file to temp
+  cp "$MD_FILE" "$TEMP_FILE"
 
-      if [[ $line =~ ^title: ]]; then HAS_TITLE=true; fi
-      if [[ $line =~ ^description: ]]; then HAS_DESC=true; fi
-      if [[ $line =~ ^author: ]]; then HAS_AUTHOR=true; fi
-      if [[ $line =~ ^date: ]]; then HAS_DATE=true; fi
-      if [[ $line =~ ^categories: ]]; then HAS_CATEGORIES=true; fi
-      if [[ $line =~ ^tags: ]]; then HAS_TAGS=true; fi
-      if [[ $line =~ ^pin: ]]; then HAS_PIN=true; fi
-      if [[ $line =~ ^math: ]]; then HAS_MATH=true; fi
-      if [[ $line =~ ^mermaid: ]]; then HAS_MERMAID=true; fi
-      if [[ $line =~ ^image: ]]; then HAS_IMAGE=true; fi
+  # Process images
+  FINAL_TEMP=$(mktemp)
+  IMAGE_COUNTER=1
 
-      if [[ $line != "---" ]]; then
-        echo "$line"
-      fi
-    done <"$FRONT_MATTER_FILE"
+  # 이미지 URL과 새 파일명을 매핑하는 연관 배열 생성
+  declare -A IMAGE_MAP
 
-    # Add missing properties
-    [ "$HAS_TITLE" = false ] && echo "title: "
-    [ "$HAS_DESC" = false ] && echo "description: "
-    [ "$HAS_AUTHOR" = false ] && echo "author: ounols"
-    [ "$HAS_DATE" = false ] && echo "date: '$POST_DATE'"
-    [ "$HAS_CATEGORIES" = false ] && echo "categories: []"
-    [ "$HAS_TAGS" = false ] && echo "tags: []"
-    [ "$HAS_PIN" = false ] && echo "pin: false"
-    [ "$HAS_MATH" = false ] && echo "math: false"
-    [ "$HAS_MERMAID" = false ] && echo "mermaid: false"
-    if [ "$HAS_IMAGE" = false ]; then
-      echo "image:"
-      echo "  path: "
-    fi
-
-    echo "---"
-
-    # Add rest of the content
-    IN_CONTENT=false
-    while IFS= read -r line; do
-      if [ "$IN_CONTENT" = true ]; then
-        echo "$line"
-      fi
-      if [[ $line == "---" ]]; then
-        IN_CONTENT=true
-      fi
-    done <"$MD_FILE"
-  } >"$TEMP_FILE"
-fi
-
-# Process images
-FINAL_TEMP=$(mktemp)
-IMAGE_COUNTER=1
-
-# 이미지 URL과 새 파일명을 매핑하는 연관 배열 생성
-declare -A IMAGE_MAP
-
-while IFS= read -r line; do
-  if [[ $line =~ !\[.*\]\((.*)\) ]] || [[ $line =~ image:\s*path:\s*(.*) ]]; then
-    if [[ $line =~ !\[.*\]\((.*)\) ]]; then
-      IMG_URL="${BASH_REMATCH[1]}"
-    else
-      IMG_URL="${BASH_REMATCH[1]}"
-    fi
-
-    # 원본 URL 저장 (다운로드용)
-    ORIGINAL_URL="$IMG_URL"
-
-    # 파일명 추출을 위해 쿼리 파라미터 제거
-    IMG_URL=${IMG_URL%\?*}
-    IMG_URL=${IMG_URL%\}*}
-    IMG_URL=${IMG_URL%\)*}
-
-    if [[ $IMG_URL == /media/$FILENAME/* ]]; then
-      echo "$line" >>"$FINAL_TEMP"
-      continue
-    fi
-
-    # 파일명과 확장자 추출
-    IMG_EXTENSION="${IMG_URL##*.}"
-    IMG_BASENAME=$(basename "$IMG_URL" ".$IMG_EXTENSION")
-
-    # 이미 처리된 URL인지 확인
-    if [[ -n "${IMAGE_MAP[$ORIGINAL_URL]}" ]]; then
-      # 이미 처리된 URL이면 저장된 새 파일명 사용
-      NEW_IMG_FILENAME="${IMAGE_MAP[$ORIGINAL_URL]}"
-    else
-      # 새로운 URL이면 새 파일명 생성 및 저장
-      NEW_IMG_FILENAME="${IMAGE_COUNTER}-${IMG_BASENAME}.${IMG_EXTENSION}"
-      IMAGE_MAP[$ORIGINAL_URL]=$NEW_IMG_FILENAME
-
-      # 실제 파일 복사/다운로드 (원본 URL 사용)
-      if [[ $ORIGINAL_URL =~ ^https?:// ]]; then
-        curl -s "$ORIGINAL_URL" -o "$MEDIA_DIR/$NEW_IMG_FILENAME"
+  while IFS= read -r line; do
+    if [[ $line =~ !\[.*\]\((.*)\) ]] || [[ $line =~ image:\s*path:\s*(.*) ]]; then
+      if [[ $line =~ !\[.*\]\((.*)\) ]]; then
+        IMG_URL="${BASH_REMATCH[1]}"
       else
-        LOCAL_PATH=${ORIGINAL_URL#/}
-        if [ -f "$LOCAL_PATH" ]; then
-          cp "$LOCAL_PATH" "$MEDIA_DIR/$NEW_IMG_FILENAME"
-        fi
+        IMG_URL="${BASH_REMATCH[1]}"
       fi
 
-      # 카운터 증가
-      ((IMAGE_COUNTER++))
+      # 원본 URL 저장 (다운로드용)
+      ORIGINAL_URL="$IMG_URL"
+
+      # 파일명 추출을 위해 쿼리 파라미터 제거
+      IMG_URL=${IMG_URL%\?*}
+      IMG_URL=${IMG_URL%\}*}
+      IMG_URL=${IMG_URL%\)*}
+
+      if [[ $IMG_URL == /media/$FILENAME/* ]]; then
+        echo "$line" >>"$FINAL_TEMP"
+        continue
+      fi
+
+      # 파일명과 확장자 추출
+      IMG_EXTENSION="${IMG_URL##*.}"
+
+      # 이미 처리된 URL인지 확인
+      if [[ -n "${IMAGE_MAP[$ORIGINAL_URL]}" ]]; then
+        # 이미 처리된 URL이면 저장된 새 파일명 사용
+        NEW_IMG_FILENAME="${IMAGE_MAP[$ORIGINAL_URL]}"
+      else
+        # 새로운 URL이면 새 파일명 생성 (figure-N.확장자 형태)
+        NEW_IMG_FILENAME="figure-${IMAGE_COUNTER}.${IMG_EXTENSION}"
+        IMAGE_MAP[$ORIGINAL_URL]=$NEW_IMG_FILENAME
+
+        # 실제 파일 복사/다운로드 (원본 URL 사용)
+        if [[ $ORIGINAL_URL =~ ^https?:// ]]; then
+          # 이미 파일이 존재하는지 확인
+          if [ -f "$MEDIA_DIR/$NEW_IMG_FILENAME" ]; then
+            echo "Skipping (already exists): $NEW_IMG_FILENAME"
+          else
+            # URL에서 도메인 추출
+            DOMAIN=$(echo "$ORIGINAL_URL" | sed -E 's|^(https?://[^/]+).*|\1|')
+
+            echo "Downloading: $ORIGINAL_URL -> $NEW_IMG_FILENAME"
+            HTTP_CODE=$(curl -L -s -w "%{http_code}" -o "$MEDIA_DIR/$NEW_IMG_FILENAME" \
+              -H "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" \
+              -H "Referer: ${DOMAIN}/" \
+              -H "Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8" \
+              --max-time 30 \
+              --retry 3 \
+              "$ORIGINAL_URL")
+
+            if [ "$HTTP_CODE" != "200" ]; then
+              echo "  WARNING: Failed to download (HTTP $HTTP_CODE)"
+            fi
+          fi
+        else
+          LOCAL_PATH=${ORIGINAL_URL#/}
+          if [ -f "$LOCAL_PATH" ]; then
+            if [ -f "$MEDIA_DIR/$NEW_IMG_FILENAME" ]; then
+              echo "Skipping (already exists): $NEW_IMG_FILENAME"
+            else
+              echo "Copying: $LOCAL_PATH -> $NEW_IMG_FILENAME"
+              cp "$LOCAL_PATH" "$MEDIA_DIR/$NEW_IMG_FILENAME"
+            fi
+          fi
+        fi
+
+        # 카운터 증가
+        ((IMAGE_COUNTER++))
+      fi
+
+      NEW_PATH="/media/$FILENAME/$NEW_IMG_FILENAME"
+      if [[ $line =~ !\[.*\]\((.*)\) ]]; then
+        line=${line//$ORIGINAL_URL/$NEW_PATH}
+      else
+        line=${line//$ORIGINAL_URL/$NEW_PATH}
+      fi
     fi
+    echo "$line" >>"$FINAL_TEMP"
+  done <"$TEMP_FILE"
 
-    NEW_PATH="/media/$FILENAME/$NEW_IMG_FILENAME"
-    if [[ $line =~ !\[.*\]\((.*)\) ]]; then
-      line=${line//$ORIGINAL_URL/$NEW_PATH}
-    else
-      line=${line//$ORIGINAL_URL/$NEW_PATH}
-    fi
-  fi
-  echo "$line" >>"$FINAL_TEMP"
-done <"$TEMP_FILE"
+  # Replace original file with processed content
+  mv "$FINAL_TEMP" "$MD_FILE"
 
-# Replace original file with processed content
-mv "$FINAL_TEMP" "$MD_FILE"
+  # Cleanup temporary files
+  rm -f "$TEMP_FILE"
 
-# Cleanup temporary files
-rm -f "$TEMP_FILE" "$FRONT_MATTER_FILE"
+  echo "Processing complete. Images have been saved to $MEDIA_DIR"
+  echo ""
+}
 
-echo "Processing complete. Images have been saved to $MEDIA_DIR and front matter has been updated."
+# 메인 로직: 와일드카드 또는 단일 파일 처리
+FILE_PATTERN="$1"
+
+# 파일 패턴 확장
+shopt -s nullglob
+FILES=($FILE_PATTERN)
+shopt -u nullglob
+
+if [ ${#FILES[@]} -eq 0 ]; then
+  echo "Error: No files found matching pattern: $FILE_PATTERN"
+  exit 1
+fi
+
+echo "Found ${#FILES[@]} file(s) to process"
+echo ""
+
+# 각 파일 순차 처리
+for file in "${FILES[@]}"; do
+  process_single_file "$file"
+done
+
+echo "========================================="
+echo "All files processed successfully!"
+echo "========================================="
