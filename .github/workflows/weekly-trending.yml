@@ -1,0 +1,125 @@
+name: Weekly GitHub Trending Post
+
+on:
+  schedule:
+    # 매주 월요일 오전 8시(KST)에 실행 (UTC 일요일 23:00)
+    - cron: '0 23 * * 0'
+  workflow_dispatch: # 수동 실행 가능
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+  id-token: write
+
+jobs:
+  create-trending-post:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Jekyll blog repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Generate Weekly Trending Post
+        id: claude
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          prompt: |
+            안녕하세요! 이번 주 GitHub Trending 블로그 포스트를 작성해주세요.
+
+            ## 요구사항
+
+            1. **데이터 수집**
+               - https://github.com/trending?since=weekly 페이지에서 트렌딩 레포지토리 정보를 수집합니다.
+               - 각 레포지토리의 상세 페이지와 README를 확인하여 내용을 파악합니다.
+
+            2. **필터링 기준**
+               - 신기술이나 많은 사람들이 궁금해할 만한 내용이 아니면 제외합니다.
+               - AI기술 관련해서 겉만 번지르르하고 실질적 가치가 없는 프로젝트는 제외합니다.
+               - AI가 아닌 일반 오픈소스 프로젝트라도 유용한 도구나 라이브러리, 흥미롭거나 재밌을만한 프로젝트는 포함할 수 있습니다.
+               - 최종적으로 5-10개 정도의 의미있는 레포지토리만 선별합니다.
+
+            3. **Jekyll 포스트 작성**
+               - 파일 위치: `_posts/YYYY-MM-DD-YYYYMM-github-trending-week-N.md`
+               - 파일명 형식: 오늘 날짜를 사용하여 `2025-10-22-202510-github-trending-week-4.md` 형식
+               - 반드시 한국어로 작성합니다.
+               - 이모지는 전문성이 떨어지므로 사용하지 않습니다.
+               - 날짜 형식 중 N은 해당 월의 몇 번째 주인지를 나타냅니다 (예: 4는 4주째).
+
+            4. **Jekyll 헤더 형식**
+            ```yaml
+            ---
+            title: YYYY년 MM월 N주째 GitHub Trending
+            description: [이번 주 트렌딩의 핵심 주제나 특징을 한 문장으로]
+            author: claude
+            date: 'YYYY-MM-DD HH:MM:SS'
+            categories:
+              - GitHub Trending
+            tags:
+              - AI
+              - [관련 기술 태그들]
+            pin: false
+            math: [latex가 필요한 경우 true, 아니면 false]
+            mermaid: [머메이드 다이어그램이 필요한 경우 true, 아니면 false]
+            hidden: true
+            ---
+            ```
+
+            5. **본문 구조**
+               - AI를 통해 정보를 수집했다는 아래와 같은 설명을 추가:
+                  > 이 포스트는 AI 모델을 활용하여 정보를 수집하였습니다. 기술적 정확성을 위해 추가 검토가 이루어진 포스팅입니다.
+                  {: .prompt-info}
+               - 간단한 도입부 (2-3문장)
+               - 각 레포지토리별로:
+                 * H2 헤더 (예시: ## 레포지토리명 - 레포지토리의 설명을 부제 스타일로 작성)
+                 * 대표 이미지 (README에서 가장 적절한 이미지 선택 또는 레포지토리 소셜 이미지)
+                 * GitHub 링크 (예시: GitHub: [실제 링크 URL](실제 링크 URL){: target="_blank"})
+                 * 핵심 내용 설명:
+                   - 주요 기능이나 특징은 `*` 리스트로 각각 한 문장으로 읽기 좋은 길이로 정리하여 가독성을 높입니다 (만약 한문장으로 만들기 어려우면 레포지토리 단위로 2번만 길게 작성하는 것을 허용합니다)
+                   - 중요한 개념이나 주의사항은 볼드 처리하되, 남용하지 않습니다
+                   - 추가 팁이나 경고사항은 인용문(>)과 템플릿을 활용합니다
+                     예: `> 이 도구는 프로덕션 환경에서 사용 시 주의가 필요합니다`
+                     `{: .prompt-warning}`
+                   - 템플릿 종류: `.prompt-info`, `.prompt-tip`, `.prompt-warning`, `.prompt-danger`
+               - 마무리 멘트
+
+            6. **작성 가이드**
+               - 요약은 기술적으로 정확하고 구체적이어야 합니다.
+               - 단순 번역이 아닌, 이해하기 쉬운 설명으로 작성합니다.
+               - 각 레포지토리의 실질적 가치와 활용 사례를 포함합니다.
+               - 코드 예제가 있으면 간단히 포함합니다.
+               - 추가적으로 확인하면 좋은 링크가 있다면 [링크가 필요한 설명](링크URL){: target="_blank"} 형식으로 제공합니다.
+               - 모든 링크 뒤에는 {: target="_blank"} 를 붙여 새 탭에서 열리도록 합니다.
+               - 애매한 부분은 추측하지 말고 관련하여 추가적인 검색을 통해 더 정확한 정보를 얻을 수 있도록 합니다. 검색 관련 권한은 충분히 부여되어 있습니다.
+
+
+            7. **톤앤매너 (매우 중요)**
+               - **AI 기술에 대해 신중하고 객관적인 시각을 유지합니다.**
+               - AI 이전부터 개발해온 개발자들이 주 독자층임을 고려합니다.
+               - AI 관련 프로젝트를 다룰 때:
+                 * 무조건적인 찬양이나 과장된 표현을 피합니다
+                 * "혁명적", "획기적" 같은 과도한 수식어를 자제합니다
+                 * 실질적인 기술적 가치와 한계를 균형있게 서술합니다
+                 * 기존 기술과의 비교를 통해 실제 개선점을 구체적으로 제시합니다
+               - 전반적으로 차분하고 전문적인 어조를 유지합니다.
+               - 특정 자사의 기술이나 제품을 홍보하는 듯한 인상을 주지 않도록 주의합니다.
+
+            8. **이미지 처리**
+               - 각 레포지토리의 대표 이미지 URL을 확인합니다.
+               - 이미지는 마크다운 형식으로 삽입: `![이미지설명](이미지URL)`
+               - 이미지의 추가적인 설명이 필요하다면 마크다운 형식을 이처럼 적용합니다: `![이미지설명](이미지URL)_이미지 설명에 대한 글입니다_`
+               - 이미지가 없는 경우 생략 가능합니다.
+               - 이미지에 대한 설명이 필요한 경우
+
+            9. **커밋 및 푸시**
+               - 작성한 포스트 파일을 git add 합니다.
+               - 커밋 메시지 작성 시 lint 규칙을 준수합니다: 예시는 `feat(blog): Add YYYY-MM-github-trending-week-N.md`입니다.
+               - master 브랜치에 직접 푸시합니다.
+
+            작업을 시작해주세요!
+
+          claude_args: '--allowed-tools "Bash(git:*)" --allowed-tools "Bash(mkdir:*)" --allowed-tools "WebFetch" --allowed-tools "Write"'
+
