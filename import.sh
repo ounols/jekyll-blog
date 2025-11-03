@@ -65,51 +65,82 @@ process_single_file() {
         continue
       fi
 
-      # 파일명과 확장자 추출
-      IMG_EXTENSION="${IMG_URL##*.}"
-
       # 이미 처리된 URL인지 확인
       if [[ -n "${IMAGE_MAP[$ORIGINAL_URL]}" ]]; then
         # 이미 처리된 URL이면 저장된 새 파일명 사용
         NEW_IMG_FILENAME="${IMAGE_MAP[$ORIGINAL_URL]}"
       else
-        # 새로운 URL이면 새 파일명 생성 (figure-N.확장자 형태)
-        NEW_IMG_FILENAME="figure-${IMAGE_COUNTER}.${IMG_EXTENSION}"
-        IMAGE_MAP[$ORIGINAL_URL]=$NEW_IMG_FILENAME
+        # 새로운 URL이면 임시 파일로 다운로드/복사 후 실제 타입 확인
+        TEMP_DOWNLOAD=$(mktemp)
 
         # 실제 파일 복사/다운로드 (원본 URL 사용)
         if [[ $ORIGINAL_URL =~ ^https?:// ]]; then
-          # 이미 파일이 존재하는지 확인
-          if [ -f "$MEDIA_DIR/$NEW_IMG_FILENAME" ]; then
-            echo "Skipping (already exists): $NEW_IMG_FILENAME"
-          else
-            # URL에서 도메인 추출
-            DOMAIN=$(echo "$ORIGINAL_URL" | sed -E 's|^(https?://[^/]+).*|\1|')
+          # URL에서 도메인 추출
+          DOMAIN=$(echo "$ORIGINAL_URL" | sed -E 's|^(https?://[^/]+).*|\1|')
 
-            echo "Downloading: $ORIGINAL_URL -> $NEW_IMG_FILENAME"
-            HTTP_CODE=$(curl -L -s -w "%{http_code}" -o "$MEDIA_DIR/$NEW_IMG_FILENAME" \
-              -H "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" \
-              -H "Referer: ${DOMAIN}/" \
-              -H "Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8" \
-              --max-time 30 \
-              --retry 3 \
-              "$ORIGINAL_URL")
+          echo "Downloading: $ORIGINAL_URL"
+          HTTP_CODE=$(curl -L -s -w "%{http_code}" -o "$TEMP_DOWNLOAD" \
+            -H "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" \
+            -H "Referer: ${DOMAIN}/" \
+            -H "Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8" \
+            --max-time 30 \
+            --retry 3 \
+            "$ORIGINAL_URL")
 
-            if [ "$HTTP_CODE" != "200" ]; then
-              echo "  WARNING: Failed to download (HTTP $HTTP_CODE)"
-            fi
+          if [ "$HTTP_CODE" != "200" ]; then
+            echo "  WARNING: Failed to download (HTTP $HTTP_CODE)"
+            rm -f "$TEMP_DOWNLOAD"
+            echo "$line" >>"$FINAL_TEMP"
+            continue
           fi
         else
           LOCAL_PATH=${ORIGINAL_URL#/}
           if [ -f "$LOCAL_PATH" ]; then
-            if [ -f "$MEDIA_DIR/$NEW_IMG_FILENAME" ]; then
-              echo "Skipping (already exists): $NEW_IMG_FILENAME"
-            else
-              echo "Copying: $LOCAL_PATH -> $NEW_IMG_FILENAME"
-              cp "$LOCAL_PATH" "$MEDIA_DIR/$NEW_IMG_FILENAME"
-            fi
+            echo "Copying: $LOCAL_PATH"
+            cp "$LOCAL_PATH" "$TEMP_DOWNLOAD"
+          else
+            echo "  WARNING: Local file not found: $LOCAL_PATH"
+            rm -f "$TEMP_DOWNLOAD"
+            echo "$line" >>"$FINAL_TEMP"
+            continue
           fi
         fi
+
+        # 실제 파일 타입 확인하여 확장자 결정
+        FILE_TYPE=$(file -b --mime-type "$TEMP_DOWNLOAD" 2>/dev/null || echo "application/octet-stream")
+        case $FILE_TYPE in
+          image/png) IMG_EXTENSION="png" ;;
+          image/jpeg) IMG_EXTENSION="jpg" ;;
+          image/gif) IMG_EXTENSION="gif" ;;
+          image/webp) IMG_EXTENSION="webp" ;;
+          image/svg+xml) IMG_EXTENSION="svg" ;;
+          image/avif) IMG_EXTENSION="avif" ;;
+          image/bmp) IMG_EXTENSION="bmp" ;;
+          video/mp4) IMG_EXTENSION="mp4" ;;
+          video/webm) IMG_EXTENSION="webm" ;;
+          video/quicktime) IMG_EXTENSION="mov" ;;
+          video/x-msvideo) IMG_EXTENSION="avi" ;;
+          *)
+            # URL에서 확장자 추출 시도
+            IMG_EXTENSION="${IMG_URL##*.}"
+            # 확장자가 너무 길거나 없으면 기본값 사용
+            if [[ ${#IMG_EXTENSION} -gt 5 ]] || [[ -z "$IMG_EXTENSION" ]]; then
+              IMG_EXTENSION="png"
+            fi
+            ;;
+        esac
+
+        # 새 파일명 생성 (figure-N.확장자 형태)
+        # 파일명 충돌 시 카운터를 계속 증가
+        NEW_IMG_FILENAME="figure-${IMAGE_COUNTER}.${IMG_EXTENSION}"
+        while [ -f "$MEDIA_DIR/$NEW_IMG_FILENAME" ]; do
+          ((IMAGE_COUNTER++))
+          NEW_IMG_FILENAME="figure-${IMAGE_COUNTER}.${IMG_EXTENSION}"
+        done
+
+        IMAGE_MAP[$ORIGINAL_URL]=$NEW_IMG_FILENAME
+        echo "Saving as: $NEW_IMG_FILENAME"
+        mv "$TEMP_DOWNLOAD" "$MEDIA_DIR/$NEW_IMG_FILENAME"
 
         # 카운터 증가
         ((IMAGE_COUNTER++))

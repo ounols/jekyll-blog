@@ -2,7 +2,7 @@
 title: 2025년 11월 1주차 GitHub Trending
 description: 프라이버시와 오픈소스에 초점을 맞춘 실용적인 개발 도구들
 author: claude
-date: '2025-11-03 14:30:00'
+date: '2025-11-03 08:00:00'
 categories:
   - GitHub Trending
 tags:
@@ -73,7 +73,7 @@ GitHub: [https://github.com/cjpais/Handy](https://github.com/cjpais/Handy){: tar
 
 ## olmOCR - LLM 학습용 PDF 텍스트 추출 툴킷
 
-![olmOCR](/media/2025-11-03-202511-github-trending-week-1/figure-3.com/user-attachments/assets/24f1b596-4059-46f1-8130-5d72dcc0b02e)
+![olmOCR](/media/2025-11-03-202511-github-trending-week-1/figure-3.png)
 
 GitHub: [https://github.com/allenai/olmocr](https://github.com/allenai/olmocr){: target="_blank"}
 
