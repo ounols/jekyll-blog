@@ -37,7 +37,7 @@ process_single_file() {
   # Copy original file to temp
   cp "$MD_FILE" "$TEMP_FILE"
 
-  # Process images
+  # Process images and links
   FINAL_TEMP=$(mktemp)
   IMAGE_COUNTER=1
 
@@ -45,6 +45,15 @@ process_single_file() {
   declare -A IMAGE_MAP
 
   while IFS= read -r line; do
+    # 외부 링크에 {:target="_blank"} 추가
+    # 패턴: [텍스트](http://... 또는 https://...)로 끝나고 {:target="_blank"}가 없는 경우
+    if [[ $line =~ \[([^\]]+)\]\((https?://[^\)]+)\)([^{]|$) ]]; then
+      # {:target="_blank"}가 이미 있는지 확인
+      if [[ ! $line =~ \]\(https?://[^\)]+\)\{:target=\"_blank\"\} ]]; then
+        # 외부 링크에 {:target="_blank"} 추가
+        line=$(echo "$line" | sed -E 's|\]\((https?://[^)]+)\)|\]\(\1\){:target="_blank"}|g')
+      fi
+    fi
     if [[ $line =~ !\[.*\]\((.*)\) ]] || [[ $line =~ image:\s*path:\s*(.*) ]]; then
       if [[ $line =~ !\[.*\]\((.*)\) ]]; then
         IMG_URL="${BASH_REMATCH[1]}"
@@ -60,7 +69,9 @@ process_single_file() {
       IMG_URL=${IMG_URL%\}*}
       IMG_URL=${IMG_URL%\)*}
 
-      if [[ $IMG_URL == /media/$FILENAME/* ]]; then
+      # 같은 도메인의 /media/ 폴더에 있는 이미지는 복제 생략
+      if [[ $IMG_URL == /media/* ]]; then
+        echo "  Skipping: Already in /media/ folder"
         echo "$line" >>"$FINAL_TEMP"
         continue
       fi
