@@ -137,7 +137,7 @@ fi;
 
 ## Mathematics
 
-The mathematics powered by [**MathJax**](https://www.mathjax.org/):
+The mathematics powered by [**MathJax**](https://www.mathjax.org/){:target="_blank"}:
 
 $$
 \begin{equation}

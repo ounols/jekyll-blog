@@ -55,5 +55,5 @@ _엔진의 에디터에서 저장된 Scene을 불러온 모습_
 
 > 클래스와 해당 로직의 전반적인 구조는 소스코드는 아래의 문서에서 확인해주시면 감사하겠습니다.
 >
->[CSEngine: C++ 문서](https://doc-engine.ounols.kr/dd/de4/md_csengine__docs_2docs_2cpp-api.html)
+>[CSEngine: C++ 문서](https://doc-engine.ounols.kr/dd/de4/md_csengine__docs_2docs_2cpp-api.html){:target="_blank"}
 {: .prompt-info}
