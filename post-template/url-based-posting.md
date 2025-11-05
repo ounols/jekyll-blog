@@ -110,6 +110,47 @@ hidden: true
 - No emojis (maintains professionalism)
 - Formal tone: Use ~습니다, ~합니다 forms
 
+**Korean Writing Style Guidelines (CRITICAL):**
+
+1. **Avoid English-style colon usage:**
+   - ❌ BAD: "주요 기능은 다음과 같습니다:"
+   - ✅ GOOD: "주요 기능은 아래와 같이 4가지로 정리할 수 있습니다."
+   - Do NOT end sentences with `:` before lists
+   - Use complete, natural Korean sentences
+
+2. **Use numbered headers for sequential content:**
+   - When listing items with sub headers, use: `### 1. First Item`, `### 2. Second Item`
+   - Improves readability and structure
+   - Example:
+     ```markdown
+     ## AI에게 위임 가능한 보조 작업
+     Litt가 제시하는 AI에게 위임할 수 있는 구체적인 작업들은 아래와 같이 요약할 수 있습니다.
+     ### 1. 문서화 작업
+     ### 2. 스파이크 코드 생성
+     ### 3. TypeScript 오류 및 버그 수정
+     ### 4. 기능 문서화
+     ```
+
+3. **Bold text for emphasis (use strategically):**
+   - Use **bold** to highlight important sentences (not just keywords)
+   - Bold most of the important sentence, not just fragments
+   - ❌ BAD: "이 프로젝트는 **성능**이 매우 좋습니다."
+   - ✅ GOOD: "**이 프로젝트는 기존 대비 30% 성능 향상을 달성했습니다.**"
+   - Don't overuse - only for key points
+
+4. **Use footnotes for sources and references:**
+   - Add footnote markers in text: `~와 같은 사항이 있다고 합니다.[^footnote-keyword]`
+   - Place all footnote definitions at the END of the post
+   - Format: `[^footnote-keyword]: Additional info and [reference link](URL){: target="_blank"}`
+   - Example:
+     ```markdown
+     이 기술은 2024년에 처음 공개되었습니다.[^pytorch-release]
+
+     [END OF POST]
+
+     [^pytorch-release]: PyTorch 공식 블로그 [PyTorch 2.0 Release](https://pytorch.org/blog){: target="_blank"}
+     ```
+
 #### Visual Elements
 - **Actively use images** for topics and concepts
 - Insert external images: `![Description](ImageURL)`
@@ -236,6 +277,10 @@ _Additional caption text if needed_
 - [ ] No excessive AI hype (if AI-related content)
 - [ ] No emojis used
 - [ ] Code examples included where relevant
+- [ ] NO colons (`:`) before lists - use complete Korean sentences
+- [ ] Numbered headers used for sequential content (## 1., ## 2., etc.)
+- [ ] Bold text used strategically for emphasis (full sentences, not fragments)
+- [ ] Footnotes added for sources with definitions at end of post
 - [ ] External image URLs used (not local paths yet)
 - [ ] import.sh executed BEFORE git commands
 - [ ] Both markdown and media files added to git
@@ -246,6 +291,8 @@ _Additional caption text if needed_
 
 - Do NOT use emojis anywhere
 - Do NOT use informal Korean (반말)
+- Do NOT use colons (`:`) before lists - write complete sentences
+- Do NOT bold only single keywords - bold full important sentences
 - Do NOT skip the import.sh step
 - Do NOT push before running import.sh
 - Do NOT exceed 6 top-level headers
@@ -254,6 +301,7 @@ _Additional caption text if needed_
 - Do NOT make assumptions - search for facts
 - Do NOT use excessive superlatives for AI projects
 - Do NOT forget AI disclosure at the top
+- Do NOT forget to add footnote definitions at the end of post
 
 ## ERROR HANDLING
 
