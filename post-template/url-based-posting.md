@@ -1,0 +1,280 @@
+# URL-Based Automated Blog Posting Instructions
+
+## OBJECTIVE
+Analyze content from a given URL and create a comprehensive Korean blog post automatically. This is used by GitHub Actions workflow for automated posting.
+
+## INPUT VARIABLES
+- `TARGET_URL`: The URL to analyze and write about
+- `ADDITIONAL_PROMPT`: Optional additional instructions from user
+
+## EXECUTION STEPS
+
+### STEP 1: Data Collection (MANDATORY)
+
+**Primary Method:**
+- Use WebFetch tool to retrieve content from `TARGET_URL`
+
+**Fallback Method (if primary fails):**
+```python
+import requests
+headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'}
+response = requests.get(TARGET_URL, headers=headers)
+# Parse and extract content
+```
+
+**Additional Requirements:**
+- If content spans multiple pages, collect ALL pages
+- If page content is insufficient, use WebSearch tool for supplementary information
+- Ensure complete data collection before proceeding
+
+### STEP 2: File Creation
+
+**File Location and Naming:**
+- Path: `_posts/YYYY-MM-DD-[project-name-in-english].md`
+- Use TODAY's date for YYYY-MM-DD
+- Project name in English, lowercase, hyphen-separated
+- Example: `_posts/2025-11-05-awesome-ml-project.md`
+
+### STEP 3: Front Matter (EXACT FORMAT REQUIRED)
+
+```yaml
+---
+title: [Compelling title including project name and core topic]
+description: [Concise 1-2 sentence summary of main topics]
+author: claude
+date: 'YYYY-MM-DD HH:MM:SS'
+categories:
+  - GitHub Trending
+tags:
+  - [Related technology tags]
+pin: false
+math: [true if LaTeX needed, false otherwise]
+mermaid: [true if mermaid diagrams needed, false otherwise]
+hidden: true
+---
+```
+
+**Title Requirements:**
+- Include the project/content name
+- Reflect core topic clearly
+- Make it compelling but not clickbait
+- Korean language
+
+**Tags Requirements:**
+- Use specific technology names (e.g., "Rust", "PyTorch", "WebAssembly")
+- Include domain tags (e.g., "AI", "Web Development", "Systems Programming")
+- 3-7 tags recommended
+
+### STEP 4: Body Structure (MANDATORY SECTIONS)
+
+#### AI Disclosure (ALWAYS FIRST)
+```markdown
+> 이 포스트는 블로그 주인장이 흥미롭다고 생각하는 주제를 AI 모델을 통해 작성을 요청한 아티클입니다.
+{: .prompt-info}
+```
+
+#### Opening Section
+- Insert representative image: `![Description](ImageURL)`
+- Write brief introduction (2-3 sentences)
+- Set context for the content
+
+#### Main Content Structure
+- Use `##` as top-level headers (h2)
+- Subsections use `###` (h3) and `####` (h4) as needed
+- **Maximum 7 top-level headers (##)**
+- Structure: Introduction → Main Content → Conclusion
+- Headers should be readable and descriptive (not "Section 1", "Section 2")
+
+**Good Header Examples:**
+```markdown
+## Lambert Diffuse는 문제가 많다
+## 떠오르는 해결책: Burley Diffuse
+## Burley Diffuse 원리와 특징
+## 실제 활용 사례
+## 이쁘지만 성능적 한계는 있다
+## 상황에 따른 대안은?
+## 마치며
+```
+
+### STEP 5: Content Quality Requirements
+
+#### Technical Accuracy
+- Provide technically accurate and reliable information
+- Verify facts through additional searches if needed
+- Do NOT guess or assume - search for confirmation
+
+#### Writing Style
+- Korean language (NOT simple translation, but natural Korean)
+- For general topics: Write in accessible, easy-to-understand style
+- **For rendering-related topics: Write with deep technical expertise**
+- No emojis (maintains professionalism)
+- Formal tone: Use ~습니다, ~합니다 forms
+
+#### Visual Elements
+- **Actively use images** for topics and concepts
+- Insert external images: `![Description](ImageURL)`
+- If no suitable image exists, use WebSearch to find one
+- Image with caption:
+  ```markdown
+  ![Description](ImageURL)
+  _Caption text in Korean_
+  ```
+
+#### Code Examples
+- Include code examples when relevant
+- Add additional code examples if they aid understanding
+- Use appropriate language syntax highlighting
+
+#### Links
+- Format: `[Link text](URL){: target="_blank"}`
+- Provide supplementary links when helpful
+
+### STEP 6: Tone and Manner (CRITICAL)
+
+#### General Principles
+- Maintain cautious and objective perspective on technology
+- Remember primary audience: developers who worked before AI era
+- Keep calm and professional tone throughout
+- Avoid promotional language for any specific company/product
+
+#### AI-Related Content (SPECIAL RULES)
+When writing about AI projects:
+
+**AVOID:**
+- Unconditional praise or exaggeration
+- Excessive superlatives: "혁명적", "획기적", "게임체인저"
+- Hype-driven language
+- Marketing-style promotion
+
+**DO:**
+- Present practical technical value AND limitations
+- Compare with existing technologies, show concrete improvements
+- Use measured, balanced descriptions
+- Focus on actual capabilities vs. claims
+
+**Good vs Bad Examples:**
+
+❌ BAD:
+```
+이 프로젝트는 AI 분야에 혁명을 일으킬 획기적인 기술입니다!
+```
+
+✅ GOOD:
+```
+이 프로젝트는 기존 모델 대비 추론 속도를 30% 개선했으며,
+특히 제한된 컴퓨팅 환경에서 유용할 수 있습니다.
+단, 대규모 배치 처리에서는 아직 개선이 필요합니다.
+```
+
+### STEP 7: Image Handling
+
+**Critical Rule:**
+- ALL images in the post MUST be external URLs initially
+- The `import.sh` script will later convert them to self-hosted
+
+**Image Insertion Format:**
+```markdown
+![Image description](https://external-url.com/image.jpg)
+```
+
+**With Caption:**
+```markdown
+![Image description](https://external-url.com/image.jpg)
+_Additional caption text if needed_
+```
+
+**Image Selection:**
+- Find relevant images through WebSearch if needed
+- Use official project screenshots when available
+- Ensure images illustrate the concept being discussed
+
+### STEP 8: Git Operations (EXACT SEQUENCE)
+
+**CRITICAL: Follow this exact order:**
+
+1. **Run import.sh script FIRST (BEFORE git commands):**
+   ```bash
+   ./import.sh "_posts/[created-md-filename].md"
+   ```
+   - This script downloads external images
+   - Saves them to `media/[md-filename]/`
+   - Updates markdown to use local image paths
+   - Fully automated process
+
+2. **Git add:**
+   ```bash
+   git add _posts/[created-md-filename].md
+   git add media/[md-filename-folder]/*
+   ```
+
+3. **Git commit with proper format:**
+   ```bash
+   git commit -m "feat(blog): Add [md-filename].md"
+   ```
+   - Follow lint rules
+   - Format: `feat(blog): Add [filename].md`
+
+4. **Git push to master:**
+   ```bash
+   git push origin master
+   ```
+
+## WORKFLOW CHECKLIST
+
+- [ ] Understand ADDITIONAL_PROMPT before writing a post.
+- [ ] Data collected from TARGET_URL completely
+- [ ] Additional searches performed if needed
+- [ ] File created in `_posts/` with correct naming
+- [ ] Front matter properly formatted
+- [ ] AI disclosure included at top of body
+- [ ] Representative image inserted in opening
+- [ ] Maximum 6 top-level headers (##)
+- [ ] Headers are descriptive and readable
+- [ ] Content is technically accurate
+- [ ] Images actively used throughout
+- [ ] Tone is objective and professional
+- [ ] No excessive AI hype (if AI-related content)
+- [ ] No emojis used
+- [ ] Code examples included where relevant
+- [ ] External image URLs used (not local paths yet)
+- [ ] import.sh executed BEFORE git commands
+- [ ] Both markdown and media files added to git
+- [ ] Commit message follows format: `feat(blog): Add [filename].md`
+- [ ] Pushed to master branch
+
+## CONSTRAINTS
+
+- Do NOT use emojis anywhere
+- Do NOT use informal Korean (반말)
+- Do NOT skip the import.sh step
+- Do NOT push before running import.sh
+- Do NOT exceed 6 top-level headers
+- Do NOT use local image paths initially
+- Do NOT use promotional/marketing language
+- Do NOT make assumptions - search for facts
+- Do NOT use excessive superlatives for AI projects
+- Do NOT forget AI disclosure at the top
+
+## ERROR HANDLING
+
+**If WebFetch fails:**
+- Try Python requests with custom User-Agent
+- Try alternative search for the content
+- Report if completely inaccessible
+
+**If import.sh fails:**
+- Check script exists at repository root
+- Verify markdown file path is correct
+- Check if images are actually downloaded
+
+**If git operations fail:**
+- Verify all files are properly added
+- Check commit message format
+- Ensure on correct branch (master)
+
+## ADDITIONAL PROMPT HANDLING
+
+If `ADDITIONAL_PROMPT` is provided:
+- Read and follow those instructions AS WELL
+- Additional instructions supplement (not replace) these base instructions
+- If conflict exists, clarify with user or follow most specific instruction
