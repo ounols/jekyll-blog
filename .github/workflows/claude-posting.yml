@@ -43,6 +43,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install requests beautifulsoup4 lxml
 
+      - name: Setup GitHub CLI authentication
+        run: |
+          echo "${{ secrets.GITHUB_TOKEN }}" | gh auth login --with-token
+
       - name: Generate Blog Post with Claude
         id: claude
         uses: anthropics/claude-code-action@v1
@@ -57,4 +61,4 @@ jobs:
 
             Execute the workflow as specified in the template file.
 
-          claude_args: '--allowed-tools "Bash(./import.sh:*)" --allowed-tools "Bash(git:*)" --allowed-tools "Bash(mkdir:*)" --allowed-tools "Bash(python:*)" --allowed-tools "Bash(python3:*)" --allowed-tools "Bash(pip:*)" --allowed-tools "WebFetch" --allowed-tools "WebSearch" --allowed-tools "Write(_posts/*)" --allowed-tools "Edit(_posts/*)"'
+          claude_args: '--allowed-tools "Bash(./import.sh:*)" --allowed-tools "Bash(git:*)" --allowed-tools "Bash(gh:*)" --allowed-tools "Bash(mkdir:*)" --allowed-tools "Bash(python:*)" --allowed-tools "Bash(python3:*)" --allowed-tools "Bash(pip:*)" --allowed-tools "WebFetch" --allowed-tools "WebSearch" --allowed-tools "Write(_posts/*)" --allowed-tools "Edit(_posts/*)"'

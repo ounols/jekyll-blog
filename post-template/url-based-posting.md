@@ -313,22 +313,55 @@ _Additional caption text if needed_
    - Updates markdown to use local image paths
    - Fully automated process
 
-2. **Git add:**
+2. **Create a new branch:**
+   ```bash
+   BRANCH_NAME="post/[slug-from-filename]"
+   git checkout -b "$BRANCH_NAME"
+   ```
+   - Branch naming: `post/[slug]` (e.g., `post/awesome-ml-project`)
+   - Extract slug from filename (remove date prefix)
+
+3. **Git add:**
    ```bash
    git add _posts/[created-md-filename].md
    git add media/[md-filename-folder]/*
    ```
 
-3. **Git commit with proper format:**
+4. **Git commit with proper format:**
    ```bash
    git commit -m "feat(blog): Add [md-filename].md"
    ```
    - Follow lint rules
    - Format: `feat(blog): Add [filename].md`
 
-4. **Git push to master:**
+5. **Push branch to remote:**
    ```bash
-   git push origin master
+   git push origin "$BRANCH_NAME"
+   ```
+
+6. **Create Pull Request using gh CLI:**
+   ```bash
+   gh pr create \
+     --title "feat(blog): Add [post-title]" \
+     --body "## Summary
+
+   New blog post: [Post Title]
+
+   **Source URL**: [TARGET_URL]
+
+   ## Changes
+   - Created: \`_posts/[filename].md\`
+   - Added images to: \`media/[folder]/\`
+
+   ## Checklist
+   - [x] Content is technically accurate
+   - [x] Images processed through import.sh
+   - [x] All external links have {:target=\"_blank\"}
+   - [x] Korean writing style guidelines followed
+
+   🤖 Generated with Claude Code" \
+     --base master \
+     --head "$BRANCH_NAME"
    ```
 
 ## WORKFLOW CHECKLIST
@@ -357,9 +390,11 @@ _Additional caption text if needed_
 - [ ] Footnotes added for sources with definitions at end of post
 - [ ] External image URLs used (not local paths yet)
 - [ ] import.sh executed BEFORE git commands
+- [ ] New branch created with pattern: `post/[slug]`
 - [ ] Both markdown and media files added to git
 - [ ] Commit message follows format: `feat(blog): Add [filename].md`
-- [ ] Pushed to master branch
+- [ ] Branch pushed to remote
+- [ ] Pull Request created with proper title and description
 
 ## CONSTRAINTS
 
@@ -371,6 +406,7 @@ _Additional caption text if needed_
 - Do NOT forget to add prompt styles to blockquotes (.prompt-info/warning/tip)
 - Do NOT skip the import.sh step
 - Do NOT push before running import.sh
+- Do NOT push directly to master - create a PR instead
 - Do NOT exceed 6 top-level headers
 - Do NOT use local image paths initially
 - Do NOT use promotional/marketing language
@@ -394,7 +430,14 @@ _Additional caption text if needed_
 **If git operations fail:**
 - Verify all files are properly added
 - Check commit message format
-- Ensure on correct branch (master)
+- Ensure branch was created successfully
+- Check if branch name is valid (no special characters)
+
+**If PR creation fails:**
+- Verify `gh` CLI is available
+- Check if branch was pushed successfully
+- Ensure base branch (master) exists
+- Verify GitHub permissions are correct
 
 ## VARIABLE HANDLING
 
