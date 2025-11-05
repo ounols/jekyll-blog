@@ -11,4 +11,19 @@ layout: page
     <span class="lead text-muted ps-2">{{ page.posts | size }}</span>
   </h1>
 </div>
+
 {% include post-list.html posts=page.posts %}
+
+<div id="load-more-container" class="text-center my-4" style="display: none;">
+  <button id="load-more-btn" class="btn btn-outline-primary">
+    Load More Posts
+  </button>
+</div>
+
+<div id="loading-spinner" class="text-center my-4" style="display: none;">
+  <div class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+
+<script src="{{ '/assets/js/category-infinite-scroll.js' | relative_url }}"></script>
