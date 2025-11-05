@@ -47,11 +47,12 @@ process_single_file() {
   while IFS= read -r line; do
     # 외부 링크에 {:target="_blank"} 추가
     # 패턴: [텍스트](http://... 또는 https://...)로 끝나고 {:target="_blank"}가 없는 경우
-    if [[ $line =~ \[([^\]]+)\]\((https?://[^\)]+)\)([^{]|$) ]]; then
+    # 단, 이미지 마크다운(![...](...))은 제외
+    if [[ $line =~ \[([^\]]+)\]\((https?://[^\)]+)\)([^{]|$) ]] && [[ ! $line =~ !\[([^\]]+)\]\((https?://[^\)]+)\) ]]; then
       # {:target="_blank"}가 이미 있는지 확인
       if [[ ! $line =~ \]\(https?://[^\)]+\)\{:target=\"_blank\"\} ]]; then
-        # 외부 링크에 {:target="_blank"} 추가
-        line=$(echo "$line" | sed -E 's|\]\((https?://[^)]+)\)|\]\(\1\){:target="_blank"}|g')
+        # 외부 링크에 {:target="_blank"} 추가 (이미지는 제외)
+        line=$(echo "$line" | sed -E 's|([^!])\[([^\]]+)\]\((https?://[^)]+)\)|\1[\2](\3){:target="_blank"}|g')
       fi
     fi
     if [[ $line =~ !\[.*\]\((.*)\) ]] || [[ $line =~ image:\s*path:\s*(.*) ]]; then
