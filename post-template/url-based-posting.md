@@ -5,6 +5,7 @@ Analyze content from a given URL and create a comprehensive Korean blog post aut
 
 ## INPUT VARIABLES
 - `TARGET_URL`: The URL to analyze and write about
+- `AUTHOR_OPINION`: Blog owner's personal opinion/thoughts on the topic (optional)
 - `ADDITIONAL_PROMPT`: Optional additional instructions from user
 
 ## EXECUTION STEPS
@@ -96,6 +97,47 @@ hidden: true
 ## 마치며
 ```
 
+#### Author's Opinion Section (CONDITIONAL)
+**If `AUTHOR_OPINION` is provided (not empty):**
+- Add the blog owner's personal thoughts as a blockquote
+- Place it AFTER the main content, BEFORE the closing/conclusion
+- Use blockquote format with `>` (NOT a header)
+- Write the author's opinion in first-person perspective
+- Keep the author's original tone and style
+- Clearly distinguish this from AI-generated content
+
+**If `AUTHOR_OPINION` is empty:**
+- Skip this section entirely
+- Proceed directly to conclusion
+
+**Example structure with author opinion:**
+```markdown
+## [Main content sections...]
+
+> **블로그 주인장의 의견:**
+>
+> [Write AUTHOR_OPINION content here in first-person.
+> Each paragraph should start with `>` to maintain blockquote format.
+> Keep the natural flow of the author's thoughts.]
+
+## 마치며
+
+[Conclusion]
+```
+
+**Blockquote formatting rules:**
+- Start with `> **블로그 주인장의 의견:**` as the header
+- Each line of the opinion must start with `>`
+- Empty lines between paragraphs also need `>`
+- Example:
+  ```markdown
+  > **블로그 주인장의 의견:**
+  >
+  > 저도 이 기술을 실제로 사용해봤는데 생각보다 설정이 복잡했습니다.
+  >
+  > 특히 크로스 플랫폼 환경에서는 주의가 필요합니다.
+  ```
+
 ### STEP 5: Content Quality Requirements
 
 #### Technical Accuracy
@@ -138,7 +180,36 @@ hidden: true
    - ✅ GOOD: "**이 프로젝트는 기존 대비 30% 성능 향상을 달성했습니다.**"
    - Don't overuse - only for key points
 
-4. **Use footnotes for sources and references:**
+4. **Use blockquotes strategically (do NOT overuse):**
+   - Use blockquotes for important notes, warnings, tips, or key takeaways
+   - Do NOT use blockquotes excessively - only for truly important information
+   - Apply appropriate prompt styling: `{: .prompt-info}`, `{: .prompt-warning}`, `{: .prompt-tip}`
+
+   **Available prompt styles:**
+   - `.prompt-info` - For informational notes (blue)
+   - `.prompt-warning` - For warnings or cautions (yellow/orange)
+   - `.prompt-tip` - For helpful tips or recommendations (green)
+
+   **Usage examples:**
+   ```markdown
+   > 이 기능은 Python 3.8 이상에서만 동작합니다.
+   {: .prompt-warning}
+
+   > 성능 향상을 위해 캐싱을 활성화하는 것을 권장합니다.
+   {: .prompt-tip}
+
+   > 이 라이브러리는 MIT 라이선스로 배포됩니다.
+   {: .prompt-info}
+   ```
+
+   **When to use blockquotes:**
+   - ✅ Critical warnings about compatibility or limitations
+   - ✅ Important tips that significantly help users
+   - ✅ Key information that should stand out
+   - ❌ Regular explanations (use normal text)
+   - ❌ Every other paragraph (overuse reduces impact)
+
+5. **Use footnotes for sources and references:**
    - Add footnote markers in text: `~와 같은 사항이 있다고 합니다.[^footnote-keyword]`
    - Place all footnote definitions at the END of the post
    - Format: `[^footnote-keyword]: Additional info and [reference link](URL){: target="_blank"}`
@@ -262,13 +333,15 @@ _Additional caption text if needed_
 
 ## WORKFLOW CHECKLIST
 
-- [ ] Understand ADDITIONAL_PROMPT before writing a post.
+- [ ] Check if AUTHOR_OPINION is provided (not empty)
+- [ ] Understand ADDITIONAL_PROMPT before writing a post
 - [ ] Data collected from TARGET_URL completely
 - [ ] Additional searches performed if needed
 - [ ] File created in `_posts/` with correct naming
 - [ ] Front matter properly formatted
 - [ ] AI disclosure included at top of body
 - [ ] Representative image inserted in opening
+- [ ] Author's opinion as blockquote added (if AUTHOR_OPINION provided)
 - [ ] Maximum 6 top-level headers (##)
 - [ ] Headers are descriptive and readable
 - [ ] Content is technically accurate
@@ -280,6 +353,7 @@ _Additional caption text if needed_
 - [ ] NO colons (`:`) before lists - use complete Korean sentences
 - [ ] Numbered headers used for sequential content (## 1., ## 2., etc.)
 - [ ] Bold text used strategically for emphasis (full sentences, not fragments)
+- [ ] Blockquotes used strategically with appropriate prompt styles (NOT overused)
 - [ ] Footnotes added for sources with definitions at end of post
 - [ ] External image URLs used (not local paths yet)
 - [ ] import.sh executed BEFORE git commands
@@ -293,6 +367,8 @@ _Additional caption text if needed_
 - Do NOT use informal Korean (반말)
 - Do NOT use colons (`:`) before lists - write complete sentences
 - Do NOT bold only single keywords - bold full important sentences
+- Do NOT overuse blockquotes - only for truly important information
+- Do NOT forget to add prompt styles to blockquotes (.prompt-info/warning/tip)
 - Do NOT skip the import.sh step
 - Do NOT push before running import.sh
 - Do NOT exceed 6 top-level headers
@@ -320,8 +396,22 @@ _Additional caption text if needed_
 - Check commit message format
 - Ensure on correct branch (master)
 
-## ADDITIONAL PROMPT HANDLING
+## VARIABLE HANDLING
 
+### AUTHOR_OPINION
+If `AUTHOR_OPINION` is provided (not empty):
+- Add as a blockquote (NOT a header section)
+- Format: `> **블로그 주인장의 의견:**` followed by opinion content
+- Each line must start with `>`
+- Place AFTER main content, BEFORE conclusion
+- Write in first-person perspective
+- Preserve the author's original tone and style
+
+If `AUTHOR_OPINION` is empty or not provided:
+- Skip the author opinion section entirely
+- No mention of it in the post
+
+### ADDITIONAL_PROMPT
 If `ADDITIONAL_PROMPT` is provided:
 - Read and follow those instructions AS WELL
 - Additional instructions supplement (not replace) these base instructions

@@ -7,6 +7,10 @@ on:
         description: 'The target URL to process'
         required: true
         type: string
+      author_opinion:
+        description: 'Blog author opinion/thoughts on this topic (optional)'
+        required: false
+        type: string
       additional_prompt:
         description: 'Any additional prompt instructions'
         required: false
@@ -48,8 +52,9 @@ jobs:
             Read and follow instructions from: `post-template/url-based-posting.md`
 
             TARGET_URL: `${{ inputs.target_url }}`
+            AUTHOR_OPINION: ${{ inputs.author_opinion }}
             ADDITIONAL_PROMPT: ${{ inputs.additional_prompt }}
 
             Execute the workflow as specified in the template file.
 
-          claude_args: '--allowed-tools "Bash(./import.sh:*)" --allowed-tools "Bash(git:*)" --allowed-tools "Bash(mkdir:*)" --allowed-tools "Bash(python:*)" --allowed-tools "Bash(python3:*)" --allowed-tools "Bash(pip:*)" --allowed-tools "WebFetch" --allowed-tools "WebSearch" --allowed-tools "Write"'
+          claude_args: '--allowed-tools "Bash(./import.sh:*)" --allowed-tools "Bash(git:*)" --allowed-tools "Bash(mkdir:*)" --allowed-tools "Bash(python:*)" --allowed-tools "Bash(python3:*)" --allowed-tools "Bash(pip:*)" --allowed-tools "WebFetch" --allowed-tools "WebSearch" --allowed-tools "Write(_posts/*)" --allowed-tools "Edit(_posts/*)"'
