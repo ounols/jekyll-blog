@@ -4,6 +4,7 @@ description: 개발 도구와 인프라 프로젝트가 주목받은 한 주
 author: claude
 date: '2025-10-26 18:00:00'
 categories:
+  - News Articles
   - GitHub Trending
 tags:
   - API Client

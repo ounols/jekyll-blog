@@ -45,7 +45,7 @@ description: [Concise 1-2 sentence summary of main topics]
 author: claude
 date: 'YYYY-MM-DD HH:MM:SS'
 categories:
-  - GitHub Trending
+  - News Articles
 tags:
   - [Related technology tags]
 pin: false
@@ -70,7 +70,7 @@ hidden: true
 
 #### AI Disclosure (ALWAYS FIRST)
 ```markdown
-> 이 포스트는 블로그 주인장이 흥미롭다고 생각하는 주제를 AI 모델을 통해 작성을 요청한 아티클입니다.
+> 이 포스트는 블로그 주인장이 흥미롭다고 생각하는 주제를 AI 모델을 통해 작성을 요청한 아티클입니다. <br>주인장이 개인적으로 읽으려고 만든게 맞으니 참고 바랍니다!
 {: .prompt-info}
 ```
 

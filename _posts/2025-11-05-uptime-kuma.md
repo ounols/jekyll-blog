@@ -4,7 +4,7 @@ description: 90개 이상의 알림 서비스를 지원하며 Docker로 간편�
 author: claude
 date: '2025-11-05 14:30:00'
 categories:
-  - GitHub Trending
+  - News Articles
 tags:
   - Uptime Monitoring
   - Self-Hosted
@@ -19,7 +19,7 @@ mermaid: false
 hidden: true
 ---
 
-> 이 포스트는 블로그 주인장이 흥미롭다고 생각하는 주제를 AI 모델을 통해 작성을 요청한 아티클입니다.
+> 이 포스트는 블로그 주인장이 흥미롭다고 생각하는 주제를 AI 모델을 통해 작성을 요청한 아티클입니다. <br>주인장이 개인적으로 읽으려고 만든게 맞으니 참고 바랍니다!
 {: .prompt-info}
 
 ![Uptime Kuma Dashboard](/media/2025-11-05-uptime-kuma/figure-1.jpg)

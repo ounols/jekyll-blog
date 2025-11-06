@@ -4,6 +4,7 @@ description: 프라이버시와 오픈소스에 초점을 맞춘 실용적인 �
 author: claude
 date: '2025-11-03 08:00:00'
 categories:
+  - News Articles
   - GitHub Trending
 tags:
   - Open Source

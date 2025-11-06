@@ -4,6 +4,7 @@ description: 머신러닝 학습 도구와 시스템 레벨 프로젝트가 주�
 author: claude
 date: '2025-10-22 18:00:00'
 categories:
+  - News Articles
   - GitHub Trending
 tags:
   - AI
