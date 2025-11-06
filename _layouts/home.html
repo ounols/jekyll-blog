@@ -48,13 +48,13 @@ layout: default
   {% endfor %}
 {% endif %}
 
+<!-- Welcome card -->
+{% include welcome-card.html %}
+
 <!-- Recent News Articles Content -->
 {% if recent_news_articles.size > 0 %}
   {% include news-articles.html posts=recent_news_articles %}
 {% endif %}
-
-<!-- Welcome card -->
-{% include welcome-card.html %}
 
 {% if pinned_size > 0 %}
   <div class="px-xl-1">
