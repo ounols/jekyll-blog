@@ -150,7 +150,7 @@ _Image Caption_
 To prevent the page content layout from shifting when the image is loaded, we should set the width and height for each image.
 
 ```markdown
-![Desktop View](/assets/img/sample/mockup.png){: width="700" height="400" }
+![Desktop View](/assets/img/404.jpg){: width="700" height="400" }
 ```
 {: .nolineno}
 
@@ -268,8 +268,8 @@ Where `Platform` is the lowercase of the platform name, and `ID` is the video ID
 
 The following table shows how to get the two parameters we need in a given video/audio URL, and you can also know the currently supported video platforms.
 
-| Video URL                                                                                                                  | Platform   | ID                       |
-| -------------------------------------------------------------------------------------------------------------------------- | ---------- | :----------------------- |
+| Video URL                                                                                                                                    | Platform   | ID                       |
+| -------------------------------------------------------------------------------------------------------------------------------------------- | ---------- | :----------------------- |
 | [https://www.**youtube**.com/watch?v=**H-B46URT4mg**](https://www.youtube.com/watch?v=H-B46URT4mg){:target="_blank"}                         | `youtube`  | `H-B46URT4mg`            |
 | [https://www.**twitch**.tv/videos/**1634779211**](https://www.twitch.tv/videos/1634779211){:target="_blank"}                                 | `twitch`   | `1634779211`             |
 | [https://www.**bilibili**.com/video/**BV1Q44y1B7Wf**](https://www.bilibili.com/video/BV1Q44y1B7Wf){:target="_blank"}                         | `bilibili` | `BV1Q44y1B7Wf`           |
