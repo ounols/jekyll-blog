@@ -31,6 +31,9 @@
     width: 100%;
     {% if page.image %}
       height: 300px;
+    {% else %}
+      padding-top: 5rem;
+      padding-bottom: -2rem;
     {% endif %}
   "
 >
@@ -98,7 +101,7 @@
     {% if page.image %}
       <span class="img-desc"></span>
     {% else %}
-      <hr>
+      <hr style="margin: 0;">
     {% endif %}
   </div>
 

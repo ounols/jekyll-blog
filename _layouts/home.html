@@ -10,6 +10,9 @@ layout: default
 {% assign pinned_posts = '' | split: '' %}
 {% assign normal_posts = '' | split: '' %}
 
+<!-- Get recent news articles (latest 3 posts from 'News Articles' category) -->
+{% assign recent_news_articles = site.categories['News Articles'] | slice: 0, 3 %}
+
 <!-- Get pinned posts on current page -->
 {% assign visible_start = paginator.page | minus: 1 | times: paginator.per_page %}
 {% assign visible_end = visible_start | plus: paginator.per_page %}
@@ -45,12 +48,17 @@ layout: default
   {% endfor %}
 {% endif %}
 
+<!-- Recent News Articles Content -->
+{% if recent_news_articles.size > 0 %}
+  {% include news-articles.html posts=recent_news_articles %}
+{% endif %}
+
 <!-- Welcome card -->
 {% include welcome-card.html %}
 
 {% if pinned_size > 0 %}
   <div class="px-xl-1">
-    <h2 class="mb-4">Tranding Posts ✨</h2>
+    <h2 class="mb-4">Main Posts ✨</h2>
   </div>
   {% include post-list.html posts=pinned_posts %}
 {% endif %}
