@@ -51,12 +51,12 @@ layout: default
 <!-- Welcome card -->
 {% include welcome-card.html %}
 
-<!-- Recent News Articles Content -->
-{% if recent_news_articles.size > 0 %}
-  {% include news-articles.html posts=recent_news_articles %}
-{% endif %}
-
 {% if pinned_size > 0 %}
+  <!-- Recent News Articles Content -->
+  {% if recent_news_articles.size > 0 %}
+    {% include news-articles.html posts=recent_news_articles %}
+  {% endif %}
+
   <div class="px-xl-1">
     <h2 class="mb-4">Main Posts ✨</h2>
   </div>
