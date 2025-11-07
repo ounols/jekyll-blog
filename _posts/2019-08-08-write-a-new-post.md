@@ -150,7 +150,7 @@ _Image Caption_
 To prevent the page content layout from shifting when the image is loaded, we should set the width and height for each image.
 
 ```markdown
-![Desktop View](/assets/img/404.jpg){: width="700" height="400" }
+![Desktop View](/media/2019-08-08-write-a-new-post/figure-1.jpg){: width="700" height="400" }
 ```
 {: .nolineno}
 

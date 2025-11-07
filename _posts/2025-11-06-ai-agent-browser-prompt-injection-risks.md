@@ -157,7 +157,7 @@ Brave는 포괄적인 안전 개선이 이루어질 때까지, AI 브라우저�
 
 ## 다른 AI 브라우저들도 안전하지 않다
 
-!()[https://i0.wp.com/static.simonwillison.net/static/2025/fellou-prompt-injection.jpg?ssl=1]
+![](/media/2025-11-06-ai-agent-browser-prompt-injection-risks/figure-5.webp)
 _Fellou 브라우저는 페이지 방문만으로도 Gmail에 접속을 시도하고 있습니다_
 
 이번 연구에서 다룬 Perplexity Comet과 OpenAI Atlas 외에도, 다른 AI 브라우저들 역시 유사한 취약점을 가지고 있습니다. Brave의 연구진은 Opera Neon, Fellou등 다양한 브라우저에서도 프롬프트 인젝션 취약점을 발견했다고 밝혔습니다.
