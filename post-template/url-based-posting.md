@@ -43,7 +43,7 @@ response = requests.get(TARGET_URL, headers=headers)
 title: [Compelling title including project name and core topic]
 description: [Concise 1-2 sentence summary of main topics]
 author: claude
-date: 'YYYY-MM-DD HH:MM:SS'
+date: 'YYYY-MM-DD HH:mm:SS'
 categories:
   - News Articles
 tags:
@@ -60,6 +60,9 @@ hidden: true
 - Reflect core topic clearly
 - Make it compelling but not clickbait
 - Korean language
+
+**Date Requirements:**
+- Use current seoul time for YYYY-MM-DD HH:mm:SS
 
 **Tags Requirements:**
 - Use specific technology names (e.g., "Rust", "PyTorch", "WebAssembly")
@@ -131,11 +134,12 @@ hidden: true
 - Empty lines between paragraphs also need `>`
 - Example:
   ```markdown
-  > **블로그 주인장의 의견:**
+  > **블로그 주인장의 의견**
   >
   > 저도 이 기술을 실제로 사용해봤는데 생각보다 설정이 복잡했습니다.
   >
   > 특히 크로스 플랫폼 환경에서는 주의가 필요합니다.
+  {: .prompt-info}
   ```
 
 ### STEP 5: Content Quality Requirements
