@@ -448,7 +448,7 @@ _Additional caption text if needed_
 ### AUTHOR_OPINION
 If `AUTHOR_OPINION` is provided (not empty):
 - Add as a blockquote (NOT a header section)
-- Format: `> **블로그 주인장의 의견:**` followed by opinion content
+- Format: `> **블로그 주인장의 의견**` followed by opinion content
 - Each line must start with `>`
 - Place AFTER main content, BEFORE conclusion
 - Write in first-person perspective

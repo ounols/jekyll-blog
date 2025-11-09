@@ -53,12 +53,13 @@ jobs:
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           prompt: |
-            Read and follow instructions from: `post-template/url-based-posting.md`
+            Read `post-template/url-posting-config.md` first for the complete workflow guide.
+            Follow all template files in the order specified in the guide.
 
             TARGET_URL: `${{ inputs.target_url }}`
             AUTHOR_OPINION: ${{ inputs.author_opinion }}
             ADDITIONAL_PROMPT: ${{ inputs.additional_prompt }}
 
-            Execute the workflow as specified in the template file.
+            Execute the workflow as specified in the template files.
 
           claude_args: '--allowed-tools "Bash(./import.sh:*)" --allowed-tools "Bash(git:*)" --allowed-tools "Bash(gh:*)" --allowed-tools "Bash(mkdir:*)" --allowed-tools "Bash(python:*)" --allowed-tools "Bash(python3:*)" --allowed-tools "Bash(pip:*)" --allowed-tools "WebFetch" --allowed-tools "WebSearch" --allowed-tools "Write(_posts/*)" --allowed-tools "Edit(_posts/*)"'
