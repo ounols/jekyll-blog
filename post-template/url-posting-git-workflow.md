@@ -66,7 +66,6 @@ New blog post: [Post Title]
 ## Checklist
 - [x] Content is technically accurate
 - [x] Images processed through import.sh
-- [x] All external links have {:target=\"_blank\"}
 - [x] Korean writing style guidelines followed
 
 🤖 Generated with Claude Code" \
@@ -91,9 +90,7 @@ gh pr comment "$PR_NUMBER" --body "## 📝 Post Preview
 <details>
 <summary>Click to expand full post content</summary>
 
-\`\`\`markdown
 $POST_CONTENT
-\`\`\`
 
 </details>
 

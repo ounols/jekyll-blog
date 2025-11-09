@@ -25,7 +25,6 @@
 
 ## LINKS
 
-- Format: `[Link text](URL){: target="_blank"}`
 - Provide supplementary links when helpful
 
 ## IMAGE HANDLING
