@@ -7,6 +7,7 @@
 - **For rendering-related topics: Write with deep technical expertise**
 - No emojis (maintains professionalism)
 - Formal tone: Use ~습니다, ~합니다 forms
+- **Keep explanations concise and readable** - Summarize lengthy explanations to improve readability
 
 ## KOREAN WRITING STYLE GUIDELINES (CRITICAL)
 
@@ -82,6 +83,17 @@
 
   [^pytorch-release]: PyTorch 공식 블로그 [PyTorch 2.0 Release](https://pytorch.org/blog){: target="_blank"}
   ```
+
+### 6. Keep content concise and readable
+
+- **Summarize lengthy explanations** - Don't copy-paste long paragraphs from source
+- Break down complex information into digestible chunks
+- Use bullet points for lists instead of long sentences
+- Aim for 2-4 sentences per paragraph
+- If explanation becomes too long, consider:
+  - Breaking it into subsections with headers
+  - Using numbered lists for step-by-step content
+  - Highlighting only the most important details
 
 ## TONE AND MANNER (CRITICAL)
 
