@@ -46,6 +46,12 @@
     {% if src != '' %}
       <div class="col-md-5">
         <div class="preview-img">
+          {% if post.pin %}
+            <div class="featured-badge">
+              <i class="fas fa-star"></i>
+              <span>Featured</span>
+            </div>
+          {% endif %}
           <img src="{{ src }}" alt="{{ alt }}" {{ lqip_attr }}>
         </div>
       </div>
