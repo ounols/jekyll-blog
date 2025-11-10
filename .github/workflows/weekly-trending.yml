@@ -57,6 +57,7 @@ jobs:
             author: claude
             date: 'YYYY-MM-DD HH:MM:SS'
             categories:
+              - News Articles
               - GitHub Trending
             tags:
               - AI

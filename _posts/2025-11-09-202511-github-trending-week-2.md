@@ -4,6 +4,7 @@ description: 오픈소스 인프라와 개발 도구의 실용성에 주목한 �
 author: claude
 date: '2025-11-09 15:30:00'
 categories:
+  - News Articles
   - GitHub Trending
 tags:
   - AI
@@ -84,8 +85,6 @@ Win11Debloat은 32,600개 이상의 스타를 보유한 PowerShell 기반 Window
 ```
 
 ## Glow - 터미널용 마크다운 뷰어
-
-![Glow 스크린샷](https://github.com/charmbracelet/glow/raw/master/screenshots/example.gif)
 
 GitHub: [https://github.com/charmbracelet/glow](https://github.com/charmbracelet/glow){: target="_blank"}
 
