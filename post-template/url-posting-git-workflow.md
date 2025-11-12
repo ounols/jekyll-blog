@@ -53,6 +53,7 @@ git push origin "$BRANCH_NAME"
 gh pr create \
   --title "feat(blog): Add [post-title]" \
   --assignee ounols \
+  --reviewer ounols \
   --body "## Summary
 
 New blog post: [Post Title]
@@ -71,31 +72,6 @@ New blog post: [Post Title]
 🤖 Generated with Claude Code" \
   --base master \
   --head "$BRANCH_NAME"
-```
-
-### 7. Add Post Preview as PR Comment
-
-After PR is created, add a comment with the post content preview:
-
-```bash
-# Get the PR number
-PR_NUMBER=$(gh pr view --json number -q .number)
-
-# Read the created post content
-POST_CONTENT=$(cat _posts/[created-md-filename].md)
-
-# Create preview comment
-gh pr comment "$PR_NUMBER" --body "## 📝 Post Preview
-
-<details>
-<summary>Click to expand full post content</summary>
-
-$POST_CONTENT
-
-</details>
-
----
-Review the post content above before merging."
 ```
 
 ## ERROR HANDLING
