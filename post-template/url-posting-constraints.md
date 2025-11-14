@@ -2,10 +2,10 @@
 
 ## CONSTRAINTS
 
-- Do NOT use emojis anywhere
+- Do NOT use emojis in blog post content (emojis are allowed ONLY in PR body)
 - Do NOT use informal Korean (반말)
 - Do NOT use colons (`:`) before lists - write complete sentences
-- Do NOT bold only single keywords - bold full important sentences
+- Do NOT bold single keywords OR entire sentences - bold core phrases only (2-8 words containing key information)
 - Do NOT overuse blockquotes - only for truly important information
 - Do NOT forget to add prompt styles to blockquotes (.prompt-info/warning/tip)
 - Do NOT skip the import.sh step
@@ -27,6 +27,7 @@ If `AUTHOR_OPINION` is provided (not empty):
 - Add as a blockquote (NOT a header section)
 - Format: `> **블로그 주인장의 의견**` followed by opinion content
 - Each line must start with `>`
+- **MUST add `.prompt-info` style at the end** of the blockquote
 - Place AFTER main content, BEFORE conclusion
 - Write in first-person perspective
 - Preserve the author's original tone and style
@@ -51,19 +52,22 @@ If `ADDITIONAL_PROMPT` is provided:
 - [ ] File created in `_posts/` with correct naming
 - [ ] Front matter properly formatted
 - [ ] AI disclosure included at top of body
-- [ ] Representative image inserted in opening
+- [ ] Original/project link inserted at very top (REQUIRED, before image)
+- [ ] Representative image from TARGET_URL or official source inserted in opening (REQUIRED)
 - [ ] Author's opinion as blockquote added (if AUTHOR_OPINION provided)
 - [ ] Maximum 6 top-level headers (##)
 - [ ] Headers are descriptive and readable
 - [ ] Content is technically accurate
-- [ ] Images actively used throughout
+- [ ] Images follow priority order: TARGET_URL → Official → News → WebSearch
+- [ ] No generic stock photos for opening image
 - [ ] Tone is objective and professional
 - [ ] No excessive AI hype (if AI-related content)
-- [ ] No emojis used
+- [ ] No emojis used in blog post content
 - [ ] Code examples included where relevant
 - [ ] NO colons (`:`) before lists - use complete Korean sentences
 - [ ] Numbered headers used for sequential content (## 1., ## 2., etc.)
-- [ ] Bold text used strategically for emphasis (full sentences, not fragments)
+- [ ] Bold text used for core phrases (2-8 words), not single keywords or entire sentences
+- [ ] Bold usage limited to 1-3 phrases per major section
 - [ ] Blockquotes used strategically with appropriate prompt styles (NOT overused)
 - [ ] Footnotes added for sources with definitions at end of post
 - [ ] External image URLs used (not local paths yet)

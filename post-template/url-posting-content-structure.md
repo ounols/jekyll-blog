@@ -9,7 +9,21 @@
 
 ## OPENING SECTION
 
-- Insert representative image: `![Description](ImageURL)`
+- **Insert original/project link (REQUIRED)**: Place at the very top before any other content
+  ```markdown
+  **원본 링크**: [Link Title](URL){: target="_blank"}
+  ```
+  OR for projects:
+  ```markdown
+  **프로젝트 링크**: [Project Name](URL){: target="_blank"}
+  ```
+
+- **Insert representative image (REQUIRED)**: `![Description](ImageURL)`
+  - MUST be from TARGET_URL or official project source
+  - Prioritize images from the original article/page
+  - If unavailable, use official project images (GitHub, official site)
+  - Never use generic stock photos
+
 - Write brief introduction (2-3 sentences)
 - Set context for the content
 
@@ -17,7 +31,7 @@
 
 - Use `##` as top-level headers (h2)
 - Subsections use `###` (h3) and `####` (h4) as needed
-- **Maximum 7 top-level headers (##)**
+- **Maximum 6 top-level headers (##)**
 - Structure: Introduction → Main Content → Conclusion
 - Headers should be readable and descriptive (not "Section 1", "Section 2")
 
@@ -65,6 +79,7 @@
 - Start with `> **블로그 주인장의 의견:**` as the header
 - Each line of the opinion must start with `>`
 - Empty lines between paragraphs also need `>`
+- **MUST add `.prompt-info` style at the end** of the author opinion blockquote
 - Example:
   ```markdown
   > **블로그 주인장의 의견**

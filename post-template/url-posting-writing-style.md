@@ -4,8 +4,11 @@
 
 - Korean language (NOT simple translation, but natural Korean)
 - For general topics: Write in accessible, easy-to-understand style
-- **For rendering-related topics: Write with deep technical expertise**
-- No emojis (maintains professionalism)
+- **For graphics rendering topics: Write with deep technical expertise**
+  - Includes: Real-time graphics rendering, rendering algorithms, shader techniques, lighting models, ray tracing, rasterization, graphics rendering theory
+  - Requires: Technical depth, mathematical explanations when needed, implementation details
+  - Examples: Lambert diffuse vs Burley diffuse, PBR materials, global illumination techniques
+- No emojis in blog post content (emojis are allowed ONLY in PR body)
 - Formal tone: Use ~습니다, ~합니다 forms
 - **Keep explanations concise and readable** - Summarize lengthy explanations to improve readability
 
@@ -34,11 +37,14 @@
 
 ### 3. Bold text for emphasis (use strategically)
 
-- Use **bold** to highlight important sentences (not just keywords)
-- Bold most of the important sentence, not just fragments
-- ❌ BAD: "이 프로젝트는 **성능**이 매우 좋습니다."
-- ✅ GOOD: "**이 프로젝트는 기존 대비 30% 성능 향상을 달성했습니다.**"
-- Don't overuse - only for key points
+- Use **bold** to highlight important **phrases** (not single keywords, not entire sentences)
+- Bold core phrases that contain the key information
+- ❌ BAD (single keyword): "이 프로젝트는 **성능**이 매우 좋습니다."
+- ❌ BAD (entire sentence): "**이 프로젝트는 기존 대비 30% 성능 향상을 달성했습니다.**"
+- ✅ GOOD (core phrase): "이 프로젝트는 **기존 대비 30% 성능 향상**을 달성했습니다."
+- ✅ GOOD (core phrase): "이번 업데이트는 **메모리 사용량을 절반으로 감소**시켰습니다."
+- Don't overuse - only for truly important information
+- Aim for 1-3 bold phrases per major section (##)
 
 ### 4. Use blockquotes strategically (do NOT overuse)
 
@@ -86,14 +92,50 @@
 
 ### 6. Keep content concise and readable
 
-- **Summarize lengthy explanations** - Don't copy-paste long paragraphs from source
-- Break down complex information into digestible chunks
-- Use bullet points for lists instead of long sentences
-- Aim for 2-4 sentences per paragraph
-- If explanation becomes too long, consider:
-  - Breaking it into subsections with headers
-  - Using numbered lists for step-by-step content
-  - Highlighting only the most important details
+**Paragraph Length Guidelines:**
+- Generally aim for 2-4 sentences per paragraph (NOT one sentence per paragraph)
+- If a single paragraph exceeds 6-7 sentences, **split it into multiple paragraphs** at natural topic boundaries
+- Group related sentences together in the same paragraph to maintain logical flow
+- Long continuous explanations are NOT allowed, but splitting content into multiple readable paragraphs IS allowed
+
+**Bad vs Good Examples:**
+
+❌ BAD (each sentence is a separate paragraph):
+```
+FFmpeg과 구글 간의 이번 충돌은 단순한 한 프로젝트의 문제가 아닙니다.
+
+이는 현대 디지털 인프라를 지탱하는 오픈소스 생태계의 구조적 문제를 드러냅니다.
+
+오픈소스 소프트웨어는 인터넷 경제에서 수조 달러의 가치를 창출하고 있습니다.
+```
+
+✅ GOOD (related sentences grouped together):
+```
+FFmpeg과 구글 간의 이번 충돌은 단순한 한 프로젝트의 문제가 아닙니다. 이는 현대 디지털 인프라를 지탱하는 오픈소스 생태계의 구조적 문제를 드러냅니다.
+
+오픈소스 소프트웨어는 인터넷 경제에서 수조 달러의 가치를 창출하고 있습니다. 하지만 이러한 가치를 창출하는 개발자들은 종종 적절한 보상을 받지 못하고 있습니다.
+
+AI 도구가 더 많은 버그를 찾아낼수록 이 문제는 더욱 심화될 것입니다. 기업들이 오픈소스에 의존하면서도 이를 지속가능하게 만드는 데 투자하지 않는다면, 언젠가는 핵심 인프라가 유지보수되지 않는 상황에 직면할 수 있습니다.
+```
+
+**Priority Rule:**
+- **Technical accuracy takes priority over brevity**
+- If content becomes long due to technical accuracy requirements, use paragraph splitting to maintain readability
+- Don't sacrifice important technical details for the sake of brevity
+
+**Content Strategy:**
+- Don't copy-paste long paragraphs from source - summarize and restructure
+- Break down complex information into digestible chunks using:
+  - Multiple short paragraphs (preferred method)
+  - Subsections with headers
+  - Bullet points for lists
+  - Numbered lists for step-by-step content
+
+**Subject-Based Application:**
+- Apply writing depth according to the TARGET_URL's topic
+- General news/announcements: Keep concise and accessible
+- Technical deep-dives: Allow detailed explanations (split into paragraphs)
+- Graphics rendering topics: Prioritize technical accuracy, use paragraph splitting extensively
 
 ## TONE AND MANNER (CRITICAL)
 

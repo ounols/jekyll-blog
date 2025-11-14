@@ -62,4 +62,27 @@ jobs:
 
             Execute the workflow as specified in the template files.
 
-          claude_args: '--allowed-tools "Bash(./import.sh:*)" --allowed-tools "Bash(git:*)" --allowed-tools "Bash(gh:*)" --allowed-tools "Bash(mkdir:*)" --allowed-tools "Bash(python:*)" --allowed-tools "Bash(python3:*)" --allowed-tools "Bash(pip:*)" --allowed-tools "WebFetch" --allowed-tools "WebSearch" --allowed-tools "Write(_posts/*)" --allowed-tools "Edit(_posts/*)"'
+            IMPORTANT: At the end of execution, provide ONLY a concise final summary in this exact format:
+
+            ## Final Summary
+            - Post Title: [제목]
+            - File Created: [파일 경로]
+            - PR Link: [PR URL]
+            - Status: [Success/Failed]
+            - Errors: [에러가 있다면 간단히 설명, 없으면 None]
+
+          claude_args: '--allowed-tools "Bash(./import.sh:*)" --allowed-tools "Bash(git:*)" --allowed-tools "Bash(gh:*)" --allowed-tools "Bash(mkdir:*)" --allowed-tools "Bash(python:*)" --allowed-tools "Bash(python3:*)" --allowed-tools "Bash(pip:*)" --allowed-tools "Bash(node:*)" --allowed-tools "Bash(npx:*)" --allowed-tools "WebFetch" --allowed-tools "WebSearch" --allowed-tools "Skill" --allowed-tools "Write(_posts/*)" --allowed-tools "Write(/tmp/*)" --allowed-tools "Edit(_posts/*)"'
+
+      - name: Create Workflow Summary
+        if: always()
+        run: |
+          echo "## Blog Post Generation Result" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Workflow Status:** ${{ steps.claude.outcome }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Target URL:** ${{ inputs.target_url }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          if [ "${{ steps.claude.outcome }}" == "success" ]; then
+            echo ":white_check_mark: Blog post generated successfully" >> $GITHUB_STEP_SUMMARY
+          else
+            echo ":x: Blog post generation failed" >> $GITHUB_STEP_SUMMARY
+          fi
