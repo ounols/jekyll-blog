@@ -28,7 +28,8 @@ Use Skill tool with parameter: "playwright-skill:playwright-skill"
 
 2. Create a Playwright script to extract content and images:
 ```javascript
-// Example usage - write to /tmp/crawl-target.js
+// IMPORTANT: Write script to current directory (NOT /tmp - it's blocked in GitHub Actions)
+// Example usage - write to ./crawl-target.js
 const { chromium } = require('playwright');
 
 const TARGET_URL = 'YOUR_URL_HERE';
@@ -73,15 +74,16 @@ const TARGET_URL = 'YOUR_URL_HERE';
   }));
 
   // Extract all images with dimensions
+  // NOTE: img.src automatically returns absolute URL (not relative path)
   const images = await page.evaluate(() => {
     return Array.from(document.querySelectorAll('img'))
       .map(img => ({
-        src: img.src,
+        src: img.src,  // This is already absolute URL like https://example.com/image.jpg
         alt: img.alt,
         width: img.naturalWidth || img.width,
         height: img.naturalHeight || img.height
       }))
-      .filter(img => img.width > 200 && img.height > 200);
+      .filter(img => img.width > 200 && img.height > 200 && img.src.startsWith('http'));
   });
 
   // Extract main content - try multiple selectors in priority order
@@ -114,11 +116,19 @@ const TARGET_URL = 'YOUR_URL_HERE';
 })();
 ```
 
-3. Execute the script and parse the JSON output
+3. Execute the script and parse the JSON output:
+```bash
+# Run from current directory (NOT cd /tmp)
+node ./crawl-target.js
+```
+
 4. Use meta.ogImage or the first large image as representative image
 5. Use the content text for blog post creation
 
 **Playwright Best Practices:**
+- **DO NOT use `/tmp` directory** - it's blocked in GitHub Actions
+- **Write scripts to current working directory** (`./script.js`)
+- **Run scripts from current directory** (`node ./script.js`)
 - **Always block ads/tracking** to prevent timeout issues
 - **Use `domcontentloaded`** instead of `networkidle` for modern websites with heavy scripts
 - **Try multiple content selectors** as different sites use different structures
