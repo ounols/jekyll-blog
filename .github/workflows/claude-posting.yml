@@ -41,14 +41,14 @@ jobs:
       - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install requests beautifulsoup4 lxml
+          pip install beautifulsoup4 lxml
 
-      - name: Setup Node.js for Playwright
+      - name: Setup Node.js for Playwright (fallback)
         uses: actions/setup-node@v4
         with:
           node-version: '20'
 
-      - name: Install Playwright
+      - name: Install Playwright (fallback if Skill fails)
         run: |
           npm install -D playwright
           npx playwright install --with-deps chromium
@@ -81,7 +81,28 @@ jobs:
             - Status: [Success/Failed]
             - Errors: [에러가 있다면 간단히 설명, 없으면 None]
 
-          claude_args: '--allowed-tools "Bash(./import.sh:*)" --allowed-tools "Bash(git:*)" --allowed-tools "Bash(gh:*)" --allowed-tools "Bash(mkdir:*)" --allowed-tools "Bash(python:*)" --allowed-tools "Bash(python3:*)" --allowed-tools "Bash(pip:*)" --allowed-tools "Bash(node:*)" --allowed-tools "Bash(npx:*)" --allowed-tools "WebFetch" --allowed-tools "WebSearch" --allowed-tools "Skill" --allowed-tools "Write(_posts/*)" --allowed-tools "Write(*.js)" --allowed-tools "Write(*.py)" --allowed-tools "Write(*.cjs)" --allowed-tools "Edit(_posts/*)"'
+          claude_args: |
+            --allowed-tools "Bash(./import.sh:*)"
+            --allowed-tools "Bash(git:*)"
+            --allowed-tools "Bash(gh:*)"
+            --allowed-tools "Bash(mkdir:*)"
+            --allowed-tools "Bash(python:*)"
+            --allowed-tools "Bash(python3:*)"
+            --allowed-tools "Bash(node:*)"
+            --allowed-tools "Bash(npx:*)"
+            --allowed-tools "WebFetch"
+            --allowed-tools "WebSearch"
+            --allowed-tools "mcp__playwright__*"
+            --allowed-tools "Write(_posts/*)"
+            --allowed-tools "Edit(_posts/*)"
+            --mcp-config '{
+              "mcpServers": {
+                "playwright": {
+                  "command": "npx",
+                  "args": ["-y", "@modelcontextprotocol/server-playwright"]
+                }
+              }
+            }'
 
       - name: Create Workflow Summary
         if: always()
