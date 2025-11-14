@@ -89,3 +89,77 @@
   > 특히 크로스 플랫폼 환경에서는 주의가 필요합니다.
   {: .prompt-info}
   ```
+
+## QUICK QUESTIONS SECTION (REQUIRED)
+
+**Purpose:**
+- Provide quick answers to questions readers might have about the topic
+- Placed AFTER conclusion (마치며), BEFORE footnotes
+- 1-3 Q&A pairs recommended
+
+**Content Order:**
+1. Main content sections
+2. Author's opinion (if AUTHOR_OPINION provided)
+3. Conclusion (마치며)
+4. **Quick questions** ← placed here
+5. Horizontal rule (`---`) to separate content from footnotes
+6. Footnote definitions
+
+**Structure:**
+```markdown
+## Quick questions
+
+> **[질문 1]?**
+>
+> [답변 1]
+{: .prompt-info}
+
+> **[질문 2]?**
+>
+> [답변 2]
+{: .prompt-info}
+
+> **[질문 3]?**
+>
+> [답변 3]
+{: .prompt-info}
+```
+
+**Guidelines:**
+- Use `## Quick questions` as the h2 header (in English)
+- Each Q&A pair is wrapped in a blockquote with `.prompt-info` styling
+- Question is in bold format: `**[질문]?**` (no "Q:" prefix)
+- Answer is in normal text (no "A:" prefix, no bold)
+- Empty line between question and answer within the blockquote (using `>`)
+- Questions should anticipate what readers would naturally wonder about
+- Keep answers concise but informative (1-3 sentences)
+- Questions should be practical and directly related to the main content
+
+**Example:**
+```markdown
+## 마치며
+
+[Conclusion content...]
+
+## Quick questions
+
+> **FFmpeg은 개인 프로젝트에 무료로 사용할 수 있나요?**
+>
+> 네, FFmpeg은 LGPL 또는 GPL 라이선스로 배포되는 오픈소스 프로젝트입니다. 개인 및 상업용 프로젝트 모두에서 라이선스 조건을 준수하면 무료로 사용할 수 있습니다.
+{: .prompt-info}
+
+> **Big Sleep과 같은 AI 보안 도구를 개인 개발자도 사용할 수 있나요?**
+>
+> 현재 Big Sleep은 구글 내부 도구이며 공개적으로 사용할 수 없습니다. 하지만 비슷한 개념의 오픈소스 정적 분석 도구들은 사용 가능합니다.
+{: .prompt-info}
+
+> **FFmpeg의 피드백에 대한 구글의 공식 입장은 어떤가요?**
+>
+> 기사 작성 시점 기준으로 구글은 FFmpeg의 요구에 대해 공식적인 입장을 발표하지 않았습니다. 다만 구글 Project Zero는 90일 공개 정책을 모든 프로젝트에 동일하게 적용한다는 기존 입장을 유지하고 있습니다.
+{: .prompt-info}
+
+---
+
+[^big-sleep]: Google Cloud Blog - [Source title](URL){: target="_blank"}
+[^vulnerabilities]: The Hacker News - [Source title](URL){: target="_blank"}
+```

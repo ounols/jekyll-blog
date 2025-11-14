@@ -55,6 +55,7 @@ If `ADDITIONAL_PROMPT` is provided:
 - [ ] Original/project link inserted at very top (REQUIRED, before image)
 - [ ] Representative image from TARGET_URL or official source inserted in opening (REQUIRED)
 - [ ] Author's opinion as blockquote added (if AUTHOR_OPINION provided)
+- [ ] Quick questions section added (1-3 Q&A pairs in blockquote format with .prompt-info)
 - [ ] Maximum 6 top-level headers (##)
 - [ ] Headers are descriptive and readable
 - [ ] Content is technically accurate
