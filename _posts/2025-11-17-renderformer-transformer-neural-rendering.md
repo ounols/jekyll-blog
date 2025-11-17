@@ -106,8 +106,6 @@ RenderFormer는 **한 번 학습하면 씬별 재학습 없이 다양한 씬에 
 
 ## Ablation Studies와 기술적 통찰
 
-![Ablation Study 결과](https://dl.acm.org/cms/10.1145/3721238.3730595/asset/39b7f661-a2d2-4d68-8268-19658990a2a6/assets/images/medium/siggraphconferencepapers25-6-fig9.jpg)
-
 논문의 ablation studies는 각 구성 요소의 중요성을 보여줍니다. **2단계 파이프라인 구조**가 단일 단계 구조보다 우수한 성능을 보이며, 이는 뷰 독립적 전역 조명과 뷰 종속적 최종 렌더링을 분리하는 것이 학습에 유리함을 시사합니다.
 
 ![성능 분석](/media/2025-11-17-renderformer-transformer-neural-rendering/figure-9.jpg)
