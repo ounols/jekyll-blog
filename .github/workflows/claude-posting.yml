@@ -41,17 +41,11 @@ jobs:
       - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install beautifulsoup4 lxml
+          pip install beautifulsoup4 lxml playwright
 
-      - name: Setup Node.js for Playwright (fallback)
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: Install Playwright (fallback if Skill fails)
+      - name: Install Playwright browsers
         run: |
-          npm install -D playwright
-          npx playwright install --with-deps chromium
+          playwright install --with-deps chromium
 
       - name: Setup GitHub CLI authentication
         run: |
@@ -88,21 +82,12 @@ jobs:
             --allowed-tools "Bash(mkdir:*)"
             --allowed-tools "Bash(python:*)"
             --allowed-tools "Bash(python3:*)"
-            --allowed-tools "Bash(node:*)"
-            --allowed-tools "Bash(npx:*)"
+            --allowed-tools "Read(post-template/**)"
+            --allowed-tools "Read(post-template/skills/**)"
             --allowed-tools "WebFetch"
             --allowed-tools "WebSearch"
-            --allowed-tools "mcp__playwright__*"
             --allowed-tools "Write(_posts/*)"
             --allowed-tools "Edit(_posts/*)"
-            --mcp-config '{
-              "mcpServers": {
-                "playwright": {
-                  "command": "npx",
-                  "args": ["-y", "@modelcontextprotocol/server-playwright"]
-                }
-              }
-            }'
 
       - name: Create Workflow Summary
         if: always()

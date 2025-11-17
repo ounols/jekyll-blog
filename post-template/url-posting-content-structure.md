@@ -1,12 +1,5 @@
 # URL-Based Posting Content Structure
 
-## AI DISCLOSURE (ALWAYS FIRST)
-
-```markdown
-> 이 포스트는 블로그 주인장이 흥미롭다고 생각하는 주제를 AI 모델을 통해 작성을 요청한 아티클입니다. <br>주인장이 개인적으로 읽으려고 만든게 맞으니 참고 바랍니다!
-{: .prompt-info}
-```
-
 ## OPENING SECTION
 
 - **Insert original/project link (REQUIRED)**: Place at the very top before any other content
@@ -102,8 +95,9 @@
 2. Author's opinion (if AUTHOR_OPINION provided)
 3. Conclusion (마치며)
 4. **Quick questions** ← placed here
-5. Horizontal rule (`---`) to separate content from footnotes
-6. Footnote definitions
+5. **AI Disclosure** ← placed here
+6. Horizontal rule (`---`) to separate content from footnotes
+7. Footnote definitions
 
 **Structure:**
 ```markdown
@@ -135,6 +129,25 @@
 - Keep answers concise but informative (1-3 sentences)
 - Questions should be practical and directly related to the main content
 
+## AI DISCLOSURE (REQUIRED)
+
+**Purpose:**
+- Inform readers that this post was generated with AI assistance
+- Maintain transparency about content creation
+- Placed AFTER Quick questions, BEFORE footnotes
+
+**Format:**
+```markdown
+> 이 포스트는 블로그 주인장이 흥미롭다고 생각하는 주제를 AI 모델을 통해 작성을 요청한 아티클입니다. <br>주인장이 개인적으로 읽으려고 만든게 맞으니 참고 바랍니다!
+{: .prompt-tip}
+```
+
+**Guidelines:**
+- Use `.prompt-tip` styling (green tip box)
+- Keep the exact wording as shown above
+- Place immediately after Quick questions section
+- Must appear before the horizontal rule (`---`) and footnotes
+
 **Example:**
 ```markdown
 ## 마치며
@@ -157,6 +170,9 @@
 >
 > 기사 작성 시점 기준으로 구글은 FFmpeg의 요구에 대해 공식적인 입장을 발표하지 않았습니다. 다만 구글 Project Zero는 90일 공개 정책을 모든 프로젝트에 동일하게 적용한다는 기존 입장을 유지하고 있습니다.
 {: .prompt-info}
+
+> 이 포스트는 블로그 주인장이 흥미롭다고 생각하는 주제를 AI 모델을 통해 작성을 요청한 아티클입니다. <br>주인장이 개인적으로 읽으려고 만든게 맞으니 참고 바랍니다!
+{: .prompt-tip}
 
 ---
 

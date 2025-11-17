@@ -6,48 +6,57 @@
 - Use WebFetch tool to retrieve content from `TARGET_URL`
 
 **Fallback Method (if WebFetch fails):**
-Use browser automation with Playwright (bypasses bot detection and handles JavaScript-rendered content):
+Use the Python crawler script with Playwright:
 
-**IMPORTANT: Playwright Skill is available and auto-invoked - just request browser automation**
+**IMPORTANT: Use the pre-built crawl_article.py script**
 
-**How to use Playwright:**
+**How to use the Python crawler:**
 
-Simply request browser automation task directly:
-
-```
-Navigate to TARGET_URL using a browser and extract:
-
-1. Page title (h1 tag and og:title meta tag)
-2. Representative image (og:image meta tag)
-3. All article images (filter: width > 200px, height > 200px, http/https URLs only)
-   - For each image: src (as absolute URL), alt text, width, height
-4. Main article content text
-   - Try these selectors in order: [itemprop="articleBody"], article, .article-content, .post-content, main
-   - If none work, use body text
-5. Publication date if available
-6. Author info if available
-
-Important requirements:
-- Block ads and tracking scripts (doubleclick, google-analytics, googletagmanager, facebook.net, .ads.) to prevent timeout
-- Wait 2 seconds after page load for dynamic content to render
-- Use 'domcontentloaded' wait strategy (not 'networkidle') for faster loading
-- Extract image src values which are automatically absolute URLs (not relative paths)
-- Return data in JSON format with fields: meta, images, content
+1. Run the crawler script with the target URL:
+```bash
+python3 post-template/skills/crawl_article.py "TARGET_URL"
 ```
 
-**How it works:**
-- Claude will automatically invoke the Playwright Skill when you request browser automation
-- The Skill writes and executes Playwright code in /tmp (which it has access to)
-- No manual file creation or Skill invocation needed
-- Results are returned as structured data
+2. The script will output JSON data to stdout with the following structure:
+```json
+{
+  "meta": {
+    "title": "Article title",
+    "ogImage": "URL to OG image",
+    "description": "Article description",
+    "publishDate": "Publication date if available",
+    "author": "Author name if available"
+  },
+  "images": [
+    {
+      "src": "Absolute URL to image",
+      "alt": "Alt text",
+      "width": 800,
+      "height": 600
+    }
+  ],
+  "content": "Full article text content"
+}
+```
 
-**Fallback Method 2 (if Playwright also fails):**
+3. Parse the JSON output and use it for blog post generation
+
+**What the crawler does:**
+- Launches headless Chromium browser using Playwright
+- Blocks ads and tracking scripts to prevent timeouts
+- Waits for dynamic content to render
+- Extracts meta information (title, OG image, description, date, author)
+- Extracts main article content using multiple selector strategies
+- Filters and extracts images (only > 200x200px)
+- Returns structured JSON data
+
+**Fallback Method 2 (if Python crawler also fails):**
 - Use WebSearch tool to search for the TARGET_URL and related content
 - Extract information from search results and accessible alternative sources
 - Verify information accuracy across multiple sources
 
 **Additional Requirements:**
-- If content spans multiple pages, run Playwright for each page URL
+- If content spans multiple pages, run the crawler for each page URL
 - If page content is insufficient, use WebSearch tool for supplementary information
 - Ensure complete data collection before proceeding
 
