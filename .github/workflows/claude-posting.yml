@@ -73,7 +73,7 @@ jobs:
             - File Created: [파일 경로]
             - PR Link: [PR URL]
             - Status: [Success/Failed]
-            - Errors: [에러가 있다면 간단히 설명, 없으면 None]
+            - Errors: [에러가 있다면 상세히 로그와 함께 설명, 없으면 None]
 
           claude_args: |
             --allowed-tools "Bash(./import.sh:*)"
