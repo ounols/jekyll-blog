@@ -9,12 +9,53 @@ import json
 import sys
 import asyncio
 import io
+import aiohttp
 from playwright.async_api import async_playwright
 
 # Fix Windows encoding issue
 if sys.platform == 'win32':
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
     sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8')
+
+
+async def filter_images_by_size(images: list, max_size_mb: float = 7) -> list:
+    """
+    Filter images by file size
+
+    Args:
+        images: List of image dictionaries with 'src' field
+        max_size_mb: Maximum file size in megabytes
+
+    Returns:
+        Filtered list of images
+    """
+    filtered = []
+    max_size_bytes = max_size_mb * 1024 * 1024
+
+    async with aiohttp.ClientSession() as session:
+        for img in images:
+            try:
+                async with session.head(img['src'], timeout=aiohttp.ClientTimeout(total=5)) as response:
+                    content_length = response.headers.get('Content-Length')
+
+                    if content_length:
+                        size_bytes = int(content_length)
+                        if size_bytes < max_size_bytes:
+                            filtered.append(img)
+                            print(f'  ✓ {img["src"][:80]}... ({size_bytes / 1024 / 1024:.2f}MB)', file=sys.stderr)
+                        else:
+                            print(f'  ✗ Skipped (too large): {img["src"][:80]}... ({size_bytes / 1024 / 1024:.2f}MB)', file=sys.stderr)
+                    else:
+                        # If no Content-Length header, include the image
+                        filtered.append(img)
+                        print(f'  ✓ {img["src"][:80]}... (size unknown)', file=sys.stderr)
+
+            except Exception as e:
+                # On error, include the image (better to have it than miss it)
+                filtered.append(img)
+                print(f'  ✓ {img["src"][:80]}... (check failed: {str(e)})', file=sys.stderr)
+
+    return filtered
 
 
 async def crawl_reddit(page) -> dict:
@@ -411,20 +452,14 @@ async def crawl_article(url: str) -> dict:
                 result.content = extracted.content;
                 result.links = extracted.links;
 
-                // Extract images (filter by size)
+                // Extract all images (file size filtering will be done in Python)
                 const allImages = Array.from(contentElement.querySelectorAll('img'));
-                result.images = allImages
-                    .filter(img => {
-                        const width = img.naturalWidth || img.width || 0;
-                        const height = img.naturalHeight || img.height || 0;
-                        return width > 200 && height > 200;
-                    })
-                    .map(img => ({
-                        src: img.src,
-                        alt: img.alt || '',
-                        width: img.naturalWidth || img.width || 0,
-                        height: img.naturalHeight || img.height || 0
-                    }));
+                result.images = allImages.map(img => ({
+                    src: img.src,
+                    alt: img.alt || '',
+                    width: img.naturalWidth || img.width || 0,
+                    height: img.naturalHeight || img.height || 0
+                }));
 
                 return result;
             }''')
@@ -433,6 +468,12 @@ async def crawl_article(url: str) -> dict:
             print(f'✓ Images found: {len(data["images"])}', file=sys.stderr)
             print(f'✓ Links found: {len(data.get("links", []))}', file=sys.stderr)
             print(f'✓ Content length: {len(data["content"])} characters', file=sys.stderr)
+
+            # Filter images by file size (< 7MB)
+            print('Filtering images by file size...', file=sys.stderr)
+            filtered_images = await filter_images_by_size(data["images"], max_size_mb=7)
+            data["images"] = filtered_images
+            print(f'✓ Images after size filtering: {len(data["images"])}', file=sys.stderr)
 
             return data
 
