@@ -18,9 +18,6 @@ mermaid: false
 hidden: true
 ---
 
-> 이 포스트는 블로그 주인장이 흥미롭다고 생각하는 주제를 AI 모델을 통해 작성을 요청한 아티클입니다. <br>주인장이 개인적으로 읽으려고 만든게 맞으니 참고 바랍니다!
-{: .prompt-info}
-
 **원본 링크**: [AI 퍼스트 크래프톤, 자발적 퇴사 선택 프로그램 시행](https://www.thisisgame.com/articles/406895){: target="_blank"}
 
 ![크래프톤 본사](/media/2025-11-17-krafton-ai-first-vsp/figure-1.jpg)
@@ -127,6 +124,9 @@ AI 퍼스트는 단순히 AI 도구를 활용하는 수준을 넘어서, **AI를
 {: .prompt-info}
 
 ---
+
+> 이 포스트는 블로그 주인장이 흥미롭다고 생각하는 주제를 AI 모델을 통해 작성을 요청한 아티클입니다. <br>주인장이 개인적으로 읽으려고 만든게 맞으니 참고 바랍니다!
+{: .prompt-tip}
 
 [^krafton-ai]: 크래프톤 공식 보도자료 - [크래프톤, 'AI First' 기업 전환 선언… 1000억 원 이상 투자 단행](https://www.krafton.com/news/press/%ed%81%ac%eb%9e%98%ed%94%84%ed%86%a4-ai-first-%ea%b8%b0%ec%97%85-%ec%a0%84%ed%99%98-%ec%84%a0%ec%96%b8-1000%ec%96%b5-%ec%9b%90-%ec%9d%b4%ec%83%81-%ed%88%ac%ec%9e%90/){: target="_blank"}
 [^ajunews]: 아주경제 - [크래프톤, AI 전환 기조 아래 '자발적 퇴사 선택 프로그램' 공지](https://www.ajunews.com/view/20251112122446045){: target="_blank"}
