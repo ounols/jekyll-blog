@@ -12,6 +12,40 @@
 - Formal tone: Use ~습니다, ~합니다 forms
 - **Keep explanations concise and readable** - Summarize lengthy explanations to improve readability
 
+## TECHNICAL DEPTH REQUIREMENTS (CRITICAL FOR TECHNICAL TOPICS)
+
+### For Rendering and Graphics Topics:
+
+**1. Explain Mathematical/Algorithmic Differences:**
+- Don't just describe what it does - explain HOW it works differently from legacy methods
+- Compare mathematical approaches (e.g., "레거시는 수학적 공식으로 직접 계산하는 반면, 신경망은 학습된 파라미터로 근사값을 출력합니다")
+- Highlight computational trade-offs and performance implications
+- Example: "기존 몬테카를로 적분 방식은 수천 개의 샘플을 필요로 하지만, 이 방법은 한 번의 순전파로 결과를 얻습니다"
+
+**2. Practical Benefits and Limitations:**
+- Explain concrete advantages over legacy approaches
+- Mention specific use cases where the new method excels
+- Discuss limitations and edge cases
+- Example: "메쉬와 카메라 정보는 동일하게 입력하지만, 내부적으로는 물리 기반 계산 대신 학습된 패턴으로 빛 전달을 추론합니다"
+
+**3. Implementation Details:**
+- Mention data structures used (e.g., triangle meshes, SDF volumes, ray bundles)
+- Explain pipeline stages and their purposes
+- Describe input/output formats
+- Example: "768차원 토큰으로 각 트라이앵글을 표현하며, attention 메커니즘으로 삼각형 간 빛 전달을 학습합니다"
+
+**4. Performance and Quality Metrics:**
+- Include quantitative comparisons when available (speed, memory, quality)
+- Mention resolution constraints, triangle limits, or other technical boundaries
+- Compare with established baselines
+- Example: "512×512 해상도 기준 수 초 내 렌더링되며, 기존 패스 트레이싱이 노이즈 제거를 위해 수천 샘플을 필요로 하는 것과 대조적입니다"
+
+**When Crawled Links Provide Technical Details:**
+- Use information from crawled links to deepen technical explanations
+- Reference specific papers, documentation, or technical blogs discovered through links
+- Extract mathematical formulas, algorithms, or implementation notes from linked resources
+- Example: If a link leads to a research paper with equations, incorporate those details into the explanation
+
 ## KOREAN WRITING STYLE GUIDELINES (CRITICAL)
 
 ### 1. Avoid English-style colon usage
@@ -89,6 +123,29 @@
 
   [^pytorch-release]: PyTorch 공식 블로그 [PyTorch 2.0 Release](https://pytorch.org/blog){: target="_blank"}
   ```
+
+**CRITICAL: Always Include Reference Links from AUTHOR_OPINION:**
+- If `AUTHOR_OPINION` mentions specific URLs or references (e.g., "내 블로그의 이 글 참고: https://...")
+- You MUST include those URLs as footnotes in the blog post
+- Add footnote markers where the reference is mentioned in the content
+- Include the actual link in the footnote definitions at the end
+- Example:
+  ```markdown
+  ## 기존 기술과의 비교
+
+  블로그 주인장이 구현한 SDFGI 방식[^sdfgi-implementation]과 비교하면...
+
+  [END OF POST]
+
+  [^sdfgi-implementation]: ounols 블로그 - [자체 엔진에 Global Illumination을 적용하기 위한 삽질기 2](https://ounols.kr/posts/...){: target="_blank"}
+  ```
+
+**How to Handle AUTHOR_OPINION References:**
+1. Read `AUTHOR_OPINION` carefully for any URLs or reference mentions
+2. Identify the context where these references should be mentioned in the blog post
+3. Add footnote markers `[^keyword]` in the appropriate sections
+4. Define the footnotes at the end with proper formatting
+5. DO NOT skip or ignore references provided in AUTHOR_OPINION
 
 ### 6. Keep content concise and readable
 
