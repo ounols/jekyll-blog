@@ -5,11 +5,11 @@ author: cotes
 date: 2019-08-08 11:33:00 +0800
 categories: [Blogging, Demo]
 tags: [typography]
-pin: true
+pin: false
 math: true
 mermaid: true
 image:
-  path: /commons/devices-mockup.png
+  path: /media/엔진-제작기/%EC%9D%B4%EB%A7%9B%EC%9D%80.png
   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
   alt: Responsive rendering of Chirpy theme on multiple devices.
 ---
@@ -137,7 +137,7 @@ fi;
 
 ## Mathematics
 
-The mathematics powered by [**MathJax**](https://www.mathjax.org/):
+The mathematics powered by [**MathJax**](https://www.mathjax.org/){:target="_blank"}:
 
 $$
 \begin{equation}
@@ -166,7 +166,7 @@ $$ x = {-b \pm \sqrt{b^2-4ac} \over 2a} $$
 
 ### Default (with caption)
 
-![Desktop View](/posts/20190808/mockup.png){: width="972" height="589" }
+![Desktop View](/media/엔진-제작기/이맛은.png){: width="972" height="589" }
 _Full screen width and center alignment_
 
 ### Left aligned
