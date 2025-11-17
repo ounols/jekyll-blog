@@ -196,6 +196,7 @@ async def crawl_article(url: str) -> dict:
                 const result = {
                     meta: {},
                     images: [],
+                    links: [],
                     content: ''
                 };
 
@@ -241,16 +242,103 @@ async def crawl_article(url: str) -> dict:
                     }
                 }
 
+                // Helper function to convert content with links to footnote format
+                function convertLinksToFootnotes(element) {
+                    const links = [];
+                    const clone = element.cloneNode(true);
+
+                    // Find all <a> links in the content (excluding image parent links)
+                    const allLinks = Array.from(clone.querySelectorAll('a[href]'));
+
+                    allLinks.forEach((link, index) => {
+                        const href = link.href;
+                        const text = link.textContent.trim();
+
+                        // Skip empty links, anchors, and javascript links
+                        if (!href || href.startsWith('#') || href.startsWith('javascript:')) {
+                            return;
+                        }
+
+                        // Skip if link text is too long (likely not a real link)
+                        if (text.length > 200) {
+                            return;
+                        }
+
+                        // Skip if this link only contains an image (it's an image wrapper)
+                        const hasOnlyImage = link.querySelector('img') && link.textContent.trim().length === 0;
+                        if (hasOnlyImage) {
+                            return;
+                        }
+
+                        // Skip if the link URL is an image file
+                        const imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.svg', '.bmp'];
+                        const isImageUrl = imageExtensions.some(ext => href.toLowerCase().includes(ext));
+                        if (isImageUrl) {
+                            return;
+                        }
+
+                        const footnoteNum = links.length + 1;
+
+                        // Store link info
+                        links.push({
+                            text: text,
+                            url: href,
+                            context: getContextAroundElement(link)
+                        });
+
+                        // Replace link with text + footnote marker
+                        const footnoteMarker = `[${footnoteNum}]`;
+                        link.replaceWith(text + footnoteMarker);
+                    });
+
+                    return {
+                        content: clone.innerText.trim(),
+                        links: links
+                    };
+                }
+
+                // Helper function to get context around a link
+                function getContextAroundElement(element) {
+                    const parent = element.parentElement;
+                    if (!parent) return '';
+
+                    const parentText = parent.innerText || '';
+                    const linkText = element.innerText || '';
+
+                    // Find the link text in parent text
+                    const linkIndex = parentText.indexOf(linkText);
+                    if (linkIndex === -1) return parentText.substring(0, 100);
+
+                    // Get 50 chars before and after
+                    const start = Math.max(0, linkIndex - 50);
+                    const end = Math.min(parentText.length, linkIndex + linkText.length + 50);
+
+                    let context = parentText.substring(start, end).trim();
+                    if (start > 0) context = '...' + context;
+                    if (end < parentText.length) context = context + '...';
+
+                    return context;
+                }
+
                 // Extract main content using Reader Mode (Readability.js) if available
                 let readerModeContent = null;
+                let contentElement = null;
+
                 if (typeof Readability !== 'undefined') {
                     try {
                         const documentClone = document.cloneNode(true);
                         const reader = new Readability(documentClone);
                         const article = reader.parse();
-                        if (article && article.textContent) {
-                            readerModeContent = article.textContent.trim();
+                        if (article && article.content) {
+                            // Create a temporary div with the reader mode HTML
+                            const tempDiv = document.createElement('div');
+                            tempDiv.innerHTML = article.content;
+                            contentElement = tempDiv;
+
                             // Also update metadata if available from Reader Mode
+                            if (article.title && !result.meta.title) {
+                                result.meta.title = article.title;
+                            }
                             if (article.byline && !result.meta.author) {
                                 result.meta.author = article.byline;
                             }
@@ -260,85 +348,68 @@ async def crawl_article(url: str) -> dict:
                     }
                 }
 
-                // If Reader Mode worked, use it
-                if (readerModeContent && readerModeContent.length > 500) {
-                    result.content = readerModeContent;
-                    // Still need to extract images separately
-                    const allImages = Array.from(document.querySelectorAll('img'));
-                    result.images = allImages
-                        .filter(img => {
-                            const width = img.naturalWidth || img.width || 0;
-                            const height = img.naturalHeight || img.height || 0;
-                            return width > 200 && height > 200;
-                        })
-                        .map(img => ({
-                            src: img.src,
-                            alt: img.alt || '',
-                            width: img.naturalWidth || img.width || 0,
-                            height: img.naturalHeight || img.height || 0
-                        }));
-
-                    return result;
-                }
-
                 // Fallback: Extract main content using smart detection
-                // First try specific selectors
-                const contentSelectors = [
-                    '[itemprop="articleBody"]',
-                    '.content-column-post-body',  // For sites like thenewstack.io
-                    'article .entry-content',
-                    '.article-content',
-                    '.post-content',
-                    '.post-body',
-                    'article',
-                    'main article'
-                ];
+                if (!contentElement) {
+                    // First try specific selectors
+                    const contentSelectors = [
+                        '[itemprop="articleBody"]',
+                        '.content-column-post-body',  // For sites like thenewstack.io
+                        'article .entry-content',
+                        '.article-content',
+                        '.post-content',
+                        '.post-body',
+                        'article',
+                        'main article'
+                    ];
 
-                let contentElement = null;
-                for (const selector of contentSelectors) {
-                    const elem = document.querySelector(selector);
-                    if (elem && elem.innerText.length > 100) {
-                        const text = elem.innerText;
-                        // Skip if it contains newsletter/subscription forms
-                        if (!text.includes('EMAIL ADDRESS') &&
-                            !text.includes('SUBSCRIBE') &&
-                            !text.includes('SUBSCRIPTION REQUIRED')) {
-                            contentElement = elem;
-                            break;
+                    for (const selector of contentSelectors) {
+                        const elem = document.querySelector(selector);
+                        if (elem && elem.innerText.length > 100) {
+                            const text = elem.innerText;
+                            // Skip if it contains newsletter/subscription forms
+                            if (!text.includes('EMAIL ADDRESS') &&
+                                !text.includes('SUBSCRIBE') &&
+                                !text.includes('SUBSCRIPTION REQUIRED')) {
+                                contentElement = elem;
+                                break;
+                            }
                         }
+                    }
+
+                    // If no specific selector worked, use smart detection
+                    if (!contentElement) {
+                        const allDivs = Array.from(document.querySelectorAll('div'));
+                        let bestCandidate = null;
+                        let bestScore = 0;
+
+                        allDivs.forEach(div => {
+                            const text = div.innerText || '';
+                            const html = div.innerHTML || '';
+
+                            // Skip if too short or contains newsletter signup
+                            if (text.length < 500) return;
+                            if (text.includes('EMAIL ADDRESS') || text.includes('SUBSCRIBE')) return;
+                            if (html.includes('newsletter-signup') || html.includes('subscription-modal')) return;
+
+                            // Score based on content quality indicators
+                            const paragraphs = div.querySelectorAll('p').length;
+                            const headings = div.querySelectorAll('h1, h2, h3, h4, h5, h6').length;
+                            const score = paragraphs * 10 + headings * 5 + (text.length / 100);
+
+                            if (score > bestScore) {
+                                bestScore = score;
+                                bestCandidate = div;
+                            }
+                        });
+
+                        contentElement = bestCandidate || document.body;
                     }
                 }
 
-                // If no specific selector worked, use smart detection
-                if (!contentElement) {
-                    const allDivs = Array.from(document.querySelectorAll('div'));
-                    let bestCandidate = null;
-                    let bestScore = 0;
-
-                    allDivs.forEach(div => {
-                        const text = div.innerText || '';
-                        const html = div.innerHTML || '';
-
-                        // Skip if too short or contains newsletter signup
-                        if (text.length < 500) return;
-                        if (text.includes('EMAIL ADDRESS') || text.includes('SUBSCRIBE')) return;
-                        if (html.includes('newsletter-signup') || html.includes('subscription-modal')) return;
-
-                        // Score based on content quality indicators
-                        const paragraphs = div.querySelectorAll('p').length;
-                        const headings = div.querySelectorAll('h1, h2, h3, h4, h5, h6').length;
-                        const score = paragraphs * 10 + headings * 5 + (text.length / 100);
-
-                        if (score > bestScore) {
-                            bestScore = score;
-                            bestCandidate = div;
-                        }
-                    });
-
-                    contentElement = bestCandidate || document.body;
-                }
-
-                result.content = contentElement.innerText.trim();
+                // Convert links to footnotes and extract content
+                const extracted = convertLinksToFootnotes(contentElement);
+                result.content = extracted.content;
+                result.links = extracted.links;
 
                 // Extract images (filter by size)
                 const allImages = Array.from(contentElement.querySelectorAll('img'));
@@ -360,6 +431,7 @@ async def crawl_article(url: str) -> dict:
 
             print(f'✓ Title: {data["meta"]["title"]}', file=sys.stderr)
             print(f'✓ Images found: {len(data["images"])}', file=sys.stderr)
+            print(f'✓ Links found: {len(data.get("links", []))}', file=sys.stderr)
             print(f'✓ Content length: {len(data["content"])} characters', file=sys.stderr)
 
             return data
