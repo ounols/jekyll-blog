@@ -5,7 +5,11 @@
 
 @for $i from 1 through 5 {
   h#{$i} {
-    @extend %heading;
+    @if $i > 2 {
+      @extend %heading-subtitle;
+    } @else {
+      @extend %heading;
+    }
 
     @if $i > 1 {
       @extend %anchor;
