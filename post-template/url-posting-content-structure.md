@@ -57,11 +57,12 @@
 ```markdown
 ## [Main content sections...]
 
-> **블로그 주인장의 의견:**
+> **블로그 주인장의 의견**
 >
 > [Write AUTHOR_OPINION content here in first-person.
 > Each paragraph should start with `>` to maintain blockquote format.
 > Keep the natural flow of the author's thoughts.]
+{: .prompt-info}
 
 ## 마치며
 
@@ -138,7 +139,7 @@
 
 **Format:**
 ```markdown
-> 이 포스트는 블로그 주인장이 흥미롭다고 생각하는 주제를 AI 모델을 통해 작성을 요청한 아티클입니다. <br>주인장이 개인적으로 읽으려고 만든게 맞으니 참고 바랍니다!
+> 이 포스트는 블로그 주인장이 흥미롭다고 생각하는 주제를 AI를 통해 요약한 글입니다. <br>주인장이 개인적으로 읽으려고 만든게 맞으니 참고 바랍니다!
 {: .prompt-tip}
 ```
 
@@ -171,7 +172,7 @@
 > 기사 작성 시점 기준으로 구글은 FFmpeg의 요구에 대해 공식적인 입장을 발표하지 않았습니다. 다만 구글 Project Zero는 90일 공개 정책을 모든 프로젝트에 동일하게 적용한다는 기존 입장을 유지하고 있습니다.
 {: .prompt-info}
 
-> 이 포스트는 블로그 주인장이 흥미롭다고 생각하는 주제를 AI 모델을 통해 작성을 요청한 아티클입니다. <br>주인장이 개인적으로 읽으려고 만든게 맞으니 참고 바랍니다!
+> 이 포스트는 블로그 주인장이 흥미롭다고 생각하는 주제를 AI를 통해 요약한 글입니다. <br>주인장이 개인적으로 읽으려고 만든게 맞으니 참고 바랍니다!
 {: .prompt-tip}
 
 ---

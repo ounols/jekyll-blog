@@ -19,9 +19,6 @@ mermaid: false
 hidden: true
 ---
 
-> 이 포스트는 블로그 주인장이 흥미롭다고 생각하는 주제를 AI 모델을 통해 작성을 요청한 아티클입니다. <br>주인장이 개인적으로 읽으려고 만든게 맞으니 참고 바랍니다!
-{: .prompt-info}
-
 **원본 링크**: [FFmpeg to Google: Fund Us or Stop Sending Bugs](https://thenewstack.io/ffmpeg-to-google-fund-us-or-stop-sending-bugs/){: target="_blank"}
 
 ![FFmpeg Logo](/media/2025-11-12-ffmpeg-google-funding-controversy/figure-1.png)
@@ -136,6 +133,11 @@ FFmpeg과 구글 간의 이번 충돌은 단순한 한 프로젝트의 문제가
 오픈소스 소프트웨어는 인터넷 경제에서 수조 달러의 가치를 창출하고 있습니다. 하지만 이러한 가치를 창출하는 개발자들은 종종 적절한 보상을 받지 못하고 있습니다. AI 도구가 더 많은 버그를 찾아낼수록 이 문제는 더욱 심화될 것입니다.
 
 기업들이 오픈소스에 의존하면서도 이를 지속가능하게 만드는 데 투자하지 않는다면, 언젠가는 핵심 인프라가 유지보수되지 않는 상황에 직면할 수 있습니다. FFmpeg의 메시지는 명확합니다. "자금을 지원하거나, 버그 리포트를 멈추라." 이는 전체 오픈소스 생태계를 위한 경고이기도 합니다.
+
+> 이 포스트는 블로그 주인장이 흥미롭다고 생각하는 주제를 AI를 통해 요약한 글입니다. <br>주인장이 개인적으로 읽으려고 만든게 맞으니 참고 바랍니다!
+{: .prompt-info}
+
+---
 
 [^big-sleep]: Google Cloud Blog - [Cloud CISO Perspectives: Our Big Sleep agent makes a big leap](https://cloud.google.com/blog/products/identity-security/cloud-ciso-perspectives-our-big-sleep-agent-makes-big-leap){: target="_blank"}
 [^vulnerabilities]: The Hacker News - [Google's AI Tool Big Sleep Finds Zero-Day Vulnerability in SQLite Database Engine](https://thehackernews.com/2024/11/googles-ai-tool-big-sleep-finds-zero.html){: target="_blank"}

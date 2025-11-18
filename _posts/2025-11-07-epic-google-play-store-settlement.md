@@ -18,9 +18,6 @@ mermaid: false
 hidden: true
 ---
 
-> 이 포스트는 블로그 주인장이 흥미롭다고 생각하는 주제를 AI 모델을 통해 작성을 요청한 아티클입니다. <br>주인장이 개인적으로 읽으려고 만든게 맞으니 참고 바랍니다!
-{: .prompt-info}
-
 ![Epic Games vs Google](/media/2025-11-07-epic-google-play-store-settlement/figure-1.png)
 _에픽게임즈와 구글의 법정 다툼이 합의로 마무리되었습니다_
 
@@ -119,6 +116,11 @@ _에픽게임즈와 구글의 법정 다툼이 합의로 마무리되었습니�
 에픽게임즈와 구글의 합의는 모바일 게임 생태계에서 중요한 전환점이 될 것으로 보입니다. 수수료 인하와 결제 시스템 선택권 확대는 게임 개발사들에게 실질적인 재정적 혜택을 제공할 것입니다. 특히 연간 수백만 달러 규모의 매출을 올리는 개발사들은 수십만 달러에서 수백만 달러에 이르는 비용을 절감할 수 있습니다.
 
 다만 이러한 변화가 실제로 어떻게 구현될지, 그리고 개발자들이 새로운 시스템을 얼마나 효과적으로 활용할 수 있을지는 법원의 최종 승인과 이후의 실행 과정을 지켜봐야 할 것입니다. 게임 개발 커뮤니티는 이번 합의를 통해 더 공정하고 경쟁적인 모바일 앱 시장이 만들어지기를 기대하고 있습니다.
+
+> 이 포스트는 블로그 주인장이 흥미롭다고 생각하는 주제를 AI를 통해 요약한 글입니다. <br>주인장이 개인적으로 읽으려고 만든게 맞으니 참고 바랍니다!
+{: .prompt-info}
+
+---
 
 [^settlement]: Fortune - [Google, Epic Games reach 'comprehensive settlement' over long-running Play Store antitrust case](https://fortune.com/2025/11/06/google-epic-games-settlement-antitrust-monopoly-play-store-android/){: target="_blank"}
 [^gamedeveloper]: Game Developer - [Google to reduce Play Store fees after settlement with Epic Games](https://www.gamedeveloper.com/mobile/google-to-reduce-play-store-fees-after-settlement-with-epic-games){: target="_blank"}

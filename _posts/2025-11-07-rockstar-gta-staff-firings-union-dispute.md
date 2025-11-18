@@ -17,9 +17,6 @@ mermaid: false
 hidden: true
 ---
 
-> 이 포스트는 블로그 주인장이 흥미롭다고 생각하는 주제를 AI 모델을 통해 작성을 요청한 아티클입니다. <br>주인장이 개인적으로 읽으려고 만든게 맞으니 참고 바랍니다!
-{: .prompt-info}
-
 ![GTA 6 Artwork](/media/2025-11-07-rockstar-gta-staff-firings-union-dispute/figure-1.webp)
 
 락스타 게임즈가 최근 영국과 캐나다 스튜디오 전반에 걸쳐 30-40명의 직원을 동시에 해고하면서 게임 업계에 큰 파장을 일으키고 있습니다. 회사 측은 기밀 정보 유출을 해고 사유로 밝혔지만, 노동조합은 이를 노조 활동 탄압이라며 강력하게 반발하고 있습니다.
@@ -77,6 +74,11 @@ GTA 6는 현재 2026년 11월 19일 출시 예정이지만, 내부 직원들은 
 락스타 게임즈의 이번 해고 사건은 게임 업계에서 진행 중인 노동권과 기업 권한 사이의 갈등을 상징적으로 보여줍니다. 정보 보안과 노조 활동이라는 두 가지 정당한 가치가 충돌하는 상황에서, 어느 쪽의 주장이 더 설득력 있는지는 향후 법적 절차를 통해 밝혀질 것으로 보입니다.
 
 게임 업계의 근로 환경 개선을 요구하는 목소리는 계속 커지고 있으며, 이번 사건은 그 과정에서 발생할 수 있는 갈등의 한 사례로 기록될 것입니다. 동시에 기업의 정보 보안 필요성도 무시할 수 없는 만큼, 양측이 합리적인 선에서 타협점을 찾을 수 있을지 주목됩니다.
+
+> 이 포스트는 블로그 주인장이 흥미롭다고 생각하는 주제를 AI를 통해 요약한 글입니다. <br>주인장이 개인적으로 읽으려고 만든게 맞으니 참고 바랍니다!
+{: .prompt-info}
+
+---
 
 [^bloomberg]: Bloomberg - 'Grand Theft Auto' Studio Says Fired Employees Were Leaking Information
 [^thesixthaxis]: TheSixthAxis - [Rockstar responds to union busting accusations, says fired employees were leakers](https://www.thesixthaxis.com/2025/11/06/rockstar-responds-to-union-busting-accusations-says-fired-employees-were-leakers/){: target="_blank"}

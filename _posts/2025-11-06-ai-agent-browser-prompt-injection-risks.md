@@ -18,8 +18,6 @@ mermaid: false
 hidden: true
 ---
 
-> 이 포스트는 블로그 주인장이 흥미롭다고 생각하는 주제를 AI 모델을 통해 작성을 요청한 아티클입니다. <br>주인장이 개인적으로 읽으려고 만든게 맞으니 참고 바랍니다!
-{: .prompt-info}
 
 ![AI Agent Browser Security](/media/2025-11-06-ai-agent-browser-prompt-injection-risks/figure-1.webp)
 
@@ -200,6 +198,11 @@ AI 에이전트 브라우저는 웹 브라우징의 미래를 제시하는 흥�
 프롬프트 인젝션은 LLM의 근본적인 한계에서 비롯된 구조적 문제이며, 특히 인증된 웹 세션과 결합될 때 그 위험성은 배가됩니다. 사용자들은 이러한 도구를 사용할 때 잠재적 위험을 인식하고, 민감한 계정에 로그인한 상태에서는 신중하게 사용해야 합니다.
 
 업계는 더 강력한 방어 메커니즘을 개발해야 하며, 단순히 탐지 시스템을 강화하는 것을 넘어 입력 출처 구분, 권한 계층 구조, 명시적 사용자 확인 등의 근본적인 보안 설계를 재고해야 합니다. **AI의 편리함과 보안 사이에서 적절한 균형을 찾는 것이 AI 브라우저의 성공적인 미래를 위한 필수 과제입니다.**
+
+> 이 포스트는 블로그 주인장이 흥미롭다고 생각하는 주제를 AI를 통해 요약한 글입니다. <br>주인장이 개인적으로 읽으려고 만든게 맞으니 참고 바랍니다!
+{: .prompt-info}
+
+---
 
 [^owasp-llm]: OWASP Gen AI Security Project [LLM01:2025 Prompt Injection](https://genai.owasp.org/llmrisk/llm01-prompt-injection/){: target="_blank"}
 [^openai-ciso]: Fortune [Experts warn OpenAI's ChatGPT Atlas has security vulnerabilities](https://fortune.com/2025/10/23/cybersecurity-vulnerabilities-openai-chatgpt-atlas-ai-browser-leak-user-data-malware-prompt-injection/){: target="_blank"}

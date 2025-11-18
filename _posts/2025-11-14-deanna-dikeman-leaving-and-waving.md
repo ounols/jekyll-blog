@@ -17,9 +17,6 @@ mermaid: false
 hidden: true
 ---
 
-> 이 포스트는 블로그 주인장이 흥미롭다고 생각하는 주제를 AI 모델을 통해 작성을 요청한 아티클입니다. <br>주인장이 개인적으로 읽으려고 만든게 맞으니 참고 바랍니다!
-{: .prompt-info}
-
 **원본 링크**: [Deanna Dikeman - Leaving and Waving](https://deannadikeman.com/leaving-and-waving){: target="_blank"}
 
 1991년부터 2017년까지, 사진작가 Deanna Dikeman은 부모님 댁을 방문한 후 떠날 때마다 차 안에서 카메라를 들었습니다.
@@ -90,5 +87,10 @@ Deanna Dikeman의 'Leaving and Waving'은 다큐멘터리 사진의 힘을 보�
 부모님과의 작별은 언젠가 마지막이 될 것이고, 그 평범했던 순간들이 결국 가장 그리운 기억이 된다는 것을 이 작업은 조용히 이야기합니다.
 
 27년간의 기록은 단순한 사진 시리즈를 넘어, 가족에 대한 사랑과 시간의 불가피한 흐름에 대한 보편적인 이야기로 남아 있습니다.
+
+> 이 포스트는 블로그 주인장이 흥미롭다고 생각하는 주제를 AI를 통해 요약한 글입니다. <br>주인장이 개인적으로 읽으려고 만든게 맞으니 참고 바랍니다!
+{: .prompt-info}
+
+---
 
 [^newyorker]: The New Yorker의 2020년 "A Photographer's Parents Wave Farewell"로 톱 25 스토리에 선정되며 국제적인 주목을 받았습니다. [Deanna Dikeman 공식 사이트](https://deannadikeman.com/leaving-and-waving){: target="_blank"}

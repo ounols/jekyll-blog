@@ -19,8 +19,6 @@ mermaid: false
 hidden: true
 ---
 
-> 이 포스트는 블로그 주인장이 흥미롭다고 생각하는 주제를 AI 모델을 통해 작성을 요청한 아티클입니다. <br>주인장이 개인적으로 읽으려고 만든게 맞으니 참고 바랍니다!
-{: .prompt-info}
 
 ![Uptime Kuma Dashboard](/media/2025-11-05-uptime-kuma/figure-1.jpg)
 
@@ -208,6 +206,11 @@ Uptime Kuma는 자체 호스팅 방식의 모니터링 도구를 찾는 개발�
 설정이 간단하고 다양한 모니터링 유형을 지원하며, 90개 이상의 알림 서비스와 통합할 수 있다는 점이 큰 장점입니다. 또한 MIT 라이선스로 배포되어 상업적 용도로도 자유롭게 사용할 수 있습니다.
 
 소규모부터 중규모 인프라를 운영하면서 외부 서비스에 의존하지 않고 모니터링 시스템을 구축하고 싶다면, Uptime Kuma를 시도해볼 가치가 충분합니다. 공식 데모 사이트에서 직접 체험해보고 자신의 환경에 적합한지 판단해보시기 바랍니다.
+
+> 이 포스트는 블로그 주인장이 흥미롭다고 생각하는 주제를 AI를 통해 요약한 글입니다. <br>주인장이 개인적으로 읽으려고 만든게 맞으니 참고 바랍니다!
+{: .prompt-info}
+
+---
 
 [^project-origin]: Uptime Kuma GitHub Wiki [홈페이지](https://github.com/louislam/uptime-kuma/wiki){: target="_blank"}
 [^alternatives]: Better Stack Community [Uptime Kuma Alternatives 가이드](https://betterstack.com/community/comparisons/uptime-kuma-alternative/){: target="_blank"}

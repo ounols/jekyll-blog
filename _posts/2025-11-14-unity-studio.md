@@ -18,9 +18,6 @@ mermaid: false
 hidden: true
 ---
 
-> 이 포스트는 블로그 주인장이 흥미롭다고 생각하는 주제를 AI 모델을 통해 작성을 요청한 아티클입니다. <br>주인장이 개인적으로 읽으려고 만든게 맞으니 참고 바랍니다!
-{: .prompt-info}
-
 **프로젝트 링크**: [Unity Studio](https://unity.com/campaign/unity-studio){: target="_blank"}
 
 ![Unity Technologies Logo](/media/2025-11-14-unity-studio/figure-1.png)
@@ -99,6 +96,9 @@ Unity Studio는 3D 콘텐츠 제작의 진입 장벽을 낮추는 시도로 볼 
 >
 > 주로 비개발자, 디자이너, 마케터, 제품 매니저 등 코딩 경험 없이 3D 콘텐츠를 만들고자 하는 사람들을 대상으로 합니다. 제조업체의 제품 데모, 교육용 시뮬레이션, HMI 프로토타입 등을 빠르게 제작해야 하는 실무자에게 유용합니다.
 {: .prompt-info}
+
+> 이 포스트는 블로그 주인장이 흥미롭다고 생각하는 주제를 AI를 통해 요약한 글입니다. <br>주인장이 개인적으로 읽으려고 만든게 맞으니 참고 바랍니다!
+{: .prompt-tip}
 
 ---
 
