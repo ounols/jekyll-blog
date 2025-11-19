@@ -32,7 +32,7 @@ Unity와 Epic Games가 2025년 11월 19일 바르셀로나에서 열린 Unite 20
 
 ### 개발자 입장에서의 실질적 기회
 
-Unity 개발자들이 주목해야 할 점은 Fortnite Creator Economy의 수익 구조입니다. Epic Games는 2025년 12월부터 크리에이터들이 **자신의 Fortnite 아일랜드에서 아이템을 직접 판매**할 수 있도록 하며, 2026년 말까지 V-Bucks 가치의 100%를 개발자에게 지급할 예정입니다(이후 50%). 이는 실제 소비자 지출의 약 74%에 해당하는 금액입니다.[^fortnite-revenue]
+Unity 개발자들이 주목해야 할 점은 Fortnite Creator Economy의 수익 구조입니다. Epic Games는 2025년 12월부터 크리에이터들이 **자신의 Fortnite 아일랜드에서 아이템을 직접 판매**할 수 있도록 하며, 2026년 말까지 V-Bucks 가치의 100%를 개발자에게 지급할 예정입니다(이후 50%). 이는 실제 소비자 지출의 약 74%에 해당하는 금액입니다.
 
 기존 Engagement Payout 방식도 계속 유지되는데, 플레이어 참여도에 따라 수익을 분배받을 수 있습니다. UEFN 런칭 이후 현재까지 **총 7억 2,200만 달러가 크리에이터들에게 지급**되었다는 점을 고려하면, Unity 개발자들에게도 상당한 수익 기회가 열릴 것으로 보입니다.
 
@@ -119,5 +119,4 @@ Unity와 Epic Games의 이번 파트너십은 단순한 비즈니스 협력을 �
 ---
 
 [^fortnite-creator-economy]: Fortnite - [Fortnite Developers Will Soon Be Able to Sell In-Game Items](https://www.fortnite.com/news/fortnite-developers-will-soon-be-able-to-sell-in-game-items){: target="_blank"}
-[^fortnite-revenue]: Fortnite Creator Economy에서는 2025년 12월부터 2026년 말까지 아이템 판매 수익의 100%를 개발자에게 지급하며, 이후에는 50%로 조정됩니다. V-Bucks 가치는 플랫폼 수수료(12-30%)를 제외한 금액 기준으로 계산되므로, 100%는 실제 소비자 지출의 약 74%에 해당합니다.
 [^unity-commerce]: Unity Investor Relations - [Unity Launches Native Cross-Platform Commerce Management for Game Developers Worldwide](https://investors.unity.com/news/news-details/2025/Unity-Launches-Native-Cross-Platform-Commerce-Management-for-Game-Developers-Worldwide/default.aspx){: target="_blank"}
