@@ -1,0 +1,67 @@
+---
+layout: compress
+---
+
+{% capture source %}
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>{{ page.url | absolute_url }}</id>
+  <title>{{ site.title }} - {{ page.category }}</title>
+  <updated>{{ site.time | date_to_xmlschema }}</updated>
+  <author>
+    <name>{{ site.social.name }}</name>
+    <uri>{{ "/" | absolute_url }}</uri>
+  </author>
+  <link rel="self" type="application/atom+xml" href="{{ page.url | absolute_url }}"/>
+  <link rel="alternate" type="text/html" hreflang="{{ site.alt_lang | default: site.lang }}"
+    href="{{ '/categories/' | append: page.category | downcase | absolute_url }}/"/>
+  <rights> © {{ 'now' | date: '%Y' }} {{ site.social.name }} </rights>
+  <icon>{{ site.baseurl }}/assets/img/favicons/favicon.ico</icon>
+
+{% assign category_posts = site.posts | where_exp: "post", "post.categories contains page.category" %}
+{% for post in category_posts limit: 20 %}
+  {% assign post_absolute_url = post.url | absolute_url %}
+  <entry>
+    <title>{{ post.title }}</title>
+    <link href="{{ post_absolute_url }}" rel="alternate" type="text/html" title="{{ post.title | xml_escape }}" />
+    <published>{{ post.date | date_to_xmlschema }}</published>
+  {% if post.last_modified_at %}
+    <updated>{{ post.last_modified_at | date_to_xmlschema }}</updated>
+  {% else %}
+    <updated>{{ post.date | date_to_xmlschema }}</updated>
+  {% endif %}
+    <id>{{ post_absolute_url }}</id>
+    <content type="text/html" src="{{ post_absolute_url }}" />
+    <author>
+      <name>{{ post.author | default: site.social.name }}</name>
+    </author>
+
+  {% if post.categories %}
+    {% for category in post.categories %}
+    <category term="{{ category }}" />
+    {% endfor %}
+  {% endif %}
+
+  {% assign summary_text = "" %}
+  {% assign paragraphs = post.content | split: "</p>" %}
+  {% for para in paragraphs %}
+    {% if summary_text == "" %}
+      {% assign clean_para = para | strip_html | strip %}
+      {% assign has_source = clean_para | split: "원본 링크" | size | minus: 1 %}
+      {% assign has_project = clean_para | split: "프로젝트 링크" | size | minus: 1 %}
+      {% assign has_video_fallback = clean_para | split: "Your browser does not support" | size | minus: 1 %}
+      {% if clean_para.size > 30 and has_source == 0 and has_project == 0 and has_video_fallback == 0 %}
+        {% assign summary_text = clean_para %}
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+  {% if summary_text != "" %}
+  <summary>{{ summary_text | truncate: 400 }}</summary>
+  {% else %}
+  <summary>{% include post-summary.html max_length=400 %}</summary>
+  {% endif %}
+
+  </entry>
+{% endfor %}
+</feed>
+{% endcapture %}
+{{ source | replace: '&', '&amp;' }}
