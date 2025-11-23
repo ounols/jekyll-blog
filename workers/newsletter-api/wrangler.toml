@@ -1,0 +1,23 @@
+name = "newsletter-api"
+main = "src/index.ts"
+compatibility_date = "2024-01-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Cloudflare D1 Database binding
+[[d1_databases]]
+binding = "DB"
+database_name = "newsletter-subscribers"
+database_id = "YOUR_D1_DATABASE_ID"  # Cloudflare 대시보드에서 생성 후 교체
+
+# Environment variables (Cloudflare 대시보드에서 설정)
+[vars]
+BLOG_URL = "https://blog.ounols.kr"
+FROM_EMAIL = "newsletter@ounols.kr"
+FROM_NAME = "Ounols Blog"
+
+# Production secrets (wrangler secret put 명령어로 설정)
+# RESEND_API_KEY = "re_xxxxx"
+
+# CORS settings
+# [site]
+# bucket = "./public"

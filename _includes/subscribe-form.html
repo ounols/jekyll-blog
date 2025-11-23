@@ -1,0 +1,180 @@
+<!-- Newsletter Subscription Form -->
+<div id="newsletter-subscribe" class="card mb-4">
+  <div class="card-body">
+    <h5 class="card-title mb-3">
+      <i class="fas fa-envelope me-2"></i>뉴스레터 구독
+    </h5>
+    <p class="card-text small text-muted mb-3">
+      새로운 글이 발행되면 이메일로 알려드립니다.
+    </p>
+
+    <form id="subscribe-form" class="needs-validation" novalidate>
+      <div class="mb-2">
+        <input
+          type="email"
+          class="form-control form-control-sm"
+          id="subscribe-email"
+          name="email"
+          placeholder="이메일 주소"
+          required
+          autocomplete="email"
+        >
+        <div class="invalid-feedback small">
+          유효한 이메일 주소를 입력해주세요.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <input
+          type="text"
+          class="form-control form-control-sm"
+          id="subscribe-name"
+          name="name"
+          placeholder="이름 (선택)"
+          autocomplete="name"
+        >
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-sm w-100" id="subscribe-btn">
+        <span class="btn-text">구독하기</span>
+        <span class="btn-loading d-none">
+          <span class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span>
+          처리 중...
+        </span>
+      </button>
+    </form>
+
+    <div id="subscribe-message" class="mt-3 small d-none"></div>
+
+    <p class="text-muted mt-3 mb-0" style="font-size: 0.7rem;">
+      <i class="fas fa-lock me-1"></i>
+      개인정보는 뉴스레터 발송에만 사용됩니다.
+      <a href="/feeds/" class="text-muted">RSS 피드</a>도 이용 가능합니다.
+    </p>
+  </div>
+</div>
+
+<style>
+#newsletter-subscribe {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border-color);
+  border-radius: 0.75rem;
+}
+
+#newsletter-subscribe .card-title {
+  color: var(--heading-color);
+  font-size: 1rem;
+}
+
+#newsletter-subscribe .form-control {
+  background: var(--input-bg, var(--card-bg));
+  border-color: var(--card-border-color);
+  color: var(--text-color);
+}
+
+#newsletter-subscribe .form-control:focus {
+  border-color: var(--link-color);
+  box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+}
+
+#newsletter-subscribe .form-control::placeholder {
+  color: var(--text-muted-color);
+}
+
+#newsletter-subscribe .btn-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+#newsletter-subscribe .btn-primary:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+#newsletter-subscribe .btn-primary:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.subscribe-success {
+  color: #28a745;
+  background: rgba(40, 167, 69, 0.1);
+  padding: 0.75rem;
+  border-radius: 0.375rem;
+}
+
+.subscribe-error {
+  color: #dc3545;
+  background: rgba(220, 53, 69, 0.1);
+  padding: 0.75rem;
+  border-radius: 0.375rem;
+}
+</style>
+
+<script>
+(function() {
+  const NEWSLETTER_API_URL = 'https://newsletter-api.ounols.kr';
+
+  const form = document.getElementById('subscribe-form');
+  const emailInput = document.getElementById('subscribe-email');
+  const nameInput = document.getElementById('subscribe-name');
+  const submitBtn = document.getElementById('subscribe-btn');
+  const messageDiv = document.getElementById('subscribe-message');
+
+  if (!form) return;
+
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    // Validation
+    if (!form.checkValidity()) {
+      form.classList.add('was-validated');
+      return;
+    }
+
+    const email = emailInput.value.trim();
+    const name = nameInput.value.trim();
+
+    // UI state: loading
+    submitBtn.disabled = true;
+    submitBtn.querySelector('.btn-text').classList.add('d-none');
+    submitBtn.querySelector('.btn-loading').classList.remove('d-none');
+    messageDiv.classList.add('d-none');
+
+    try {
+      const response = await fetch(`${NEWSLETTER_API_URL}/api/subscribe`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, name }),
+      });
+
+      const data = await response.json();
+
+      // Show message
+      messageDiv.classList.remove('d-none', 'subscribe-success', 'subscribe-error');
+
+      if (data.success) {
+        messageDiv.classList.add('subscribe-success');
+        messageDiv.innerHTML = '<i class="fas fa-check-circle me-1"></i>' + data.message;
+        form.reset();
+        form.classList.remove('was-validated');
+      } else {
+        messageDiv.classList.add('subscribe-error');
+        messageDiv.innerHTML = '<i class="fas fa-exclamation-circle me-1"></i>' + data.error;
+      }
+    } catch (error) {
+      messageDiv.classList.remove('d-none', 'subscribe-success');
+      messageDiv.classList.add('subscribe-error');
+      messageDiv.innerHTML = '<i class="fas fa-exclamation-circle me-1"></i>네트워크 오류가 발생했습니다. 잠시 후 다시 시도해주세요.';
+    } finally {
+      // UI state: reset
+      submitBtn.disabled = false;
+      submitBtn.querySelector('.btn-text').classList.remove('d-none');
+      submitBtn.querySelector('.btn-loading').classList.add('d-none');
+    }
+  });
+})();
+</script>

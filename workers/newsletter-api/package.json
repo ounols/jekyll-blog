@@ -1,0 +1,21 @@
+{
+  "name": "newsletter-api",
+  "version": "1.0.0",
+  "description": "Email subscription API for Jekyll blog using Cloudflare Workers",
+  "main": "src/index.ts",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "db:create": "wrangler d1 create newsletter-subscribers",
+    "db:migrate": "wrangler d1 execute newsletter-subscribers --file=./schema.sql",
+    "db:migrate:local": "wrangler d1 execute newsletter-subscribers --local --file=./schema.sql"
+  },
+  "dependencies": {
+    "hono": "^4.3.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20240320.0",
+    "typescript": "^5.4.0",
+    "wrangler": "^3.40.0"
+  }
+}

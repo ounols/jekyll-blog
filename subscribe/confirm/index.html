@@ -1,0 +1,144 @@
+---
+layout: page
+title: 구독 확인
+permalink: /subscribe/confirm/
+---
+
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div id="confirm-card" class="card text-center">
+        <div class="card-body py-5">
+          <!-- Loading State -->
+          <div id="confirm-loading">
+            <div class="spinner-border text-primary mb-3" role="status">
+              <span class="visually-hidden">처리 중...</span>
+            </div>
+            <h4>구독을 확인하고 있습니다...</h4>
+          </div>
+
+          <!-- Success State -->
+          <div id="confirm-success" class="d-none">
+            <div class="mb-4">
+              <i class="fas fa-check-circle text-success" style="font-size: 4rem;"></i>
+            </div>
+            <h3 class="mb-3">구독이 완료되었습니다!</h3>
+            <p class="text-muted mb-4">
+              환영합니다! 앞으로 새로운 글이 발행되면 이메일로 알려드리겠습니다.
+            </p>
+            <a href="/" class="btn btn-primary">
+              <i class="fas fa-home me-1"></i>블로그 홈으로
+            </a>
+          </div>
+
+          <!-- Already Confirmed State -->
+          <div id="confirm-already" class="d-none">
+            <div class="mb-4">
+              <i class="fas fa-info-circle text-info" style="font-size: 4rem;"></i>
+            </div>
+            <h3 class="mb-3">이미 구독 중입니다</h3>
+            <p class="text-muted mb-4">
+              이미 구독이 확인된 이메일입니다. 새 글 알림을 계속 받으실 수 있습니다.
+            </p>
+            <a href="/" class="btn btn-primary">
+              <i class="fas fa-home me-1"></i>블로그 홈으로
+            </a>
+          </div>
+
+          <!-- Error State -->
+          <div id="confirm-error" class="d-none">
+            <div class="mb-4">
+              <i class="fas fa-exclamation-circle text-danger" style="font-size: 4rem;"></i>
+            </div>
+            <h3 class="mb-3">확인 실패</h3>
+            <p class="text-muted mb-4" id="confirm-error-message">
+              유효하지 않거나 만료된 링크입니다.
+            </p>
+            <a href="/" class="btn btn-secondary">
+              <i class="fas fa-home me-1"></i>블로그 홈으로
+            </a>
+          </div>
+
+          <!-- No Token State -->
+          <div id="confirm-notoken" class="d-none">
+            <div class="mb-4">
+              <i class="fas fa-question-circle text-warning" style="font-size: 4rem;"></i>
+            </div>
+            <h3 class="mb-3">잘못된 접근</h3>
+            <p class="text-muted mb-4">
+              이메일의 구독 확인 링크를 통해 접속해주세요.
+            </p>
+            <a href="/" class="btn btn-secondary">
+              <i class="fas fa-home me-1"></i>블로그 홈으로
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+#confirm-card {
+  border: none;
+  border-radius: 1rem;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+}
+
+#confirm-card .btn-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  padding: 0.75rem 2rem;
+}
+</style>
+
+<script>
+(function() {
+  const NEWSLETTER_API_URL = 'https://newsletter-api.ounols.kr';
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const token = urlParams.get('token');
+
+  const loadingEl = document.getElementById('confirm-loading');
+  const successEl = document.getElementById('confirm-success');
+  const alreadyEl = document.getElementById('confirm-already');
+  const errorEl = document.getElementById('confirm-error');
+  const notokenEl = document.getElementById('confirm-notoken');
+  const errorMsgEl = document.getElementById('confirm-error-message');
+
+  function showState(state) {
+    loadingEl.classList.add('d-none');
+    successEl.classList.add('d-none');
+    alreadyEl.classList.add('d-none');
+    errorEl.classList.add('d-none');
+    notokenEl.classList.add('d-none');
+
+    state.classList.remove('d-none');
+  }
+
+  if (!token) {
+    showState(notokenEl);
+    return;
+  }
+
+  // Confirm subscription
+  fetch(`${NEWSLETTER_API_URL}/api/confirm/${token}`)
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        if (data.alreadyConfirmed) {
+          showState(alreadyEl);
+        } else {
+          showState(successEl);
+        }
+      } else {
+        errorMsgEl.textContent = data.error || '확인에 실패했습니다.';
+        showState(errorEl);
+      }
+    })
+    .catch(error => {
+      errorMsgEl.textContent = '네트워크 오류가 발생했습니다.';
+      showState(errorEl);
+    });
+})();
+</script>
