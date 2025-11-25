@@ -88,7 +88,6 @@ jobs:
             --allowed-tools "WebSearch"
             --allowed-tools "Write(_posts/*)"
             --allowed-tools "Edit(_posts/*)"
-            --model claude-opus-4-5-20251101
 
       - name: Create Workflow Summary
         if: always()
