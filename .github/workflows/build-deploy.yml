@@ -45,8 +45,19 @@ jobs:
           ruby-version: 3.3
           bundler-cache: true
 
-      - name: npm build
-        run: npm install && npm run build
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
+          cache: 'pnpm'
+
+      - name: Install and build
+        run: pnpm install && pnpm run build
 
       - name: Build site
         run: bundle exec jekyll b -d "_site${{ steps.pages.outputs.base_path }}"
