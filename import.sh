@@ -55,8 +55,11 @@ process_single_file() {
         line=$(echo "$line" | sed -E 's|([^!])\[([^\]]+)\]\((https?://[^)]+)\)|\1[\2](\3){:target="_blank"}|g')
       fi
     fi
-    if [[ $line =~ !\[.*\]\((.*)\) ]] || [[ $line =~ image:\s*path:\s*(.*) ]]; then
+    # Check for images: markdown format ![](url), front matter image: "url", or image: path: url
+    if [[ $line =~ !\[.*\]\((.*)\) ]] || [[ $line =~ ^image:[[:space:]]*\"([^\"]+)\" ]] || [[ $line =~ image:[[:space:]]*path:[[:space:]]*(.*) ]]; then
       if [[ $line =~ !\[.*\]\((.*)\) ]]; then
+        IMG_URL="${BASH_REMATCH[1]}"
+      elif [[ $line =~ ^image:[[:space:]]*\"([^\"]+)\" ]]; then
         IMG_URL="${BASH_REMATCH[1]}"
       else
         IMG_URL="${BASH_REMATCH[1]}"
@@ -95,6 +98,9 @@ process_single_file() {
             -H "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" \
             -H "Referer: ${DOMAIN}/" \
             -H "Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8" \
+            -H "sec-ch-ua: \"Not_A Brand\";v=\"8\", \"Chromium\";v=\"120\"" \
+            -H "sec-ch-ua-mobile: ?0" \
+            -H "sec-ch-ua-platform: \"Windows\"" \
             --max-time 30 \
             --retry 3 \
             "$ORIGINAL_URL")
@@ -161,6 +167,9 @@ process_single_file() {
       NEW_PATH="/media/$FILENAME/$NEW_IMG_FILENAME"
       if [[ $line =~ !\[.*\]\((.*)\) ]]; then
         line=${line//$ORIGINAL_URL/$NEW_PATH}
+      elif [[ $line =~ ^image: ]]; then
+        # Front matter image field - preserve the format with quotes
+        line="image: \"$NEW_PATH\""
       else
         line=${line//$ORIGINAL_URL/$NEW_PATH}
       fi
