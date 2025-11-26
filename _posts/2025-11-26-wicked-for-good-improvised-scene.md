@@ -17,6 +17,10 @@ mermaid: false
 hidden: true
 ---
 
+> **주의**
+> 이 글은 'Wicked: For Good'의 스포일러가 담겨있습니다!
+{: .prompt-warning}
+
 **원본 링크**: [Variety - 'Wicked: For Good' Director Jon M. Chu Says Ariana Grande and Cynthia Erivo Created the Most Emotional Scene by Accident](https://variety.com/2025/film/awards/jon-m-chu-wicked-for-good-spoilers-ending-explained-1236587506/){: target="_blank"}
 
 ![Wicked: For Good 촬영 현장에서 존 M. 추 감독과 신시아 에리보, 아리아나 그란데](/media/2025-11-26-wicked-for-good-improvised-scene/figure-1.webp)
