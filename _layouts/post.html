@@ -5,10 +5,8 @@ panel_includes:
 tail_includes:
   - related-posts
   - post-nav
-  - adsense-horizontal
 script_includes:
   - comment
-adsense_tail_slot: "3519635693"
 ---
 {% include lang.html %}
 
@@ -103,6 +101,8 @@ adsense_tail_slot: "3519635693"
       <div id="toc-popup-content" class="px-4 py-3 pb-4"></div>
     </dialog>
   {% endif %}
+
+  {% include adsense-horizontal.html slot="3519635693" %}
 
   <div class="content">
     {{ content }}
