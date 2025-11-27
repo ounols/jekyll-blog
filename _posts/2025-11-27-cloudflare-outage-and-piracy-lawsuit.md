@@ -29,7 +29,7 @@ CDN(Contents Delivery Network)은 콘텐츠를 전 세계에 효율적으로 전
 
 예를 들어 일본 인터넷 사용자를 약 1억 명, 태평양 간 회선 속도를 약 1,000Tbps로 가정하면, 모든 사람이 동시에 사용할 경우 **1인당 10Mbps** 정도밖에 되지 않습니다. 이는 영상 스트리밍이나 화상 회의를 하기에 간신히 충분한 수준입니다.
 
-![CDN network structure](/media/2025-11-27-cloudflare-outage-and-piracy-lawsuit/figure-2.jpg)
+![CDN network structure](/media/2025-11-27-cloudflare-outage-and-piracy-lawsuit/figure-3.jpg)
 
 이러한 문제를 해결하기 위해 CDN은 **사용자 가까이에 데이터의 복사본을 배치**하여 네트워크 전체의 부하를 분산시키고 접속 속도를 유지합니다. 1990년대 말부터 도입되기 시작했으며, 초기 최대 기업은 Akamai였고, 최근에는 Cloudflare가 급성장하고 있습니다.
 
@@ -39,13 +39,13 @@ CDN(Contents Delivery Network)은 콘텐츠를 전 세계에 효율적으로 전
 
 ### 1. Netflix의 Open Connect
 
-Netflix는 자체 CDN인 'Open Connect'를 운영하며, 각국 네트워크 코어와 ISP에 Open Connect Appliance(OCA)라는 기기를 배포합니다. 이 장비에는 영상 데이터를 저장하는 메커니즘이 탑재되어 있어, 네트워크 부하가 낮은 시간대에 미리 전 세계로 영상 데이터를 배포합니다.
+![Netflix Open Connect diagram](/media/2025-11-27-cloudflare-outage-and-piracy-lawsuit/figure-4.jpg)
 
-![Netflix Open Connect diagram](/media/2025-11-27-cloudflare-outage-and-piracy-lawsuit/figure-3.jpg)
+Netflix는 자체 CDN인 'Open Connect'를 운영하며, 각국 네트워크 코어와 ISP에 Open Connect Appliance(OCA)라는 기기를 배포합니다. 이 장비에는 영상 데이터를 저장하는 메커니즘이 탑재되어 있어, 네트워크 부하가 낮은 시간대에 미리 전 세계로 영상 데이터를 배포합니다.
 
 Netflix의 경우 **미국 본국 서버에 직접 접속하는 비율은 전체의 수% 미만**입니다. 실제로 우리가 시청하는 영상의 대부분은 가까운 ISP 내부의 OCA에서 전송됩니다.
 
-![Netflix OCA server hardware](/media/2025-11-27-cloudflare-outage-and-piracy-lawsuit/figure-4.jpg)
+![Netflix OCA server hardware](/media/2025-11-27-cloudflare-outage-and-piracy-lawsuit/figure-5.jpg)
 _2017년 Netflix가 사용하던 CDN 서버 'OCA'. 현재는 더욱 진화한 장비를 사용하고 있습니다_
 
 ### 2. 대규모 이벤트의 부하 분산
@@ -58,7 +58,7 @@ Cloudflare는 2010년 서비스를 시작하여 현재 클라우드 서비스 �
 
 W3Techs 통계에 따르면, 리버스 프록시 서비스를 사용하는 사이트의 **81.5%가 Cloudflare를 사용**합니다. 리버스 프록시는 CDN과 같은 기술을 기반으로 하지만, 주로 보안 목적으로 활용됩니다.
 
-![Cloudflare service statistics](/media/2025-11-27-cloudflare-outage-and-piracy-lawsuit/figure-5.jpg)
+![Cloudflare service statistics](/media/2025-11-27-cloudflare-outage-and-piracy-lawsuit/figure-6.jpg)
 
 CDN의 접속 부하 분산 특성은 현재 보안 대책에도 활용됩니다. 실제 서버 앞에 CDN 망을 배치하여 '방화벽'처럼 사용하는 것이 일반화되었습니다. 특히 **DDoS 공격을 비롯한 사이버 공격 대책**의 의미가 강해졌습니다.
 
@@ -78,9 +78,9 @@ CDN의 접속 부하 분산 특성은 현재 보안 대책에도 활용됩니다
 
 하지만 Cloudflare는 이에 응하지 않았고, 이번 소송으로 이어졌습니다. 도쿄 지방법원은 약 5억 엔의 손해배상을 명령했으며, Cloudflare는 이에 대해 항소할 방침입니다.
 
-![Court case diagram](/media/2025-11-27-cloudflare-outage-and-piracy-lawsuit/figure-6.jpg)
-
 ### Cloudflare의 입장
+
+![](/media/2025-11-27-cloudflare-outage-and-piracy-lawsuit/figure-2.jpg)
 
 Cloudflare는 자신이 서비스 주체가 아니라 **데이터 배송을 중개하는 입장**이라고 주장합니다. 자사가 호스팅하지 않는 데이터에 책임을 지는 것은 문제가 크며, 중립적 입장을 유지해야 한다는 것입니다.
 
