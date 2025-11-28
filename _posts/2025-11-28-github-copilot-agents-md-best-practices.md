@@ -55,7 +55,7 @@ AI가 절대 건드리지 말아야 할 것들을 명시합니다. 시크릿, �
 
 아래는 `.github/agents/docs-agent.md`에 문서 작성 에이전트를 추가하는 예제입니다.
 
-```yaml
+```markdown
 ---
 name: docs_agent
 description: Expert technical writer for this project
@@ -115,7 +115,7 @@ Write so that a new developer to this codebase can understand your writing, don'
 
 Copilot을 활용해 에이전트를 생성할 수도 있습니다. IDE에서 `.github/agents/test-agent.md` 파일을 열고 다음 프롬프트를 사용하세요.
 
-```
+```markdown
 Create a test agent for this repository. It should:
 - Have the persona of a QA software engineer.
 - Write tests for this codebase
@@ -173,7 +173,7 @@ API 엔드포인트를 만듭니다. 프레임워크(Express, FastAPI, Rails)와
 
 아래 템플릿을 활용해 자신만의 에이전트를 만들어보세요.
 
-```yaml
+~~~markdown
 ---
 name: your-agent-name
 description: [One-sentence description of what this agent does]
@@ -226,7 +226,7 @@ async function get(x) {
 - ✅ **Always:** Write to `src/` and `tests/`, run tests before commits, follow naming conventions
 - ⚠️ **Ask first:** Database schema changes, adding dependencies, modifying CI/CD config
 - 🚫 **Never:** Commit secrets or API keys, edit `node_modules/` or `vendor/`
-```
+~~~
 
 ## 마치며
 
