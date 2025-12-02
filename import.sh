@@ -46,13 +46,12 @@ process_single_file() {
 
   while IFS= read -r line; do
     # 외부 링크에 {:target="_blank"} 추가
-    # 패턴: [텍스트](http://... 또는 https://...)로 끝나고 {:target="_blank"}가 없는 경우
-    # 단, 이미지 마크다운(![...](...))은 제외
-    if [[ $line =~ \[([^\]]+)\]\((https?://[^\)]+)\)([^{]|$) ]] && [[ ! $line =~ !\[([^\]]+)\]\((https?://[^\)]+)\) ]]; then
-      # {:target="_blank"}가 이미 있는지 확인
-      if [[ ! $line =~ \]\(https?://[^\)]+\)\{:target=\"_blank\"\} ]]; then
-        # 외부 링크에 {:target="_blank"} 추가 (이미지는 제외)
-        line=$(echo "$line" | sed -E 's|([^!])\[([^\]]+)\]\((https?://[^)]+)\)|\1[\2](\3){:target="_blank"}|g')
+    # 이미지가 아닌 모든 외부 링크 처리
+    if [[ ! $line =~ !\[ ]] && [[ $line =~ \[(.*)\]\((https?://[^\)]+)\) ]]; then
+      # 이미 {:target="_blank"}가 없는 경우만 추가
+      if [[ ! $line =~ \{:target=\"_blank\"\} ]]; then
+        # 모든 외부 링크에 {:target="_blank"} 추가
+        line=$(echo "$line" | sed -E 's/\[([^]]+)\]\((https?:\/\/[^)]+)\)/[\1](\2){:target="_blank"}/g')
       fi
     fi
     # Check for images: markdown format ![](url), front matter image: "url", or image: path: url

@@ -12,7 +12,7 @@ image:
 description: 디퓨즈 모델 이야기를 시작으로, Lambert를 비판하는 영상에 대한 저의 생각을 작성해보고자 합니다.
 author: ounols
 date: '2025-10-01 00:00:00'
-pin: true
+pin: false
 math: false
 mermaid: false
 ---
