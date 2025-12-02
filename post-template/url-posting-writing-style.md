@@ -124,29 +124,6 @@
   [^pytorch-release]: PyTorch 공식 블로그 [PyTorch 2.0 Release](https://pytorch.org/blog){: target="_blank"}
   ```
 
-**CRITICAL: Always Include Reference Links from AUTHOR_OPINION:**
-- If `AUTHOR_OPINION` mentions specific URLs or references (e.g., "내 블로그의 이 글 참고: https://...")
-- You MUST include those URLs as footnotes in the blog post
-- Add footnote markers where the reference is mentioned in the content
-- Include the actual link in the footnote definitions at the end
-- Example:
-  ```markdown
-  ## 기존 기술과의 비교
-
-  블로그 주인장이 구현한 SDFGI 방식[^sdfgi-implementation]과 비교하면...
-
-  [END OF POST]
-
-  [^sdfgi-implementation]: ounols 블로그 - [자체 엔진에 Global Illumination을 적용하기 위한 삽질기 2](https://ounols.kr/posts/...){: target="_blank"}
-  ```
-
-**How to Handle AUTHOR_OPINION References:**
-1. Read `AUTHOR_OPINION` carefully for any URLs or reference mentions
-2. Identify the context where these references should be mentioned in the blog post
-3. Add footnote markers `[^keyword]` in the appropriate sections
-4. Define the footnotes at the end with proper formatting
-5. DO NOT skip or ignore references provided in AUTHOR_OPINION
-
 ### 6. Keep content concise and readable
 
 **Paragraph Length Guidelines:**
@@ -168,11 +145,11 @@ FFmpeg과 구글 간의 이번 충돌은 단순한 한 프로젝트의 문제가
 
 ✅ GOOD (related sentences grouped together):
 ```
-FFmpeg과 구글 간의 이번 충돌은 단순한 한 프로젝트의 문제가 아닙니다. 이는 현대 디지털 인프라를 지탱하는 오픈소스 생태계의 구조적 문제를 드러냅니다.
+FFmpeg과 구글 간의 이번 충돌은 단순한 한 프로젝트의 문제가 아닙니다. 이는 **현대 디지털 인프라를 지탱하는 오픈소스 생태계의 구조적 문제를 드러냅니다.**
 
 오픈소스 소프트웨어는 인터넷 경제에서 수조 달러의 가치를 창출하고 있습니다. 하지만 이러한 가치를 창출하는 개발자들은 종종 적절한 보상을 받지 못하고 있습니다.
 
-AI 도구가 더 많은 버그를 찾아낼수록 이 문제는 더욱 심화될 것입니다. 기업들이 오픈소스에 의존하면서도 이를 지속가능하게 만드는 데 투자하지 않는다면, 언젠가는 핵심 인프라가 유지보수되지 않는 상황에 직면할 수 있습니다.
+**AI 도구가 더 많은 버그를 찾아낼수록 이 문제는 더욱 심화될 것입니다.** 기업들이 오픈소스에 의존하면서도 이를 지속가능하게 만드는 데 투자하지 않는다면, 언젠가는 핵심 인프라가 유지보수되지 않는 상황에 직면할 수 있습니다.
 ```
 
 **Priority Rule:**

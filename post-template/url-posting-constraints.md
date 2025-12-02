@@ -23,18 +23,7 @@
 
 ### AUTHOR_OPINION
 
-If `AUTHOR_OPINION` is provided (not empty):
-- Add as a blockquote (NOT a header section)
-- Format: `> **블로그 주인장의 의견**` followed by opinion content
-- Each line must start with `>`
-- **MUST add `.prompt-info` style at the end** of the blockquote
-- Place AFTER main content, BEFORE conclusion
-- Write in first-person perspective
-- Preserve the author's original tone and style
-
-If `AUTHOR_OPINION` is empty or not provided:
-- Skip the author opinion section entirely
-- No mention of it in the post
+Follow the this md file : `url-posting-content-structure.md` -> ## QUICK QUESTIONS SECTION (REQUIRED)
 
 ### ADDITIONAL_PROMPT
 

@@ -45,12 +45,11 @@ _Caption text in Korean_
 
 **Critical Rule:**
 - ALL images in the post MUST be external URLs initially
-- The `import.sh` script will later convert them to self-hosted
 
 **Opening Section Link (REQUIRED - PLACE FIRST):**
 - Insert TARGET_URL as a link at the very top of the post body (after AI disclosure)
-- Format: `**원본 링크**: [Title](URL){: target="_blank"}` for articles/news
-- Format: `**프로젝트 링크**: [Project Name](URL){: target="_blank"}` for projects
+- Format: `**원본 링크**: [Title](URL)` for articles/news
+- Format: `**프로젝트 링크**: [Project Name](URL)` for projects
 - This provides attribution and allows readers to access the original source
 
 **Opening Section Image (REQUIRED):**
