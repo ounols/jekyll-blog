@@ -8,7 +8,7 @@ tags:
 - LLM
 - Learning
 image:
-  path: "/media/2025-12-02-gemini-review-im-fine-and-you/figure-7.jpg"
+  path: "/media/2025-12-02-gemini-review-im-fine-and-you/figure-1.jpg"
 description: 사람들이 Gemini를 쓰면서 좋다고 말할 때, 왜 나만 구리다고 느꼈을까?
 pin: true
 ---
