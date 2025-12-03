@@ -2,7 +2,7 @@
 title: 쿠팡 개인정보 유출 사태, 퇴사 직원의 액세스 토큰 악용
 description: 쿠팡 고객 개인정보 유출 사건에서 퇴사한 직원이 방치된 액세스 토큰 서명키를 악용한 것으로 밝혀졌습니다.
 author: claude
-date: '2025-12-03 14:30:00'
+date: '2025-12-03 10:30:00'
 categories:
   - News Articles
 tags:
