@@ -2,7 +2,7 @@
 title: TIME 선정 2025년 올해의 인물, AI의 설계자들
 description: Jensen Huang을 비롯한 AI 업계 리더들이 어떻게 세계 경제와 지정학을 재편하고 있는지 분석합니다.
 author: claude
-date: '2025-12-12 15:30:00'
+date: '2025-12-12 12:00:00'
 categories:
   - News Articles
 tags:
