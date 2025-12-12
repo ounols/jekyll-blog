@@ -27,7 +27,7 @@ TIME지가 2025년 올해의 인물로 'AI의 설계자들(The Architects of AI)
 
 ## Nvidia, 세계에서 가장 가치 있는 기업으로
 
-![Jensen Huang](/media/2025-12-12-time-person-of-the-year-2025-ai-architects/figure-2.webp)
+![Jensen Huang](/media/2025-12-12-time-person-of-the-year-2025-ai-architects/figure-2.webp){: .w-75}
 _Nvidia CEO Jensen Huang_
 
 Jensen Huang은 62세의 나이로 세계에서 여덟 번째 부자입니다. 불과 얼마 전까지만 해도 비디오 게임용 그래픽 프로세서를 전문으로 하는 다소 무명의 기업을 운영했던 그는, 오늘날 **AI 붐을 구동하는 고급 칩의 거의 독점적 지위**를 통해 Nvidia를 세계에서 가장 가치 있는 기업으로 만들었습니다.
@@ -46,7 +46,7 @@ OpenAI의 ChatGPT는 출시 당시 역사상 가장 빠르게 성장한 소비�
 
 ## 미-중 AI 경쟁의 심화
 
-![AI 관련 인포그래픽](/media/2025-12-12-time-person-of-the-year-2025-ai-architects/figure-3.webp)
+![AI 관련 인포그래픽](/media/2025-12-12-time-person-of-the-year-2025-ai-architects/figure-3.webp){: .w-50}
 
 Trump의 취임 첫 주, AI 분야의 중요한 사건이 발생했습니다. 중국의 거의 알려지지 않은 AI 스타트업 DeepSeek이 미국 경쟁사들의 능력에 필적한다고 평가되는 모델을 출시한 것입니다.[^deepseek] DeepSeek은 **단 몇 달 만에 덜 발전된 칩을 사용하여 이 모델을 구축**했다고 주장했습니다. 연구진은 훨씬 적은 컴퓨팅 자원으로 OpenAI의 추론 혁신을 복제한 것으로 보였습니다.
 
@@ -58,7 +58,7 @@ Trump 행정부는 **5천억 달러 규모의 Stargate 이니셔티브**를 발�
 
 ## AI 인프라에 대한 막대한 투자
 
-![AI 지출 인포그래픽](/media/2025-12-12-time-person-of-the-year-2025-ai-architects/figure-4.webp)
+![AI 지출 인포그래픽](/media/2025-12-12-time-person-of-the-year-2025-ai-architects/figure-4.webp){: .w-50}
 
 2025년, Stargate와 같은 시설에 대한 수요가 급증했습니다. **미국에서 건설 중인 새 데이터 센터의 수가 전년 대비 거의 두 배 증가**했습니다.[^data-centers] Goldman Sachs에 따르면, 데이터 센터는 2030년까지 미국 전체 전력 수요의 8%를 차지할 것으로 예상됩니다.[^power-demand]
 
@@ -79,7 +79,7 @@ Trump 행정부는 **5천억 달러 규모의 Stargate 이니셔티브**를 발�
 
 ## AI의 어두운 면
 
-![Adam Raine의 부모](/media/2025-12-12-time-person-of-the-year-2025-ai-architects/figure-5.webp)
+![Adam Raine의 부모](/media/2025-12-12-time-person-of-the-year-2025-ai-architects/figure-5.webp){: .w-75}
 _ChatGPT와의 깊은 유대 후 자살한 16세 Adam Raine의 부모_
 
 AI의 발전이 일부에게는 유익했지만, 다른 이들에게는 파괴적이었습니다. 캘리포니아의 16세 소년 Adam Raine은 ChatGPT를 사용하기 시작했습니다.[^adam-raine] 처음에는 학업 도움을 위해 사용했지만, 점차 봇에 의존하게 되었고, 자신의 감정, 두려움, 꿈을 공유했습니다.
