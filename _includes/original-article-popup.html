@@ -1,22 +1,9 @@
 {% if page.original_url %}
-<script>
-  // Check localStorage before rendering anything
-  (function() {
-    const pageId = window.location.pathname;
-    const storageKey = 'original-article-popup-shown-' + pageId;
-    const globalDisableKey = 'original-article-popup-disabled-globally';
-
-    const popupShown = localStorage.getItem(storageKey);
-    const globallyDisabled = localStorage.getItem(globalDisableKey);
-
-    if (popupShown !== 'true' && globallyDisabled !== 'true') {
-      // Only inject HTML if popup hasn't been shown
-      document.write(`
 <!-- Original Article Overlay -->
-<div id="original-article-overlay" class="original-article-overlay"></div>
+<div id="original-article-overlay" class="original-article-overlay hidden"></div>
 
 <!-- Original Article Popup -->
-<div id="original-article-popup" class="original-article-popup">
+<div id="original-article-popup" class="original-article-popup hidden">
   <div class="original-article-popup-content">
     <button id="original-article-close" class="original-article-close" aria-label="Close popup">
       <i class="fas fa-times"></i>
@@ -38,10 +25,6 @@
     </p>
   </div>
 </div>
-      `);
-    }
-  })();
-</script>
 
 <style>
 .original-article-overlay {
@@ -205,22 +188,32 @@
 }
 </style>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  const overlay = document.getElementById('original-article-overlay');
-  const popup = document.getElementById('original-article-popup');
-  const closeBtn = document.getElementById('original-article-close');
-  const link = document.getElementById('original-article-link');
-  const disableGloballyBtn = document.getElementById('disable-popup-globally');
-  const content = document.querySelector('.content');
+<script data-cfasync="false">
+(function() {
+  function initPopup() {
+    const overlay = document.getElementById('original-article-overlay');
+    const popup = document.getElementById('original-article-popup');
+    const closeBtn = document.getElementById('original-article-close');
+    const link = document.getElementById('original-article-link');
+    const disableGloballyBtn = document.getElementById('disable-popup-globally');
 
-  // Only set up event handlers if popup exists
-  if (!popup || !overlay) return;
+    // Only set up event handlers if popup exists
+    if (!popup || !overlay) return;
 
-  // Get unique page identifier (use page URL pathname)
-  const pageId = window.location.pathname;
-  const storageKey = 'original-article-popup-shown-' + pageId;
-  const globalDisableKey = 'original-article-popup-disabled-globally';
+    // Get unique page identifier (use page URL pathname)
+    const pageId = window.location.pathname;
+    const storageKey = 'original-article-popup-shown-' + pageId;
+    const globalDisableKey = 'original-article-popup-disabled-globally';
+
+    // Check if popup should be shown
+    const popupShown = localStorage.getItem(storageKey);
+    const globallyDisabled = localStorage.getItem(globalDisableKey);
+
+    // Show popup if not shown before and not globally disabled
+    if (popupShown !== 'true' && globallyDisabled !== 'true') {
+      overlay.classList.remove('hidden');
+      popup.classList.remove('hidden');
+    }
 
   // Function to close popup
   function closePopup() {
@@ -265,12 +258,21 @@ document.addEventListener('DOMContentLoaded', function() {
     disableGloballyBtn.addEventListener('click', disablePopupGlobally);
   }
 
-  // Close popup with Escape key
-  document.addEventListener('keydown', function(event) {
-    if (event.key === 'Escape') {
-      closePopup();
-    }
-  });
-});
+    // Close popup with Escape key
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+        closePopup();
+      }
+    });
+  }
+
+  // Initialize when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initPopup);
+  } else {
+    // DOM is already ready, execute immediately
+    initPopup();
+  }
+})();
 </script>
 {% endif %}
