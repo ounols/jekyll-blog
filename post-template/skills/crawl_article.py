@@ -452,14 +452,33 @@ async def crawl_article(url: str) -> dict:
                 result.content = extracted.content;
                 result.links = extracted.links;
 
-                // Extract all images (file size filtering will be done in Python)
+                // Extract images with position markers
                 const allImages = Array.from(contentElement.querySelectorAll('img'));
-                result.images = allImages.map(img => ({
-                    src: img.src,
-                    alt: img.alt || '',
-                    width: img.naturalWidth || img.width || 0,
-                    height: img.naturalHeight || img.height || 0
-                }));
+                const imageMarkers = [];
+
+                // Create a clone for text extraction with image markers
+                const contentClone = contentElement.cloneNode(true);
+                const imagesInClone = Array.from(contentClone.querySelectorAll('img'));
+
+                imagesInClone.forEach((img, index) => {
+                    const marker = `\n\n[IMAGE-${index + 1}: ${img.alt || 'image'}]\n\n`;
+                    const textNode = document.createTextNode(marker);
+                    img.parentNode.replaceChild(textNode, img);
+
+                    // Store image data
+                    const originalImg = allImages[index];
+                    imageMarkers.push({
+                        src: originalImg.src,
+                        alt: originalImg.alt || '',
+                        width: originalImg.naturalWidth || originalImg.width || 0,
+                        height: originalImg.naturalHeight || originalImg.height || 0,
+                        position: index + 1
+                    });
+                });
+
+                // Extract content with image markers
+                result.content = contentClone.innerText.trim();
+                result.images = imageMarkers;
 
                 return result;
             }''')
