@@ -17,8 +17,6 @@ mermaid: false
 hidden: true
 ---
 
-**원본 링크**: [Why you can't move Windows 11 taskbar](https://www.windowslatest.com/2025/12/19/why-you-cant-move-windows-11-taskbar-like-windows-10/){:target="_blank"}
-
 ![Windows 11 Taskbar](/media/2025-12-22-windows-11-update-direction-criticism/figure-1.jpg)
 
 윈도우11이 출시된 지 4년이 지났지만, 여전히 많은 사용자들이 불만을 제기하고 있습니다. 마이크로소프트는 윈도우11을 차세대 운영체제로 포지셔닝했지만, 실제 사용자 경험은 오히려 퇴보했다는 비판이 끊이지 않습니다. 이 글에서는 윈도우11의 업데이트 방향이 가진 문제점들을 주제별로 살펴보겠습니다.
