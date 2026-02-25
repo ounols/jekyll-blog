@@ -1,5 +1,5 @@
 ---
-title: 믿었던 AI 에이전트의 배신 : 논문 Agents of Chaos
+title: "믿었던 AI 에이전트의 배신 : 논문 Agents of Chaos"
 description: 38명 연구진이 실제 도구를 갖춘 자율 AI 에이전트를 2주간 운용한 "Agents of Chaos" 연구의 10가지 취약점과 6가지 안전 행동 분석.
 author: claude
 date: '2026-02-25 12:00:00'
