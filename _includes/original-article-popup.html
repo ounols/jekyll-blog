@@ -1,0 +1,278 @@
+{% if page.original_url %}
+<!-- Original Article Overlay -->
+<div id="original-article-overlay" class="original-article-overlay hidden"></div>
+
+<!-- Original Article Popup -->
+<div id="original-article-popup" class="original-article-popup hidden">
+  <div class="original-article-popup-content">
+    <button id="original-article-close" class="original-article-close" aria-label="Close popup">
+      <i class="fas fa-times"></i>
+    </button>
+    <div class="original-article-icon">
+      <i class="fas fa-language"></i>
+    </div>
+    <h3 class="original-article-title">번역된 게시글입니다</h3>
+    <p class="original-article-message">
+      원작자를 응원하기 위해 원문의 링크를 방문해주세요!<br>
+      Please visit the link to support the original author!
+    </p>
+    <a href="{{ page.original_url }}" target="_blank" rel="noopener noreferrer" class="original-article-link" id="original-article-link">
+      <i class="fas fa-external-link-alt"></i> 원문 방문하기
+    </a>
+    <p class="original-article-notice">
+      이 팝업은 해당 게시글에서 한번만 보여집니다.<br>
+      <a href="#" id="disable-popup-globally" class="disable-link">모든 게시글에서 팝업을 비활성화 하려면 여기를 눌러주세요.</a>
+    </p>
+  </div>
+</div>
+
+<style>
+.original-article-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9998;
+  display: block;
+  animation: fadeIn 0.15s ease;
+}
+
+.original-article-overlay.hidden {
+  display: none;
+}
+
+.original-article-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--main-bg, #ffffff);
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  z-index: 9999;
+  max-width: 500px;
+  width: 90%;
+  padding: 2rem;
+  animation: slideIn 0.15s ease;
+}
+
+.original-article-popup.hidden {
+  display: none;
+}
+
+.original-article-popup-content {
+  text-align: center;
+  position: relative;
+}
+
+.original-article-close {
+  position: absolute;
+  top: -1rem;
+  right: -1rem;
+  background: var(--button-bg, #f0f0f0);
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  color: var(--text-color, #333);
+}
+
+.original-article-close:hover {
+  background: var(--button-hover-bg, #e0e0e0);
+}
+
+.original-article-icon {
+  font-size: 3rem;
+  color: var(--link-color, #0056b3);
+  margin-bottom: 1rem;
+}
+
+.original-article-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: var(--heading-color, #333);
+}
+
+.original-article-message {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  color: var(--text-muted, #666);
+}
+
+.original-article-link {
+  display: inline-block;
+  background: var(--link-color, #0056b3);
+  color: #ffffff !important;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.original-article-link:hover {
+  background: var(--link-hover-color, #004494);
+}
+
+.original-article-link i {
+  margin-right: 0.5rem;
+}
+
+.original-article-notice {
+  font-size: 0.85rem;
+  color: var(--text-muted, #999);
+  margin-top: 1.5rem;
+  margin-bottom: 0;
+  line-height: 1.5;
+}
+
+.original-article-notice .disable-link {
+  color: var(--text-muted, #999);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.original-article-notice .disable-link:hover {
+  color: var(--text-color, #666);
+}
+
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -48%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+/* Responsive design */
+@media (max-width: 576px) {
+  .original-article-popup {
+    padding: 1.5rem;
+    width: 95%;
+  }
+
+  .original-article-title {
+    font-size: 1.25rem;
+  }
+
+  .original-article-message {
+    font-size: 0.9rem;
+  }
+
+  .original-article-icon {
+    font-size: 2.5rem;
+  }
+}
+</style>
+
+<script data-cfasync="false">
+(function() {
+  function initPopup() {
+    const overlay = document.getElementById('original-article-overlay');
+    const popup = document.getElementById('original-article-popup');
+    const closeBtn = document.getElementById('original-article-close');
+    const link = document.getElementById('original-article-link');
+    const disableGloballyBtn = document.getElementById('disable-popup-globally');
+
+    // Only set up event handlers if popup exists
+    if (!popup || !overlay) return;
+
+    // Get unique page identifier (use page URL pathname)
+    const pageId = window.location.pathname;
+    const storageKey = 'original-article-popup-shown-' + pageId;
+    const globalDisableKey = 'original-article-popup-disabled-globally';
+
+    // Check if popup should be shown
+    const popupShown = localStorage.getItem(storageKey);
+    const globallyDisabled = localStorage.getItem(globalDisableKey);
+
+    // Show popup if not shown before and not globally disabled
+    if (popupShown !== 'true' && globallyDisabled !== 'true') {
+      overlay.classList.remove('hidden');
+      popup.classList.remove('hidden');
+    }
+
+  // Function to close popup
+  function closePopup() {
+    if (overlay) overlay.classList.add('hidden');
+    if (popup) popup.classList.add('hidden');
+
+    // Save to localStorage that popup was shown
+    localStorage.setItem(storageKey, 'true');
+  }
+
+  // Function to disable popup globally
+  function disablePopupGlobally(event) {
+    event.preventDefault();
+
+    // Save global disable flag
+    localStorage.setItem(globalDisableKey, 'true');
+
+    // Close the current popup
+    if (overlay) overlay.classList.add('hidden');
+    if (popup) popup.classList.add('hidden');
+  }
+
+  // Close popup when clicking X button
+  if (closeBtn) {
+    closeBtn.addEventListener('click', closePopup);
+  }
+
+  // Close popup when clicking overlay
+  if (overlay) {
+    overlay.addEventListener('click', closePopup);
+  }
+
+  // Close popup when clicking the link
+  if (link) {
+    link.addEventListener('click', function() {
+      closePopup();
+    });
+  }
+
+  // Disable popup globally when clicking the disable link
+  if (disableGloballyBtn) {
+    disableGloballyBtn.addEventListener('click', disablePopupGlobally);
+  }
+
+    // Close popup with Escape key
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+        closePopup();
+      }
+    });
+  }
+
+  // Initialize when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initPopup);
+  } else {
+    // DOM is already ready, execute immediately
+    initPopup();
+  }
+})();
+</script>
+{% endif %}

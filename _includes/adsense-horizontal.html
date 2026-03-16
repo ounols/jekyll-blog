@@ -1,0 +1,21 @@
+<!-- Google AdSense - Horizontal -->
+<div
+  class="adsense-horizontal"
+  style="margin: 2rem 0; max-height:100px; text-align: center; padding: 1rem; background-color: var(--main-bg, #fff); border-radius: 8px;"
+>
+  <script
+    async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7885608228730680"
+  ></script>
+  <ins
+    class="adsbygoogle"
+    style="display:block; height:100px;"
+    data-ad-client="ca-pub-7885608228730680"
+    data-ad-slot="{{ include.slot | default: page.adsense_tail_slot | default: '6664673785' }}"
+    data-ad-format="horizontal"
+    data-full-width-responsive="true"
+  ></ins>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</div>

@@ -2,7 +2,6 @@
 layout: page
 # The Category layout
 ---
-
 {% include lang.html %}
 
 <div id="page-category">
@@ -11,14 +10,20 @@ layout: page
     {{ page.title }}
     <span class="lead text-muted ps-2">{{ page.posts | size }}</span>
   </h1>
-
-  <ul class="content ps-0">
-    {% for post in page.posts %}
-      <li class="d-flex justify-content-between px-md-3">
-        <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-        <span class="dash flex-grow-1"></span>
-        {% include datetime.html date=post.date class='text-muted small text-nowrap' lang=lang %}
-      </li>
-    {% endfor %}
-  </ul>
 </div>
+
+{% include post-list.html posts=page.posts %}
+
+<div id="load-more-container" class="text-center my-4" style="display: none;">
+  <button id="load-more-btn" class="btn btn-outline-primary">
+    Load More Posts
+  </button>
+</div>
+
+<div id="loading-spinner" class="text-center my-4" style="display: none;">
+  <div class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+
+<script src="{{ '/assets/js/category-infinite-scroll.js' | relative_url }}"></script>

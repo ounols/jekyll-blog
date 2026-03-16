@@ -11,11 +11,11 @@ This tutorial will guide you on how to write a post in the _Chirpy_ template, an
 
 ## Naming and Path
 
-Create a new file named `YYYY-MM-DD-TITLE.EXTENSION`{: .filepath} and put it in the `_posts`{: .filepath} of the root directory. Please note that the `EXTENSION`{: .filepath} must be one of `md`{: .filepath} and `markdown`{: .filepath}. If you want to save time of creating files, please consider using the plugin [`Jekyll-Compose`](https://github.com/jekyll/jekyll-compose) to accomplish this.
+Create a new file named `YYYY-MM-DD-TITLE.EXTENSION`{: .filepath} and put it in the `_posts`{: .filepath} of the root directory. Please note that the `EXTENSION`{: .filepath} must be one of `md`{: .filepath} and `markdown`{: .filepath}. If you want to save time of creating files, please consider using the plugin [`Jekyll-Compose`](https://github.com/jekyll/jekyll-compose){:target="_blank"} to accomplish this.
 
 ## Front Matter
 
-Basically, you need to fill the [Front Matter](https://jekyllrb.com/docs/front-matter/) as below at the top of the post:
+Basically, you need to fill the [Front Matter](https://jekyllrb.com/docs/front-matter/){:target="_blank"} as below at the top of the post:
 
 ```yaml
 ---
@@ -70,7 +70,7 @@ authors: [<author1_id>, <author2_id>]   # for multiple entries
 
 Having said that, the key `author` can also identify multiple entries.
 
-> The benefit of reading the author information from the file `_data/authors.yml`{: .filepath } is that the page will have the meta tag `twitter:creator`, which enriches the [Twitter Cards](https://developer.twitter.com/en/docs/twitter-for-websites/cards/guides/getting-started#card-and-content-attribution) and is good for SEO.
+> The benefit of reading the author information from the file `_data/authors.yml`{: .filepath } is that the page will have the meta tag `twitter:creator`, which enriches the [Twitter Cards](https://developer.twitter.com/en/docs/twitter-for-websites/cards/guides/getting-started#card-and-content-attribution){:target="_blank"} and is good for SEO.
 {: .prompt-info }
 
 ### Post Description
@@ -87,7 +87,7 @@ Additionally, the `description` text will also be displayed under the post title
 
 ## Table of Contents
 
-By default, the **T**able **o**f **C**ontents (TOC) is displayed on the right panel of the post. If you want to turn it off globally, go to `_config.yml`{: .filepath} and set the value of variable `toc` to `false`. If you want to turn off TOC for a specific post, add the following to the post's [Front Matter](https://jekyllrb.com/docs/front-matter/):
+By default, the **T**able **o**f **C**ontents (TOC) is displayed on the right panel of the post. If you want to turn it off globally, go to `_config.yml`{: .filepath} and set the value of variable `toc` to `false`. If you want to turn off TOC for a specific post, add the following to the post's [Front Matter](https://jekyllrb.com/docs/front-matter/){:target="_blank"}:
 
 ```yaml
 ---
@@ -150,7 +150,7 @@ _Image Caption_
 To prevent the page content layout from shifting when the image is loaded, we should set the width and height for each image.
 
 ```markdown
-![Desktop View](/assets/img/sample/mockup.png){: width="700" height="400" }
+![Desktop View](/media/2019-08-08-write-a-new-post/figure-1.jpg){: width="700" height="400" }
 ```
 {: .nolineno}
 
@@ -268,12 +268,12 @@ Where `Platform` is the lowercase of the platform name, and `ID` is the video ID
 
 The following table shows how to get the two parameters we need in a given video/audio URL, and you can also know the currently supported video platforms.
 
-| Video URL                                                                                                                  | Platform   | ID                       |
-| -------------------------------------------------------------------------------------------------------------------------- | ---------- | :----------------------- |
-| [https://www.**youtube**.com/watch?v=**H-B46URT4mg**](https://www.youtube.com/watch?v=H-B46URT4mg)                         | `youtube`  | `H-B46URT4mg`            |
-| [https://www.**twitch**.tv/videos/**1634779211**](https://www.twitch.tv/videos/1634779211)                                 | `twitch`   | `1634779211`             |
-| [https://www.**bilibili**.com/video/**BV1Q44y1B7Wf**](https://www.bilibili.com/video/BV1Q44y1B7Wf)                         | `bilibili` | `BV1Q44y1B7Wf`           |
-| [https://www.open.**spotify**.com/track/**3OuMIIFP5TxM8tLXMWYPGV**](https://open.spotify.com/track/3OuMIIFP5TxM8tLXMWYPGV) | `spotify`  | `3OuMIIFP5TxM8tLXMWYPGV` |
+| Video URL                                                                                                                                    | Platform   | ID                       |
+| -------------------------------------------------------------------------------------------------------------------------------------------- | ---------- | :----------------------- |
+| [https://www.**youtube**.com/watch?v=**H-B46URT4mg**](https://www.youtube.com/watch?v=H-B46URT4mg){:target="_blank"}                         | `youtube`  | `H-B46URT4mg`            |
+| [https://www.**twitch**.tv/videos/**1634779211**](https://www.twitch.tv/videos/1634779211){:target="_blank"}                                 | `twitch`   | `1634779211`             |
+| [https://www.**bilibili**.com/video/**BV1Q44y1B7Wf**](https://www.bilibili.com/video/BV1Q44y1B7Wf){:target="_blank"}                         | `bilibili` | `BV1Q44y1B7Wf`           |
+| [https://www.open.**spotify**.com/track/**3OuMIIFP5TxM8tLXMWYPGV**](https://open.spotify.com/track/3OuMIIFP5TxM8tLXMWYPGV){:target="_blank"} | `spotify`  | `3OuMIIFP5TxM8tLXMWYPGV` |
 
 Spotify supports some additional parameters:
 
@@ -494,7 +494,7 @@ Can be referenced as \eqref{eq:label_name}.
 
 ## Mermaid
 
-[**Mermaid**](https://github.com/mermaid-js/mermaid) is a great diagram generation tool. To enable it on your post, add the following to the YAML block:
+[**Mermaid**](https://github.com/mermaid-js/mermaid){:target="_blank"} is a great diagram generation tool. To enable it on your post, add the following to the YAML block:
 
 ```yaml
 ---
@@ -506,4 +506,4 @@ Then you can use it like other markdown languages: surround the graph code with 
 
 ## Learn More
 
-For more knowledge about Jekyll posts, visit the [Jekyll Docs: Posts](https://jekyllrb.com/docs/posts/).
+For more knowledge about Jekyll posts, visit the [Jekyll Docs: Posts](https://jekyllrb.com/docs/posts/){:target="_blank"}.

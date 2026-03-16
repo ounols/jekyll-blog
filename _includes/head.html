@@ -8,6 +8,7 @@
     name="viewport"
     content="width=device-width, user-scalable=no initial-scale=1, shrink-to-fit=no, viewport-fit=cover"
   >
+  {% include csp.html %}
 
   {%- capture seo_tags -%}
     {% seo title=false %}
@@ -134,6 +135,20 @@
       {% endif %}
     {% endfor %}
   {% endif %}
+
+  <script
+    data-goatcounter="https://ounols-blog.goatcounter.com/count"
+    async
+    src="https://gc.zgo.at/count.js"
+  ></script>
+
+  <script
+    async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7885608228730680"
+    crossorigin="anonymous"
+  ></script>
+
+  {% include analytics.html %}
 
   {% include metadata-hook.html %}
 </head>
