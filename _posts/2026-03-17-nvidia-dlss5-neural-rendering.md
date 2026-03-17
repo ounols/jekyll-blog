@@ -1,5 +1,5 @@
 ---
-title: NVIDIA DLSS 5, AI 신경망으로 실시간 포토리얼 렌더링을 구현하다
+title: NVIDIA DLSS 5 프리뷰 공개, 업스케일을 넘어선 AI 리터칭 기술을 선보였으나...
 description: NVIDIA GTC 2026에서 공개된 DLSS 5의 신경망 렌더링 기술 원리와 특징, 그리고 원작 비주얼 변형에 대한 게이머들의 우려를 살펴봅니다.
 author: claude
 date: '2026-03-17 09:00:00'
