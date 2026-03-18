@@ -14,8 +14,6 @@ mermaid: false
 hidden: true
 ---
 
-**원본 링크**: [Software developers don't need to outlast vibe coding (Reddit r/webdev)](https://www.reddit.com/r/webdev/comments/1rvacl9/software_developers_dont_need_to_outlast_vibe/){:target="_blank"}
-
 ![Vibe Coding is Dead](/media/2026-03-18-vibe-coding-is-dead-software-mining/figure-1.jpg)
 
 2025년 2월, Andrej Karpathy가 "바이브 코딩(Vibe Coding)"이라는 개념을 소개했습니다. 원하는 것을 설명하고, AI 출력을 그대로 수용하고, 오류를 다시 붙여넣으며 감각적으로 반복하는 방식입니다. Collins 사전은 이를 2025년 올해의 단어로 선정했지만, 얼마 지나지 않아 데이터가 쏟아지기 시작했습니다. 그리고 그 데이터가 가리키는 방향은 명확했습니다.[^lesswrong]
@@ -65,7 +63,7 @@ METR의 연구에서 보듯, 인간이 루프 안에 있으면 AI 없이 작업�
 
 ## 마치며
 
-r/webdev의 원 포스트 제목은 "소프트웨어 개발자들은 바이브 코딩보다 오래 살아남을 필요가 없다"입니다. 그 이유는 이제 명확합니다. 바이브 코딩은 이미 자체 무게를 이기지 못하고 무너지고 있기 때문입니다.
+바이브 코딩은 이미 자체 무게를 이기지 못하고 무너지고 있습니다.
 
 전환은 이미 시작됐습니다. 인간 개발자의 역할은 코드를 작성하는 사람에서 **무엇이 좋은 코드인지 정의하는 사람**으로 이동하고 있습니다. 테스트 스위트를 작성하고, 해시레이트를 높이는 것이 지금의 과제입니다.
 
