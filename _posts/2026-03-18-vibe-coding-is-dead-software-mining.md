@@ -7,19 +7,14 @@ categories:
   - News Articles
 tags:
   - Vibe Coding
-  - Software Mining
   - AI
-  - Developer Tools
-  - Claude Code
-  - AlphaEvolve
-  - GitHub
 pin: false
 math: false
 mermaid: false
 hidden: true
 ---
 
-**원본 링크**: [Software developers don't need to outlast vibe coding (Reddit r/webdev)](https://www.reddit.com/r/webdev/comments/1rvacl9/software_developers_dont_need_to_outlast_vibe/){:target="_blank"}{: target="_blank"}
+**원본 링크**: [Software developers don't need to outlast vibe coding (Reddit r/webdev)](https://www.reddit.com/r/webdev/comments/1rvacl9/software_developers_dont_need_to_outlast_vibe/){:target="_blank"}
 
 ![Vibe Coding is Dead](/media/2026-03-18-vibe-coding-is-dead-software-mining/figure-1.jpg)
 
@@ -65,7 +60,7 @@ METR의 연구에서 보듯, 인간이 루프 안에 있으면 AI 없이 작업�
 
 코딩 벤치마크 점수는 18개월 만에 거의 두 배가 됐습니다. SWE-bench Verified는 49%에서, Aider 코드 편집 벤치마크는 88%까지 도달했습니다.[^swefetch] 모델 비용은 매월 낮아지고 있습니다. 알고리즘 최적화 분야에서 수천 개의 후보를 생성하는 것이 하나를 직접 작성하는 것보다 이미 유리한 상황이며, 이 임계점은 분기마다 낮아지고 있습니다.
 
-> AI 비용 구조에 대해 더 자세히 알고 싶다면, 블로그에 작성된 [AI 산업의 수익성 위기 - 왜 모든 기업이 적자를 보고 있는가](/posts/why-everybody-is-losing-money-on-ai/) 포스트도 참고해 보시기 바랍니다. AI 서비스 제공의 구조적 비용 문제를 다루고 있습니다.
+> AI 비용 구조에 대해 더 자세히 알고 싶다면, 블로그에 작성된 [AI 산업의 수익성 위기 - 왜 모든 기업이 적자를 보고 있는가](/posts/why-everybody-is-losing-money-on-ai/){:target="_blank"} 포스트도 참고해 보시기 바랍니다. AI 서비스 제공의 구조적 비용 문제를 다루고 있습니다.
 {: .prompt-tip}
 
 ## 마치며
