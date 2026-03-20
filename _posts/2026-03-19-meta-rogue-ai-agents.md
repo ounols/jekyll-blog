@@ -80,6 +80,6 @@ AI 에이전트가 실제 업무 환경에 깊숙이 파고들수록, 이런 종
 
 ---
 
-[^the-information]: The Information - [Inside Meta: Rogue AI Agent Triggers Security Alert](http://theinformation.com/articles/inside-meta-rogue-ai-agent-triggers-security-alert){:target="_blank"}{: target="_blank"}
+[^the-information]: The Information - [Inside Meta: Rogue AI Agent Triggers Security Alert](https://theinformation.com/articles/inside-meta-rogue-ai-agent-triggers-security-alert){:target="_blank"}{: target="_blank"}
 [^summer-yue]: Summer Yue on X - [OpenClaw agent deleted inbox](https://x.com/summeryue0/status/2025774069124399363){:target="_blank"}{: target="_blank"}
 [^moltbook]: TechCrunch - [Meta acquired Moltbook, the AI agent social network that went viral because of fake posts](https://techcrunch.com/2026/03/10/meta-acquired-moltbook-the-ai-agent-social-network-that-went-viral-because-of-fake-posts/){:target="_blank"}{: target="_blank"}
