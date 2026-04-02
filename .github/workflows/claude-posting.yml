@@ -57,14 +57,14 @@ jobs:
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           prompt: |
-            Read `post-template/url-posting-config.md` first for the complete workflow guide.
-            Follow all template files in the order specified in the guide.
+            Read `.claude/skills/url-posting.md` for the complete workflow guide.
+            Follow all steps in the order specified in the skill file.
 
             TARGET_URL: `${{ inputs.target_url }}`
             AUTHOR_OPINION: ${{ inputs.author_opinion }}
             ADDITIONAL_PROMPT: ${{ inputs.additional_prompt }}
 
-            Execute the workflow as specified in the template files.
+            Execute the workflow as specified in the skill file.
 
             IMPORTANT: At the end of execution, provide ONLY a concise final summary in this exact format:
 
@@ -82,8 +82,7 @@ jobs:
             --allowed-tools "Bash(mkdir:*)"
             --allowed-tools "Bash(python:*)"
             --allowed-tools "Bash(python3:*)"
-            --allowed-tools "Read(post-template/**)"
-            --allowed-tools "Read(post-template/skills/**)"
+            --allowed-tools "Read(.claude/skills/**)"
             --allowed-tools "WebFetch"
             --allowed-tools "WebSearch"
             --allowed-tools "Write(_posts/*)"
@@ -128,7 +127,7 @@ jobs:
             echo "1. Check the workflow logs above for detailed error messages" >> $GITHUB_STEP_SUMMARY
             echo "2. Verify the target URL is accessible" >> $GITHUB_STEP_SUMMARY
             echo "3. Check if Claude Code OAuth token is valid" >> $GITHUB_STEP_SUMMARY
-            echo "4. Review the template files in \`post-template/\` directory" >> $GITHUB_STEP_SUMMARY
+            echo "4. Review the skill file in \`.claude/skills/\` directory" >> $GITHUB_STEP_SUMMARY
           fi
 
           echo "" >> $GITHUB_STEP_SUMMARY
