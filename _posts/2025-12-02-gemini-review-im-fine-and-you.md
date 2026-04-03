@@ -10,7 +10,7 @@ tags:
 image:
   path: "/media/2025-12-02-gemini-review-im-fine-and-you/figure-1.jpg"
 description: 사람들이 Gemini를 쓰면서 좋다고 말할 때, 왜 나만 구리다고 느꼈을까?
-pin: true
+pin: false
 ---
 
 최근 **Gemini 3 Pro**가 등장하면서 여러 SNS를 통해 바이럴이 많이 되었습니다.
