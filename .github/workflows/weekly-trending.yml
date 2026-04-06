@@ -34,11 +34,11 @@ jobs:
             작업을 시작해주세요!
 
           show_full_output: true
-          allowed_tools: |
-            Bash(./import.sh:*)
-            Bash(git:*)
-            Bash(mkdir:*)
-            Read(.claude/skills/**)
-            WebFetch
-            WebSearch
-            Write(_posts/*)
+          claude_args: >-
+            --allowed-tools "Bash(./import.sh:*)"
+            --allowed-tools "Bash(git:*)"
+            --allowed-tools "Bash(mkdir:*)"
+            --allowed-tools "Read(.claude/skills/**)"
+            --allowed-tools "WebFetch"
+            --allowed-tools "WebSearch"
+            --allowed-tools "Write(_posts/*)"
