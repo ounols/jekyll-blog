@@ -9,10 +9,6 @@ tags:
   - Ubuntu
   - Linux
   - Windows
-  - 시스템요구사항
-  - Canonical
-  - GNOME
-  - 오픈소스
 pin: false
 math: false
 mermaid: false
