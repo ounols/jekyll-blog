@@ -8,10 +8,6 @@ categories:
 tags:
   - macOS
   - TCP
-  - 커널 버그
-  - XNU
-  - 네트워킹
-  - 정수 오버플로우
 pin: false
 math: false
 mermaid: false
