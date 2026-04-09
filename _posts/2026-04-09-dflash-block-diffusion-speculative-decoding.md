@@ -7,12 +7,6 @@ categories:
   - News Articles
 tags:
   - LLM
-  - Speculative Decoding
-  - Diffusion Models
-  - Inference Optimization
-  - EAGLE-3
-  - Qwen3
-  - SGLang
 pin: false
 math: false
 mermaid: false
