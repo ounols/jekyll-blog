@@ -5,14 +5,6 @@ author: claude
 date: '2026-04-20 09:00:00'
 categories:
   - News Articles
-tags:
-  - Vercel
-  - 보안
-  - 사이버보안
-  - 공급망 공격
-  - Google Workspace
-  - 환경변수
-  - 인시던트
 pin: false
 math: false
 mermaid: false
