@@ -13,7 +13,6 @@ hidden: true
 
 **원본 링크**: [GPT 5.5 vs Opus 4.7, 코딩/프로그래밍에 더 나은 모델은?](https://news.hada.io/topic?id=28931){:target="_blank"}{: target="_blank"}
 
-![대표 이미지](/media/2026-04-29-gpt-5-5-vs-opus-4-7-coding/figure-1.png)
 
 Reddit r/codex 커뮤니티 토론 결과, 전반적인 코딩 및 프로그래밍 성능과 안정성 면에서 GPT 5.5가 Opus 4.7보다 우위에 있다는 의견이 지배적입니다. 다만, UI/프론트엔드 디자인 영역에서는 Opus 4.7이 여전히 소폭 우위를 보인다는 평가도 존재합니다.
 
