@@ -58,10 +58,11 @@ post:
   words: words
   pageview_measure: views
   read_time:
-    unit: min
-    prompt: read
-  relate_posts: Further Reading
-  share: Share
+    unit: 분
+    prompt: 읽는 시간
+  edit: 이 글 편집
+  relate_posts: 관련된 글
+  share: 공유하기
   button:
     next: Newer
     previous: Older
