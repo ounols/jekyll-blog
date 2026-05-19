@@ -34,6 +34,34 @@
     .preview-img {
       @extend %img-radius;
 
+      position: relative;
+
+      .featured-badge {
+        position: absolute;
+        bottom: 0.75rem;
+        right: 0.75rem;
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.4rem 0.75rem;
+        border-radius: v.$radius-lg;
+        background: rgb(255 255 255 / 90%);
+        box-shadow: 0 2px 8px rgb(0 0 0 / 15%);
+        color: #6c757d;
+        font-size: 0.75rem;
+        font-weight: 600;
+        z-index: 10;
+        backdrop-filter: blur(4px);
+
+        i {
+          font-size: 0.7rem;
+        }
+
+        span {
+          line-height: 1;
+        }
+      }
+
       img {
         @extend %img-radius;
       }

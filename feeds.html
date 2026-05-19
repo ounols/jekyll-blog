@@ -1,0 +1,52 @@
+---
+layout: page
+title: RSS Feeds
+permalink: /feeds/
+---
+
+<div class="feeds-list">
+  <h2>전체 피드</h2>
+  <ul>
+    <li>
+      <a href="{{ '/feed.xml' | relative_url }}">
+        <i class="fas fa-rss"></i> 전체 포스트 피드
+      </a>
+    </li>
+  </ul>
+
+  <h2>카테고리별 피드</h2>
+  <ul>
+    {% assign categories = site.posts | map: "categories" | flatten | uniq | sort %}
+    {% for category in categories %}
+      {% if category and category != "" %}
+      {% assign category_slug = category | slugify %}
+      <li>
+        <a href="{{ '/feed/categories/' | relative_url }}{{ category_slug }}/feed.xml">
+          <i class="fas fa-rss"></i> {{ category }}
+        </a>
+      </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+</div>
+
+<style>
+.feeds-list ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.feeds-list li {
+  margin: 0.5rem 0;
+}
+
+.feeds-list a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.feeds-list i {
+  color: #f26522;
+}
+</style>

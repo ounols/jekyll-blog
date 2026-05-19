@@ -1,0 +1,137 @@
+name: Claude Posting Workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      target_url:
+        description: 'The target URL to process'
+        required: true
+        type: string
+      author_opinion:
+        description: 'Blog author opinion/thoughts on this topic (optional)'
+        required: false
+        type: string
+      additional_prompt:
+        description: 'Any additional prompt instructions'
+        required: false
+        type: string
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+  id-token: write
+
+jobs:
+  create-trending-post:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Jekyll blog repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install beautifulsoup4 lxml playwright aiohttp
+
+      - name: Install Playwright browsers
+        run: |
+          playwright install --with-deps chromium
+
+      - name: Setup GitHub CLI authentication
+        run: |
+          echo "${{ secrets.GITHUB_TOKEN }}" | gh auth login --with-token
+
+      - name: Generate Blog Post with Claude
+        id: claude
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          prompt: |
+            Read `.claude/skills/url-posting.md` for the complete workflow guide.
+            Follow all steps in the order specified in the skill file.
+
+            TARGET_URL: `${{ inputs.target_url }}`
+            AUTHOR_OPINION: ${{ inputs.author_opinion }}
+            ADDITIONAL_PROMPT: ${{ inputs.additional_prompt }}
+
+            Execute the workflow as specified in the skill file.
+
+            IMPORTANT: At the end of execution, provide ONLY a concise final summary in this exact format:
+
+            ## Final Summary
+            - Post Title: [제목]
+            - File Created: [파일 경로]
+            - PR Link: [PR URL]
+            - Status: [Success/Failed]
+            - Errors: [에러가 있다면 상세히 로그와 함께 설명, 없으면 None]
+
+          claude_args: |
+            --allowed-tools "Bash(./import.sh:*)"
+            --allowed-tools "Bash(git:*)"
+            --allowed-tools "Bash(gh:*)"
+            --allowed-tools "Bash(mkdir:*)"
+            --allowed-tools "Bash(python:*)"
+            --allowed-tools "Bash(python3:*)"
+            --allowed-tools "Read(.claude/skills/**)"
+            --allowed-tools "WebFetch"
+            --allowed-tools "WebSearch"
+            --allowed-tools "Write(_posts/*)"
+            --allowed-tools "Edit(_posts/*)"
+
+      - name: Create Workflow Summary
+        if: always()
+        run: |
+          echo "## Blog Post Generation Result" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Workflow Status:** ${{ steps.claude.outcome }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Target URL:** ${{ inputs.target_url }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          # 항상 Claude 출력을 표시 (성공/실패 상관없이)
+          if [ -n "${{ steps.claude.outputs.output }}" ]; then
+            echo "**Claude Output:**" >> $GITHUB_STEP_SUMMARY
+            echo '```' >> $GITHUB_STEP_SUMMARY
+            echo "${{ steps.claude.outputs.output }}" >> $GITHUB_STEP_SUMMARY
+            echo '```' >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          if [ "${{ steps.claude.outcome }}" == "success" ]; then
+            echo "### :white_check_mark: Blog post generated successfully" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "### :x: Blog post generation failed" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "#### Error Details:" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+
+            # Error output from the step
+            if [ -n "${{ steps.claude.outputs.error }}" ]; then
+              echo "**Error Message:**" >> $GITHUB_STEP_SUMMARY
+              echo '```' >> $GITHUB_STEP_SUMMARY
+              echo "${{ steps.claude.outputs.error }}" >> $GITHUB_STEP_SUMMARY
+              echo '```' >> $GITHUB_STEP_SUMMARY
+              echo "" >> $GITHUB_STEP_SUMMARY
+            fi
+
+            echo "#### Troubleshooting Steps:" >> $GITHUB_STEP_SUMMARY
+            echo "1. Check the workflow logs above for detailed error messages" >> $GITHUB_STEP_SUMMARY
+            echo "2. Verify the target URL is accessible" >> $GITHUB_STEP_SUMMARY
+            echo "3. Check if Claude Code OAuth token is valid" >> $GITHUB_STEP_SUMMARY
+            echo "4. Review the skill file in \`.claude/skills/\` directory" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "---" >> $GITHUB_STEP_SUMMARY
+          echo "**Input Parameters:**" >> $GITHUB_STEP_SUMMARY
+          echo "- Author Opinion: ${{ inputs.author_opinion || 'Not provided' }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Additional Prompt: ${{ inputs.additional_prompt || 'Not provided' }}" >> $GITHUB_STEP_SUMMARY
