@@ -1,6 +1,6 @@
 ---
 title: "온디바이스 MoE 모델 LFM2.5-8B-A1B: 향상된 성능과 기능"
-description: "Today, we’re releasing LFM2.5-8B-A1B, a high-throughput edge model optimized for fast, reliable tool calling and complex instruction following on consumer hardware, delivering compressed performance c"
+description: "새로운 엣지 모델인 LFM2.5-8B-A1B가 출시되었으며, 이는 일반 소비자 하드웨어에서 빠르고 안정적인 도구 호출 및 복잡한 지침 수행을 위해 최적화되었습니다. 해당 모델은 컨텍스트 창을 128,000 토큰으로 확장하고 어휘 크기를 두 배로 늘리는 등 이전 버전에 비해 성능이 강화된 것이 특징입니다."
 author: claude
 date: '2026-05-29 16:50:59'
 categories:
