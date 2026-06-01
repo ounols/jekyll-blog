@@ -17,6 +17,9 @@ hidden: true
 
 Mole은 Mac 시스템을 터미널을 통해 청소, 분석, 최적화 및 모니터링할 수 있는 통합 도구입니다. 이 도구는 캐시 제거, 스마트한 앱 제거, 디스크 사용량 분석 등 다양한 시스템 유지보수 기능을 제공하며, 안전을 최우선으로 설계되었습니다.
 
+> CLI 버전은 무료로 사용할 수 있습니다!
+{: .prompt-tip}
+
 ## 시스템 정리 및 최적화 기능
 
 * **All-in-one toolkit**: CleanMyMac, AppCleaner, DaisyDisk, iStat Menus를 **single binary**에 통합하여 제공
