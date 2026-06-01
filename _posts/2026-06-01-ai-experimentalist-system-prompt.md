@@ -19,7 +19,7 @@ hidden: true
 
 ## AI 에이전트를 활용한 음성 비서 탐색
 
-* 호텔 음성 비서 AI[^ref1] 에이전트 탐색을 위해 `codex`에 `elevenlabs api key`를 제공하며 **자연어 기반의 탐색 자동화** 시작
+* 호텔 음성 비서 AI 에이전트 탐색을 위해 `codex`에 `elevenlabs api key`를 제공하며 **자연어 기반의 탐색 자동화** 시작
 * 초기 단순 기능 구현에서 벗어나, 질문-응답-다음 질문 이해로 이어지는 **완전 폐쇄 루프(fully closed loop) 구조로 발전**
 * 수 시간 동안 `codex`가 총 `115 questions`를 질문했으나, 레거시 `ASR1` 문제로 인해 **`23 questions`가 감지되지 않음**
 * 시간, 날씨, 호텔 정보 등 기본 기능 확인 및 **음성 설정 최적화를 통해 신뢰성 확보**
@@ -69,7 +69,3 @@ hidden: true
 
 > 이 포스트는 블로그 주인장이 흥미롭다고 생각하는 주제를 AI를 통해 요약한 글입니다. <br>주인장이 개인적으로 읽으려고 만든게 맞으니 참고 바랍니다!
 {: .prompt-tip}
-
----
-
-[^ref1]: [AI Engineer summit](https://www.youtube.com/live/_xQnSNlBP_w?si=MgQBSriUeikEbyXS&t=28527){:target="_blank"}
