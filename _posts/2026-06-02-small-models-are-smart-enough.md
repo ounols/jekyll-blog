@@ -32,24 +32,10 @@ hidden: true
 * 삼성의 `Less is More: Recursive Reasoning with Tiny Networks` 연구에서, 7M 파라미터 모델이 **100,000배 크기의 모델**과 동등한 성능 달성
 * 이러한 성과는 모델에 **잠재 상태를 재처리**할 수 있는 메커니즘을 부여함으로써 가능해짐
 
-## 잠재 공간에서의 사고와 추론
+## JEPA와 세계 모델의 개념
 
 * 토큰 디코딩 과정은 **매우 손실적인** 방식으로 다차원 잠재 공간을 직렬화하는 과정
 * 모델이 잠재 공간 내에서 사고할 수 있도록 허용하는 것이 더 스마트하고 나은 결과를 도출하는 방법으로 제안됨
-* `JEPA` (Joint Embedding Predictive Architecture)는 디코딩 없이 인접한 잠재 상태를 예측하는 **근본적인 아키텍처**
-* JEPA는 토큰 임베딩을 인코딩하고 디코딩하는 `dense transformer blocks` 방식보다 훨씬 효율적인 신경망 구조
-* 삼성의 `Less is More: Recursive Reasoning with Tiny Networks` 연구에서 7M 파라미터 모델이 **재귀적 상태 처리**를 통해 100,000배 크기 모델과 동등한 성능 달성
-* 기존 트랜스포머 LLM은 `feed-forward` 방식이어서 잠재 공간 내부에서 처리할 **자연스러운 메커니즘 부재**
-
-## 재귀적 상태 연결의 중요성
-
-* Distilled `Qwen3.5` 변종 실험에서 후반 레이어는 원본 프롬프트에 대한 충실도를 잃고 질문이 벗어난 답변을 생성하는 경향
-* **후반 레이어가 이전의 작업 보존 상태와 재연결할 수 있는 메커니즘**이 실패를 회복하는 핵심 요소로 작용
-* 이러한 상태 재연결은 **파라미터를 추가하지 않으면서도 벤치마크에서의 실패를 회복**시키는 효과를 보임
-* 삼성은 `Less is More: Recursive Reasoning with Tiny Networks` 연구를 통해 `7M` 파라미터 모델이 **100,000배 큰 모델과 동등한 성능**을 달성함을 시연
-* 작은 모델의 잠재력은 단순히 크기가 아닌 **상태를 보존하고 재귀적으로 처리하는 아키텍처적 설계**에 달려 있음
-
-## JEPA와 세계 모델의 개념
 
 * `Yann LeCun`이 제안한 `Joint Embedding Predictive Architecture (JEPA)` 개념 소개
 * `JEPA`는 **'world models'의 근간을 이루는 아키텍처**
