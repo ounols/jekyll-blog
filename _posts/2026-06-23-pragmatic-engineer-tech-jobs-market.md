@@ -78,7 +78,7 @@ hidden: true
 
 ---
 
-[^ref1]: [Interviewing.io](http://interviewing.io/){:target="_blank"}
-[^ref2]: [Workforce.ai](http://workforce.ai/){:target="_blank"}
+[^ref1]: [Interviewing.io](https://interviewing.io/){:target="_blank"}
+[^ref2]: [Workforce.ai](https://workforce.ai/){:target="_blank"}
 [^ref3]: [SignalFire](https://www.signalfire.com/){:target="_blank"}
 [^ref4]: [TrueUp](https://www.trueup.io/){:target="_blank"}
