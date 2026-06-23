@@ -8,6 +8,13 @@
   scroll-margin-top: 3.5rem;
 }
 
+%heading-subtitle {
+  color: var(--heading-color);
+  font-weight: 1000;
+  font-family: v.$font-family-base;
+  scroll-margin-top: 3.5rem;
+}
+
 %anchor {
   .anchor {
     font-size: 80%;

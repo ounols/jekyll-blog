@@ -1,0 +1,44 @@
+name: Weekly GitHub Trending Post
+
+on:
+  schedule:
+    # 매주 월요일 오전 8시(KST)에 실행 (UTC 일요일 23:00)
+    - cron: "0 23 * * 0"
+  workflow_dispatch: # 수동 실행 가능
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+  id-token: write
+
+jobs:
+  create-trending-post:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Jekyll blog repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Generate Weekly Trending Post
+        id: claude
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          prompt: |
+            Read `.claude/skills/weekly-trending.md` for the complete workflow guide.
+            Follow all steps in the order specified in the skill file.
+
+            작업을 시작해주세요!
+
+          show_full_output: true
+          claude_args: >-
+            --allowed-tools "Bash(./import.sh:*)"
+            --allowed-tools "Bash(git:*)"
+            --allowed-tools "Bash(mkdir:*)"
+            --allowed-tools "Read(.claude/skills/**)"
+            --allowed-tools "WebFetch"
+            --allowed-tools "WebSearch"
+            --allowed-tools "Write(_posts/*)"

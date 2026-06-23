@@ -17,7 +17,7 @@
 
 header {
   .post-desc {
-    @extend %heading;
+    @extend %heading-subtitle;
 
     font-size: 1.125rem;
     line-height: 1.6;
@@ -502,5 +502,86 @@ h3,
 h4 {
   @include bp.xl {
     scroll-margin-top: 2rem;
+  }
+}
+
+/* Footnote preview tooltip */
+
+.footnote-tooltip {
+  background-color: var(--card-bg);
+  border: 1px solid var(--main-border-color);
+  border-radius: v.$radius-sm;
+  padding: 0.5rem 0.75rem;
+  max-width: 400px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--text-color);
+
+  p {
+    margin: 0;
+  }
+
+  a {
+    color: var(--link-color);
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  // Mobile styles
+  @include bp.lte(bp.get(md)) {
+    position: fixed !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    max-width: 85vw;
+    max-height: 70vh;
+    overflow-y: auto;
+    padding-top: 2rem;
+  }
+}
+
+.footnote-close {
+  display: none;
+
+  @include bp.lte(bp.get(md)) {
+    display: flex;
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    line-height: 1;
+    color: var(--text-muted-color);
+    cursor: pointer;
+    padding: 0.25rem;
+    width: 1.75rem;
+    height: 1.75rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background-color 0.2s, color 0.2s;
+
+    &:hover {
+      background-color: var(--button-bg);
+      color: var(--text-color);
+    }
+  }
+}
+
+.footnote-backdrop {
+  display: none;
+
+  @include bp.lte(bp.get(md)) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0 0 0 / 50%);
+    z-index: 9998;
   }
 }

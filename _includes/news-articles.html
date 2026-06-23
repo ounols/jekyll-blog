@@ -1,0 +1,64 @@
+<div id="news-articles" class="news-articles-container">
+  <div class="news-articles-scroll">
+    {% for post in include.posts limit: 3 %}
+      <article class="news-card">
+        {% assign src = '' %}
+
+        <!-- Try to get image from front matter first -->
+        {% if post.image %}
+          {% assign src = post.image.path | default: post.image %}
+
+          {% if post.media_subpath %}
+            {% unless src contains '://' %}
+              {% assign src = post.media_subpath
+                | append: '/'
+                | append: src
+                | replace: '///', '/'
+                | replace: '//', '/'
+              %}
+            {% endunless %}
+          {% endif %}
+        {% endif %}
+
+        <!-- If no front matter image, extract first image from HTML content -->
+        {% if src == '' %}
+          {% assign img_split = post.content | split: '<img ' %}
+          {% if img_split.size > 1 %}
+            {% assign src_split = img_split[1] | split: 'src="' %}
+            {% if src_split.size > 1 %}
+              {% assign src = src_split[1] | split: '"' | first %}
+            {% endif %}
+          {% endif %}
+        {% endif %}
+
+        <!-- DEBUG: Show image source -->
+        <!-- SRC: {{ src }} -->
+
+        <a
+          href="{{ post.url | relative_url }}"
+          class="news-card-link"
+          {% if src != '' %}
+            style="background-image: url('{{ src | relative_url }}')"
+          {% endif %}
+        >
+          <div class="news-card-overlay">
+            <div class="news-card-body">
+              <h3 class="news-card-title">{{ post.title }}</h3>
+
+              <div class="news-card-meta">
+                <i class="far fa-calendar fa-fw me-1"></i>
+                {% include datetime.html date=post.date lang=lang %}
+              </div>
+            </div>
+          </div>
+        </a>
+      </article>
+    {% endfor %}
+  </div>
+
+  <div class="news-articles-more">
+    <a href="{{ '/categories/news-articles/' | relative_url }}" class="news-more-link">
+      View all News Articles <i class="fas fa-arrow-right"></i>
+    </a>
+  </div>
+</div>

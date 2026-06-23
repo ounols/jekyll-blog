@@ -15,14 +15,14 @@
   "homepage": "https://github.com/cotes2020/jekyll-theme-chirpy/",
   "type": "module",
   "scripts": {
-    "build": "concurrently npm:build:*",
+    "build": "concurrently pnpm:build:*",
     "build:css": "node purgecss.js",
     "build:js": "rollup -c --bundleConfigAsCjs --environment BUILD:production",
     "watch:js": "rollup -c --bundleConfigAsCjs -w",
     "lint:js": "eslint",
     "lint:scss": "stylelint _sass/**/*.scss",
-    "lint:fix:scss": "npm run lint:scss -- --fix",
-    "test": "npm run lint:js && npm run lint:scss",
+    "lint:fix:scss": "pnpm run lint:scss -- --fix",
+    "test": "pnpm run lint:js && pnpm run lint:scss",
     "prepare": "husky"
   },
   "dependencies": {

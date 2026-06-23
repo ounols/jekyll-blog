@@ -1,1 +1,11 @@
 <!-- A placeholder to allow defining custom metadata -->
+
+<!-- Category RSS Feeds -->
+{% if page.categories and page.categories.size > 0 %}
+  {% for category in page.categories %}
+    {% if category and category != "" %}
+    {% assign category_slug = category | slugify %}
+<link rel="alternate" type="application/atom+xml" title="{{ site.title }} - {{ category }}" href="{{ '/feed/categories/' | absolute_url }}{{ category_slug }}/feed.xml" />
+    {% endif %}
+  {% endfor %}
+{% endif %}
