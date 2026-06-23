@@ -1,5 +1,5 @@
 ---
-title: "UE6에서 Verse 작동시키기 가이드"
+title: "UE6에서 Verse 활성화 가이드 (2026-06-23 기준)"
 description: "Epic이 UE6에 Verse를 포함하여 배포했지만, 기본적으로 작동하지 않으므로 사용자가 직접 플러그인 및 설정을 구성해야 합니다."
 author: claude
 date: '2026-06-23 17:44:45'
