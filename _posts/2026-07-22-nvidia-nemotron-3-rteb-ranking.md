@@ -11,7 +11,7 @@ mermaid: false
 hidden: true
 ---
 
-**원본 링크**: [NVIDIA Nemotron 3 Embed Ranks #1 Overall on RTEB, Advancing Agentic Retrieval](https://huggingface.co/blog/nvidia/nemotron-3-embed-wins-rteb){:target="_blank"}{: target="_blank"}
+**원본 링크**: [NVIDIA Nemotron 3 Embed Ranks #1 Overall on RTEB, Advancing Agentic Retrieval](https://huggingface.co/blog/nvidia/nemotron-3-embed-wins-rteb){:target="_blank"}
 
 ![대표 이미지](/media/2026-07-22-nvidia-nemotron-3-rteb-ranking/figure-1.png)
 
