@@ -66,4 +66,4 @@ hidden: true
 
 ---
 
-[^ref1]: [noreply.net](http://noreply.net/){:target="_blank"}
+[^ref1]: [noreply.net](https://noreply.net/){:target="_blank"}
